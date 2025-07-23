@@ -4,7 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import './AccountModal.css';
 
 const AccountModal = ({ isOpen, onClose }) => {
-  const { currentDepartment, logout } = useAuth();
+  const { currentDepartment, logout, updateDepartmentPassword } = useAuth();
   const [activeTab, setActiveTab] = useState('info');
   const [passwordData, setPasswordData] = useState({
     currentPassword: '',
@@ -41,10 +41,14 @@ const AccountModal = ({ isOpen, onClose }) => {
         return;
       }
 
-      // 새 비밀번호 저장
-      localStorage.setItem(`dept_${currentDepartment?.code}_password`, passwordData.newPassword);
-      
-      setPasswordMessage('비밀번호가 성공적으로 변경되었습니다.');
+      // 새 비밀번호 저장 (Firebase와 동기화)
+      try {
+        await updateDepartmentPassword(currentDepartment?.code, passwordData.newPassword);
+        setPasswordMessage('비밀번호가 성공적으로 변경되었습니다.');
+      } catch (error) {
+        setPasswordMessage('비밀번호 변경 중 오류가 발생했습니다.');
+        console.error('비밀번호 변경 실패:', error);
+      }
       setPasswordData({
         currentPassword: '',
         newPassword: '',

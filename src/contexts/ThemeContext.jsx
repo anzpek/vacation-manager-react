@@ -1,5 +1,6 @@
 // ThemeContext.jsx - 다크/라이트 테마 전환 컨텍스트
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useAuth } from './AuthContext';
 
 const ThemeContext = createContext();
 
@@ -12,6 +13,8 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
+  const { currentDepartment } = useAuth();
+  
   // 로컬스토리지에서 테마 가져오기 (기본값: light)
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem('vacation-theme');
@@ -123,6 +126,50 @@ export const ThemeProvider = ({ children }) => {
     }
   }, [effectiveTheme]);
 
+  // Firebase와 테마 동기화
+  const saveThemeToFirebase = async (themeValue) => {
+    if (currentDepartment) {
+      try {
+        const { database, ref, set } = await import('../utils/firebase');
+        if (database) {
+          const themeRef = ref(database, `users/${currentDepartment.code}/theme`);
+          await set(themeRef, themeValue);
+          console.log('🎨 테마 설정 Firebase에 저장됨');
+        }
+      } catch (error) {
+        console.error('테마 Firebase 저장 실패:', error);
+      }
+    }
+  };
+
+  // Firebase에서 테마 불러오기
+  const loadThemeFromFirebase = async () => {
+    if (currentDepartment) {
+      try {
+        const { database, ref, get } = await import('../utils/firebase');
+        if (database) {
+          const themeRef = ref(database, `users/${currentDepartment.code}/theme`);
+          const snapshot = await get(themeRef);
+          if (snapshot.exists()) {
+            const firebaseTheme = snapshot.val();
+            setTheme(firebaseTheme);
+            localStorage.setItem('vacation-theme', firebaseTheme);
+            console.log('🎨 Firebase에서 테마 설정 불러옴');
+          }
+        }
+      } catch (error) {
+        console.error('테마 Firebase 로드 실패:', error);
+      }
+    }
+  };
+
+  // 로그인 시 테마 로드
+  useEffect(() => {
+    if (currentDepartment) {
+      loadThemeFromFirebase();
+    }
+  }, [currentDepartment]);
+
   // 테마 변경 함수
   const toggleTheme = () => {
     const themes = ['light', 'dark', 'system'];
@@ -130,6 +177,7 @@ export const ThemeProvider = ({ children }) => {
     const nextTheme = themes[(currentIndex + 1) % themes.length];
     setTheme(nextTheme);
     localStorage.setItem('vacation-theme', nextTheme);
+    saveThemeToFirebase(nextTheme);
   };
 
   // 특정 테마로 설정
@@ -137,6 +185,7 @@ export const ThemeProvider = ({ children }) => {
     if (['light', 'dark', 'system'].includes(newTheme)) {
       setTheme(newTheme);
       localStorage.setItem('vacation-theme', newTheme);
+      saveThemeToFirebase(newTheme);
     }
   };
 
