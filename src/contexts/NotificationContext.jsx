@@ -45,7 +45,7 @@ export function NotificationProvider({ children }) {
       type: notification.type || 'info',
       title: notification.title,
       message: notification.message,
-      duration: notification.duration || 5000,
+      duration: notification.duration || 5000, // 기본 5초
       createdAt: new Date(),
       ...notification
     };
@@ -76,6 +76,7 @@ export function NotificationProvider({ children }) {
       type: 'success',
       title,
       message,
+      duration: 5000, // 5초 후 자동 제거
       ...options
     });
   }, [addNotification]);
@@ -85,7 +86,7 @@ export function NotificationProvider({ children }) {
       type: 'error',
       title,
       message,
-      duration: 0, // 에러는 수동 제거
+      duration: 5000, // 5초 후 자동 제거
       ...options
     });
   }, [addNotification]);
@@ -95,6 +96,7 @@ export function NotificationProvider({ children }) {
       type: 'warning',
       title,
       message,
+      duration: 5000, // 5초 후 자동 제거
       ...options
     });
   }, [addNotification]);
@@ -104,6 +106,7 @@ export function NotificationProvider({ children }) {
       type: 'info',
       title,
       message,
+      duration: 5000, // 5초 후 자동 제거
       ...options
     });
   }, [addNotification]);
