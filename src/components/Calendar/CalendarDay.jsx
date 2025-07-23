@@ -401,11 +401,35 @@ const CalendarDay = React.forwardRef(({
                             }
                             return a.employeeId - b.employeeId;
                         });
+
+                        // 트랙 할당 시스템 (겹침 방지)
+                        const tracks = []; // 각 트랙의 휴가 종료일을 저장
+                        const fullDayVacationsWithTracks = [];
+
+                        sorted.forEach(vacation => {
+                            const consecutiveGroup = getConsecutiveGroupForDate(date, vacation.employeeId);
+                            const vacationEndDate = consecutiveGroup ? new Date(consecutiveGroup.endDate) : new Date(vacation.date);
+
+                            let assignedTrack = -1;
+                            for (let i = 0; i < tracks.length; i++) {
+                                // 현재 트랙의 마지막 휴가가 현재 휴가 시작 전에 끝나면 이 트랙 사용
+                                if (!tracks[i] || new Date(tracks[i]) < new Date(vacation.date)) {
+                                    assignedTrack = i;
+                                    break;
+                                }
+                            }
+
+                            if (assignedTrack === -1) {
+                                assignedTrack = tracks.length; // 새 트랙 할당
+                            }
+                            tracks[assignedTrack] = vacationEndDate; // 트랙의 종료일 업데이트
+                            fullDayVacationsWithTracks.push({ ...vacation, trackIndex: assignedTrack });
+                        });
                         
-                        // 정렬 완료
+                        // 트랙 할당 완료
                         
-                        const rendered = sorted.map((vacation, index) => {
-                            return renderVacationBar(vacation, index);
+                        const rendered = fullDayVacationsWithTracks.map((vacation) => {
+                            return renderVacationBar(vacation, vacation.trackIndex);
                         }).filter(Boolean); // null 제거
                         
                         return rendered;
