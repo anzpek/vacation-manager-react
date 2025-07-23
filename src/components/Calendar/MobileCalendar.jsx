@@ -639,12 +639,15 @@ const MobileCalendar = ({ holidays, filteredEmployees }) => {
 
     fullDayVacations.forEach(vacation => {
       const consecutiveGroup = getConsecutiveGroupForDate(date, vacation.employeeId);
+      
+      // 연속휴가인 경우 실제 시작일과 종료일 사용, 아니면 현재 날짜 사용
+      const vacationStartDate = consecutiveGroup ? new Date(consecutiveGroup.startDate) : new Date(vacation.date);
       const vacationEndDate = consecutiveGroup ? new Date(consecutiveGroup.endDate) : new Date(vacation.date);
 
       let assignedTrack = -1;
       for (let i = 0; i < tracks.length; i++) {
-        // If the current track's last vacation ends before the current vacation starts, use this track
-        if (!tracks[i] || new Date(tracks[i]) < new Date(vacation.date)) {
+        // 현재 트랙의 마지막 휴가가 현재 휴가 시작 전에 끝나면 이 트랙 사용 (겹치지 않음)
+        if (!tracks[i] || new Date(tracks[i]).getTime() < vacationStartDate.getTime()) {
           assignedTrack = i;
           break;
         }
