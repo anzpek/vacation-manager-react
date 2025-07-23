@@ -48,9 +48,16 @@ const SecuritySettings = ({ isOpen, onClose }) => {
     setIsLoading(true);
 
     try {
-      // 로컬스토리지에 새 비밀번호 저장
+      // Firebase와 로컬스토리지에 새 비밀번호 저장
       await new Promise(resolve => setTimeout(resolve, 1000));
       localStorage.setItem('adminPassword', newPassword);
+      
+      // Firebase에도 저장
+      const { database, ref, set } = await import('../../utils/firebase');
+      if (database) {
+        const adminPasswordRef = ref(database, 'system/adminPassword');
+        await set(adminPasswordRef, newPassword);
+      }
       
       showSuccess('비밀번호 변경', '관리자 비밀번호가 성공적으로 변경되었습니다.');
       setCurrentPassword('');

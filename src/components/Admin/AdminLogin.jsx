@@ -10,8 +10,8 @@ const AdminLogin = ({ onAdminLogin, onBackToLogin }) => {
   const { showError } = useNotification();
   const { theme, toggleTheme } = useTheme();
 
-  // 관리자 비밀번호 (실제 운영시에는 환경변수나 Firebase에서 관리)
-  const ADMIN_PASSWORD = 'admin2024!';
+  // 관리자 비밀번호 (로컬스토리지에서 동적으로 관리, 기본값: admin2025!)
+  const getAdminPassword = () => localStorage.getItem('adminPassword') || 'admin2025!';
 
   const handleAdminLogin = async (e) => {
     e.preventDefault();
@@ -24,7 +24,7 @@ const AdminLogin = ({ onAdminLogin, onBackToLogin }) => {
     setIsLoading(true);
 
     try {
-      if (adminPassword === ADMIN_PASSWORD) {
+      if (adminPassword === getAdminPassword()) {
         onAdminLogin();
       } else {
         showError('로그인 실패', '관리자 비밀번호가 틀렸습니다.', 5000);

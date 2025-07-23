@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { auth } from '../utils/firebase'; // Firebase 설정 파일 임포트
+import { auth, database, ref, set, get } from '../utils/firebase'; // Firebase 설정 파일 임포트
 import { signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth';
 
 const AuthContext = createContext();
@@ -86,6 +86,12 @@ export function AuthProvider({ children }) {
         setDepartments(updatedDepartments);
         localStorage.setItem('departments', JSON.stringify(updatedDepartments));
         
+        // Firebase에도 저장
+        if (database) {
+          const departmentsRef = ref(database, 'system/departments');
+          await set(departmentsRef, updatedDepartments);
+        }
+        
         console.log(`🏢 새 부서 추가: ${newDepartment.name} (${newDepartment.code})`);
         resolve(newDepartment);
       } catch (error) {
@@ -107,6 +113,12 @@ export function AuthProvider({ children }) {
         
         setDepartments(updatedDepartments);
         localStorage.setItem('departments', JSON.stringify(updatedDepartments));
+        
+        // Firebase에도 저장
+        if (database) {
+          const departmentsRef = ref(database, 'system/departments');
+          await set(departmentsRef, updatedDepartments);
+        }
         
         console.log(`🔧 부서 수정: ${departmentData.name || deptCode}`);
         resolve();
@@ -130,6 +142,12 @@ export function AuthProvider({ children }) {
         const updatedDepartments = departments.filter(dept => dept.code !== deptCode);
         setDepartments(updatedDepartments);
         localStorage.setItem('departments', JSON.stringify(updatedDepartments));
+        
+        // Firebase에도 저장
+        if (database) {
+          const departmentsRef = ref(database, 'system/departments');
+          await set(departmentsRef, updatedDepartments);
+        }
         
         console.log(`🗑️ 부서 삭제: ${department.name} (${deptCode})`);
         resolve();
@@ -157,19 +175,62 @@ export function AuthProvider({ children }) {
     return Promise.resolve();
   };
 
-  // 앱 시작 시 저장된 부서 정보 복원
+  // 앱 시작 시 Firebase와 로컬스토리지에서 데이터 복원
   useEffect(() => {
-    // 저장된 부서 목록 복원
-    const savedDepartments = localStorage.getItem('departments');
-    if (savedDepartments) {
+    // Firebase에서 부서 목록과 관리자 비밀번호 불러오기
+    const loadFromFirebase = async () => {
       try {
-        const parsedDepartments = JSON.parse(savedDepartments);
-        setDepartments(parsedDepartments);
-        console.log('💾 부서 목록 복원됨');
+        if (database) {
+          // 부서 목록 불러오기
+          const departmentsRef = ref(database, 'system/departments');
+          const departmentsSnapshot = await get(departmentsRef);
+          
+          if (departmentsSnapshot.exists()) {
+            const firebaseDepartments = departmentsSnapshot.val();
+            setDepartments(firebaseDepartments);
+            localStorage.setItem('departments', JSON.stringify(firebaseDepartments));
+            console.log('🔥 Firebase에서 부서 목록 불러옴');
+          } else {
+            // Firebase에 데이터가 없으면 로컬스토리지에서 복원
+            const savedDepartments = localStorage.getItem('departments');
+            if (savedDepartments) {
+              try {
+                const parsedDepartments = JSON.parse(savedDepartments);
+                setDepartments(parsedDepartments);
+                console.log('💾 로컬스토리지에서 부서 목록 복원됨');
+              } catch (error) {
+                console.error('부서 목록 복원 실패:', error);
+              }
+            }
+          }
+          
+          // 관리자 비밀번호 불러오기
+          const adminPasswordRef = ref(database, 'system/adminPassword');
+          const adminPasswordSnapshot = await get(adminPasswordRef);
+          
+          if (adminPasswordSnapshot.exists()) {
+            const firebaseAdminPassword = adminPasswordSnapshot.val();
+            localStorage.setItem('adminPassword', firebaseAdminPassword);
+            console.log('🔥 Firebase에서 관리자 비밀번호 불러옴');
+          }
+        }
       } catch (error) {
-        console.error('부서 목록 복원 실패:', error);
+        console.error('Firebase 데이터 로드 실패:', error);
+        // Firebase 실패 시 로컬스토리지에서 복원
+        const savedDepartments = localStorage.getItem('departments');
+        if (savedDepartments) {
+          try {
+            const parsedDepartments = JSON.parse(savedDepartments);
+            setDepartments(parsedDepartments);
+            console.log('💾 로컬스토리지에서 부서 목록 복원됨 (Firebase 실패)');
+          } catch (error) {
+            console.error('부서 목록 복원 실패:', error);
+          }
+        }
       }
-    }
+    };
+    
+    loadFromFirebase();
 
     const savedDepartment = localStorage.getItem('currentDepartment');
     if (savedDepartment && DEV_MODE) {
