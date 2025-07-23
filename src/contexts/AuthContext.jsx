@@ -202,6 +202,12 @@ export function AuthProvider({ children }) {
             const firebaseAdminPassword = adminPasswordSnapshot.val();
             localStorage.setItem('adminPassword', firebaseAdminPassword);
             console.log('🔥 Firebase에서 관리자 비밀번호 불러옴');
+          } else {
+            // Firebase에 관리자 비밀번호가 없으면 기본값 설정
+            const defaultAdminPassword = 'admin2025!';
+            localStorage.setItem('adminPassword', defaultAdminPassword);
+            await set(adminPasswordRef, defaultAdminPassword);
+            console.log('🔥 Firebase에 기본 관리자 비밀번호 저장됨');
           }
         }
       } catch (error) {
@@ -216,6 +222,12 @@ export function AuthProvider({ children }) {
           } catch (error) {
             console.error('부서 목록 복원 실패:', error);
           }
+        }
+        
+        // Firebase 실패 시에도 기본 관리자 비밀번호 설정
+        if (!localStorage.getItem('adminPassword')) {
+          localStorage.setItem('adminPassword', 'admin2025!');
+          console.log('💾 기본 관리자 비밀번호 설정됨 (Firebase 실패)');
         }
       }
     };
