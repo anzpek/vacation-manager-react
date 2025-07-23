@@ -453,22 +453,21 @@ const CalendarDay = React.forwardRef(({
                         return isHalfDayStart && isStartOfGroup;
                     });
                     
-                    // 일반 휴가 개수를 계산하여 반차 시작 위치 결정 (반차 연속휴가가 있으면 위치 조정)
-                    const visibleFullDayCount = vacations.filter(v => {
-                        if (['오전', '오후'].includes(v.type)) return false;
-                        
-                        // 반차로 시작하는 연속휴가의 연차 부분은 카운트하지 않음
-                        const consecutiveGroup = getConsecutiveGroupForDate(date, v.employeeId);
-                        if (consecutiveGroup && consecutiveGroup.isConsecutive) {
-                            const startDateVacation = consecutiveGroup.vacations.find(vacation => vacation.date === consecutiveGroup.startDate);
-                            const isHalfDayStart = startDateVacation && ['오전', '오후'].includes(startDateVacation.type);
-                            if (isHalfDayStart) return false; // 반차로 시작하는 연속휴가는 제외
-                        }
-                        return true;
-                    }).length;
+                    // 실제로 렌더링되는 연차 막대바 개수를 계산 (현재 스코프 밖의 fullDayVacations 사용)
+                    const currentFullDayVacations = vacations.filter(v => !['오전', '오후'].includes(v.type));
+                    const renderedFullDayCount = currentFullDayVacations.length;
                     
-                    const halfDayStartTop = hasConsecutiveHalfDay ? 6 : (visibleFullDayCount * 22) + 6;
-                    const halfDayZIndex = hasConsecutiveHalfDay ? 20 : 10;
+                    // 반차 연속휴가가 있는 경우의 위치 계산
+                    let halfDayStartTop;
+                    if (hasConsecutiveHalfDay) {
+                        // 반차 연속휴가가 있으면 렌더링된 연차 막대바들 아래에 배치
+                        halfDayStartTop = (renderedFullDayCount * 22) + 6;
+                    } else {
+                        // 일반 반차는 연차 막대바들 아래에 배치
+                        halfDayStartTop = (renderedFullDayCount * 22) + 6;
+                    }
+                    // z-index 조정: 반차 연속휴가는 연차 막대바 아래에 배치
+                    const halfDayZIndex = hasConsecutiveHalfDay ? 18 : 10;
                     
                     if (morningVacations.length === 0 && afternoonVacations.length === 0) {
                         return null;

@@ -321,8 +321,11 @@ const MobileCalendarDay = ({ date, isCurrentMonth, isToday, dayOfWeek, vacations
             return true;
           }).length;
           
-          const halfDayStartTop = hasConsecutiveHalfDay ? 6 : (visibleFullDayCount * 18) + 6;
-          const halfDayZIndex = hasConsecutiveHalfDay ? 20 : 10;
+          // 실제로 렌더링되는 연차 막대바 개수 기반으로 위치 계산
+          const renderedFullDayCount = vacations.fullDay.length;
+          const halfDayStartTop = (renderedFullDayCount * 18) + 6;
+          // z-index 조정: 반차 연속휴가는 연차 막대바 아래에 배치
+          const halfDayZIndex = hasConsecutiveHalfDay ? 18 : 10;
           
           if (morningVacations.length === 0 && afternoonVacations.length === 0) {
             return null;
