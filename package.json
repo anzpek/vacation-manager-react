@@ -2,7 +2,7 @@
   "name": "vacation-management-react",
   "version": "1.0.0",
   "description": "부서 휴가 관리 시스템 - React 버전",
-  "homepage": "https://anzpek.github.io/vacation-manager",
+  "homepage": "https://anzpek.github.io/vacation-manager-react",
   "private": true,
   "dependencies": {
     "@craco/craco": "^7.1.0",
