@@ -28,6 +28,7 @@ jobs:
       run: npm run build
       env:
         GENERATE_SOURCEMAP: false
+        CI: false
 
     - name: Deploy 🚀
       uses: peaceiris/actions-gh-pages@v3
