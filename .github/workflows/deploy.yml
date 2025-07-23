@@ -40,7 +40,7 @@ jobs:
       env:
         # GitHub Pages에서 사용할 환경변수
         GENERATE_SOURCEMAP: false
-        PUBLIC_URL: /vacation-manager
+        PUBLIC_URL: /vacation-manager-react
         
     - name: Setup Pages
       uses: actions/configure-pages@v4
