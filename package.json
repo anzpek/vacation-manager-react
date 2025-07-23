@@ -1,0 +1,53 @@
+{
+  "name": "vacation-management-react",
+  "version": "1.0.0",
+  "description": "부서 휴가 관리 시스템 - React 버전",
+  "homepage": "https://anzpek.github.io/vacation-manager",
+  "private": true,
+  "dependencies": {
+    "@craco/craco": "^7.1.0",
+    "@hello-pangea/dnd": "^18.0.1",
+    "@playwright/mcp": "^0.0.31",
+    "date-fns": "^3.6.0",
+    "firebase": "^11.10.0",
+    "playwright": "^1.55.0-alpha-1752701791000",
+    "react": "^19.1.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
+    "react-dom": "^19.1.0",
+    "react-hook-form": "^7.53.0",
+    "react-router-dom": "^7.6.3",
+    "react-scripts": "5.0.1",
+    "react-to-print": "^3.1.1",
+    "xlsx": "^0.18.5"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}

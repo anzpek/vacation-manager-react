@@ -1,0 +1,39 @@
+{
+  "rules": {
+    "departments": {
+      "$departmentCode": {
+        ".read": "auth != null",
+        ".write": "auth != null",
+        "employees": {
+          ".validate": "newData.hasChildren(['id', 'name', 'team', 'position'])",
+          "$employeeId": {
+            "id": {".validate": "newData.isNumber()"},
+            "name": {".validate": "newData.isString() && newData.val().length > 0"},
+            "team": {".validate": "newData.isString()"},
+            "position": {".validate": "newData.isString()"},
+            "department": {".validate": "newData.isString()"},
+            "color": {".validate": "newData.isString()"}
+          }
+        },
+        "vacations": {
+          ".validate": "newData.hasChildren(['employeeId', 'date', 'type'])",
+          "$vacationId": {
+            "id": {".validate": "newData.isString()"},
+            "employeeId": {".validate": "newData.isNumber()"},
+            "date": {".validate": "newData.isString() && newData.val().matches(/^\\d{4}-\\d{2}-\\d{2}$/)"},
+            "type": {".validate": "newData.isString() && newData.val().matches(/^(연차|오전|오후|특별휴가|병가|업무)$/)"},
+            "note": {".validate": "newData.isString()"},
+            "createdAt": {".validate": "newData.isNumber()"},
+            "updatedAt": {".validate": "newData.isNumber()"}
+          }
+        },
+        "settings": {
+          ".read": "auth != null",
+          ".write": "auth != null"
+        }
+      }
+    },
+    ".read": false,
+    ".write": false
+  }
+}

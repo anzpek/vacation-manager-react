@@ -1,0 +1,163 @@
+/* Skeleton.css - 스켈레톤 로딩 스타일 */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--background-secondary, #f0f0f0) 25%,
+    var(--background-hover, #e0e0e0) 37%,
+    var(--background-secondary, #f0f0f0) 63%
+  );
+  background-size: 400px 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+.skeleton-text {
+  border-radius: 4px;
+}
+
+.skeleton-circular {
+  border-radius: 50%;
+}
+
+.skeleton-rectangular {
+  border-radius: 8px;
+}
+
+.skeleton-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Dark mode skeleton */
+[data-theme="dark"] .skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--background-secondary, #2a2a2a) 25%,
+    var(--background-hover, #404040) 37%,
+    var(--background-secondary, #2a2a2a) 63%
+  );
+}
+
+/* Calendar skeleton */
+.calendar-skeleton {
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--background-primary);
+}
+
+.calendar-header-skeleton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.calendar-weekdays-skeleton {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 8px 0;
+  background: var(--background-secondary);
+  border-radius: 4px;
+}
+
+.calendar-grid-skeleton {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: var(--border-color);
+}
+
+.calendar-day-skeleton {
+  background: var(--background-primary);
+  min-height: 100px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vacation-bars-skeleton {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Employee list skeleton */
+.employee-list-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.employee-item-skeleton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: var(--background-secondary);
+  border-radius: 8px;
+}
+
+.employee-info-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Stat card skeleton */
+.stat-card-skeleton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: var(--background-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.stat-info-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .calendar-day-skeleton {
+    min-height: 80px;
+    padding: 4px;
+  }
+  
+  .employee-item-skeleton {
+    padding: 8px;
+  }
+  
+  .stat-card-skeleton {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-day-skeleton {
+    min-height: 60px;
+    padding: 2px;
+  }
+}

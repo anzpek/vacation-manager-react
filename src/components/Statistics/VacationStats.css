@@ -1,0 +1,323 @@
+/* VacationStats.css - 휴가 통계 대시보드 스타일 */
+
+.vacation-stats {
+  padding: 20px;
+  background: var(--background-primary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 20px;
+}
+
+.stats-header {
+  margin-bottom: 20px;
+}
+
+.stats-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 전체 통계 요약 */
+.stats-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.summary-card {
+  background: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.summary-card:hover {
+  background: var(--background-hover);
+  transform: translateY(-1px);
+}
+
+.summary-icon {
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 8px;
+}
+
+.summary-content {
+  flex: 1;
+}
+
+.summary-number {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.summary-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* 휴가 유형별 통계 */
+.type-breakdown {
+  margin-bottom: 24px;
+}
+
+.breakdown-title {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.type-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.type-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.type-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: white;
+}
+
+.type-name {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.type-count {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* 직원별 상세 통계 */
+.employee-stats {
+  margin-top: 20px;
+}
+
+.employee-stats-title {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.employee-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.employee-stat-card {
+  background: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.2s ease;
+}
+
+.employee-stat-card:hover {
+  background: var(--background-hover);
+  transform: translateY(-1px);
+}
+
+.employee-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.employee-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.employee-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.employee-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.employee-team {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 1px;
+}
+
+.employee-total {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.total-number {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-color);
+  line-height: 1;
+}
+
+.total-label {
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+/* 직원별 휴가 목록 */
+.employee-vacation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vacation-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.vacation-type-badge {
+  background: var(--primary-color);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 9px;
+  font-weight: 500;
+  min-width: 40px;
+  text-align: center;
+}
+
+.vacation-date {
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.vacation-more {
+  font-size: 10px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+.no-vacations {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 8px;
+  font-style: italic;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .vacation-stats {
+    padding: 16px;
+  }
+  
+  .stats-summary {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .summary-card {
+    padding: 12px;
+  }
+  
+  .summary-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+  
+  .summary-number {
+    font-size: 18px;
+  }
+  
+  .employee-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .employee-stat-card {
+    padding: 12px;
+  }
+  
+  .stats-title {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .vacation-stats {
+    padding: 12px;
+  }
+  
+  .stats-title {
+    font-size: 14px;
+  }
+  
+  .type-stats {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .employee-header {
+    gap: 8px;
+  }
+  
+  .employee-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+}

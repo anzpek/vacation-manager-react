@@ -1,0 +1,398 @@
+/* BackupManager.css - 백업 관리 모달 스타일 */
+
+.backup-manager-modal {
+  background: var(--background-primary, white);
+  border-radius: 16px;
+  padding: 0;
+  max-width: 900px;
+  width: 90%;
+  max-height: 85vh;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border-color, #e0e0e0);
+}
+
+.backup-section {
+  margin-bottom: 32px;
+}
+
+.backup-section:last-child {
+  margin-bottom: 0;
+}
+
+/* 백업 생성 섹션 */
+.backup-create {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  background: var(--background-secondary, #f8f9fa);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 12px;
+  gap: 24px;
+}
+
+.backup-info {
+  flex: 1;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+.info-label {
+  font-size: 14px;
+  color: var(--text-secondary, #666);
+  font-weight: 500;
+  min-width: 80px;
+}
+
+.info-value {
+  font-size: 14px;
+  color: var(--text-primary, #1a1a1a);
+  font-weight: 600;
+}
+
+.create-backup-button {
+  padding: 16px 24px;
+  background: linear-gradient(135deg, var(--primary-color, #4285f4) 0%, #3367d6 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.create-backup-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
+}
+
+.create-backup-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 백업 히스토리 */
+.backup-history {
+  background: var(--background-secondary, #f8f9fa);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.no-backups {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.no-backup-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.no-backup-text {
+  font-size: 16px;
+  color: var(--text-secondary, #666);
+  font-weight: 500;
+}
+
+.backup-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.backup-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: var(--background-primary, white);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.backup-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.backup-main-info {
+  flex: 1;
+}
+
+.backup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.backup-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.backup-date {
+  font-size: 14px;
+  color: var(--text-secondary, #666);
+  font-weight: 500;
+}
+
+.backup-details {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 13px;
+}
+
+.backup-size,
+.backup-departments {
+  color: var(--text-secondary, #666);
+}
+
+.backup-status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.backup-status.success {
+  background: rgba(52, 168, 83, 0.1);
+  color: var(--success-color, #34a853);
+}
+
+.backup-status.failed {
+  background: rgba(234, 67, 53, 0.1);
+  color: var(--error-color, #ea4335);
+}
+
+/* 백업 액션 버튼 */
+.backup-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-button {
+  background: var(--background-secondary, #f8f9fa);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-button:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.action-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.restore-button:hover {
+  background: rgba(66, 133, 244, 0.1);
+  border-color: var(--primary-color, #4285f4);
+}
+
+.download-button:hover {
+  background: rgba(52, 168, 83, 0.1);
+  border-color: var(--success-color, #34a853);
+}
+
+.delete-button:hover {
+  background: rgba(234, 67, 53, 0.1);
+  border-color: var(--error-color, #ea4335);
+}
+
+/* 자동 백업 설정 */
+.auto-backup-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: var(--background-secondary, #f8f9fa);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 12px;
+  gap: 20px;
+}
+
+.setting-info {
+  flex: 1;
+}
+
+.setting-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  margin-bottom: 4px;
+}
+
+.setting-description {
+  font-size: 14px;
+  color: var(--text-secondary, #666);
+  line-height: 1.4;
+}
+
+.setting-select {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 6px;
+  background: var(--background-primary, white);
+  color: var(--text-primary, #1a1a1a);
+  font-size: 14px;
+  cursor: pointer;
+  min-width: 120px;
+}
+
+.setting-select:focus {
+  outline: none;
+  border-color: var(--primary-color, #4285f4);
+}
+
+/* 다크모드 지원 */
+[data-theme="dark"] .backup-manager-modal {
+  background: var(--background-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .backup-create {
+  background: var(--background-secondary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .backup-history {
+  background: var(--background-secondary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .backup-item {
+  background: var(--background-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .setting-item {
+  background: var(--background-secondary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .setting-select {
+  background: var(--background-primary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .action-button {
+  background: var(--background-secondary);
+  border-color: var(--border-color);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .backup-manager-modal {
+    width: 95%;
+    max-height: 90vh;
+  }
+  
+  .backup-create {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  
+  .backup-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  
+  .backup-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  
+  .backup-actions {
+    justify-content: center;
+  }
+  
+  .setting-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .setting-select {
+    align-self: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .backup-create {
+    padding: 20px;
+  }
+  
+  .backup-item {
+    padding: 16px;
+  }
+  
+  .setting-item {
+    padding: 16px;
+  }
+  
+  .backup-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}

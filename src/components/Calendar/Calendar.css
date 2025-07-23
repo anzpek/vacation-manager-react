@@ -1,0 +1,308 @@
+/* Calendar.css - 달력 스타일 */
+
+.calendar-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.calendar-info {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.employee-count {
+    font-size: 14px;
+    color: var(--text-secondary);
+    background: var(--background-secondary);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.calendar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: var(--background-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.weekday {
+    padding: 12px 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-primary);
+    border-right: 1px solid var(--border-color);
+}
+
+.weekday:last-child {
+    border-right: none;
+}
+
+.weekday.sunday {
+    color: var(--error-color, #e74c3c);
+}
+
+.weekday.saturday {
+    color: var(--info-color, #3498db);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    flex: 1;
+}
+
+.calendar-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    gap: 16px;
+}
+
+.calendar-legend {
+    margin-top: 16px;
+    padding: 16px;
+    background: var(--background-secondary);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.legend-title {
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.legend-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    border: 1px solid var(--border-color);
+}
+
+/* 공휴일 상태 표시 */
+.holiday-status {
+    padding-top: 8px;
+    border-top: 1px solid var(--border-color);
+    margin-top: 8px;
+}
+
+.holiday-count {
+    font-size: 12px;
+    color: var(--text-secondary);
+    background: var(--holiday-bg, rgba(255, 71, 87, 0.1));
+    padding: 4px 8px;
+    border-radius: 12px;
+    border: 1px solid var(--holiday-border, rgba(255, 71, 87, 0.2));
+    display: inline-block;
+}
+
+/* 공휴일 스타일 */
+.calendar-day.holiday {
+    background-color: var(--holiday-day-bg, rgba(255, 71, 87, 0.05));
+    border-left: 3px solid var(--holiday-border-color, #ff4757);
+}
+
+.calendar-day.holiday .day-number {
+    color: var(--holiday-text-color, #ff4757);
+    font-weight: 700;
+}
+
+.holiday-indicator {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.holiday-name {
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    right: 2px;
+    font-size: 9px;
+    color: var(--holiday-text-color, #ff4757);
+    background: var(--holiday-name-bg, rgba(255, 255, 255, 0.9));
+    padding: 1px 3px;
+    border-radius: 3px;
+    text-align: center;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 2;
+    border: 1px solid var(--holiday-border, rgba(255, 71, 87, 0.3));
+}
+
+.holiday-indicator-small {
+    margin-left: 4px;
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+/* 행 모드 공휴일 스타일 */
+.calendar-row-day.holiday {
+    background-color: var(--holiday-row-bg, rgba(255, 71, 87, 0.08));
+    border-color: var(--holiday-border-color, #ff4757);
+}
+
+.calendar-row-day.holiday .day-number {
+    color: var(--holiday-text-color, #ff4757);
+    font-weight: 700;
+}
+
+.vacation-annual {
+    background-color: var(--vacation-annual-color, rgba(52, 152, 219, 0.8));
+}
+
+.vacation-morning {
+    background-color: var(--vacation-morning-color, rgba(155, 89, 182, 0.8));
+}
+
+.vacation-afternoon {
+    background-color: var(--vacation-afternoon-color, rgba(230, 126, 34, 0.8));
+}
+
+.vacation-special {
+    background-color: var(--vacation-special-color, rgba(231, 76, 60, 0.8));
+}
+
+.vacation-sick {
+    background-color: var(--vacation-sick-color, rgba(149, 165, 166, 0.8));
+}
+
+.vacation-work {
+    background-color: var(--vacation-work-color, rgba(52, 73, 94, 0.8));
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+    .calendar-container {
+        height: calc(100vh - 70px); /* 고정 헤더 높이만큼 제외 */
+        min-height: calc(100vh - 70px);
+        display: flex;
+        flex-direction: column;
+        padding: 8px;
+        margin: 0;
+        overflow: hidden;
+        background: var(--background-primary, #ffffff);
+    }
+    
+    .calendar-header {
+        display: none; /* 헤더에 날짜 네비게이션이 있으므로 숨김 */
+    }
+    
+    .calendar-weekdays {
+        display: grid !important;
+        grid-template-columns: repeat(7, 1fr);
+        background: var(--background-secondary, #f8f9fa);
+        border-bottom: 1px solid var(--border-color, #e0e0e0);
+        flex-shrink: 0;
+    }
+    
+    .calendar {
+        flex: 1;
+        border-radius: 8px;
+        border: 1px solid var(--border-color, #e0e0e0);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .weekday {
+        padding: 8px 4px;
+        text-align: center;
+        font-weight: 600;
+        font-size: 12px;
+        color: var(--text-primary, #1a1a1a);
+        border-right: 1px solid var(--border-color, #e0e0e0);
+        line-height: 1.2;
+    }
+    
+    .weekday:last-child {
+        border-right: none;
+    }
+    
+    .weekday.sunday {
+        color: var(--error-color, #e74c3c);
+    }
+    
+    .weekday.saturday {
+        color: var(--info-color, #3498db);
+    }
+    
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: repeat(6, 1fr); /* 6주를 동일한 높이로 */
+        gap: 1px;
+        background: var(--border-color, #e0e0e0);
+        padding: 1px;
+        flex: 1;
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    .calendar-legend {
+        display: none; /* 모바일에서는 범례 숨김 */
+    }
+}
+
+@media (max-width: 480px) {
+    .weekday {
+        padding: 6px 2px;
+        font-size: 11px;
+    }
+    
+    .calendar-container {
+        height: calc(100vh - 90px);
+        min-height: calc(100vh - 90px);
+    }
+}

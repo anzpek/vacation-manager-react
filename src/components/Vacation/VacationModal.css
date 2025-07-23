@@ -1,0 +1,732 @@
+/* VacationModal.css - 깔끔한 모달 스타일 (이모티콘 제거) */
+
+/* 모달 오버레이 */
+.vacation-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 모달 컨테이너 */
+.vacation-modal-container {
+  background: var(--background-primary, #ffffff);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow: hidden;
+  animation: slideUp 0.3s ease-out;
+  border: 1px solid var(--border-color, #e0e0e0);
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+  .vacation-modal-overlay {
+    padding: 12px;
+    align-items: flex-end;
+  }
+  
+  .vacation-modal-container {
+    max-width: none;
+    width: 100%;
+    max-height: 85vh;
+    border-radius: 16px 16px 0 0;
+    animation: slideUpMobile 0.3s ease-out;
+  }
+}
+
+@keyframes slideUpMobile {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .vacation-modal-overlay {
+    padding: 0;
+  }
+  
+  .vacation-modal-container {
+    border-radius: 0;
+    max-height: 100vh;
+  }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 모달 헤더 */
+.vacation-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+  background: var(--background-secondary, #fafafa);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary, #1a1a1a);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.modal-subtitle {
+  font-size: 13px;
+  color: var(--text-secondary, #666);
+  margin: 0;
+  font-weight: 500;
+}
+
+.close-button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: var(--background-hover, #f0f0f0);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-secondary, #666);
+  transition: all 0.2s ease;
+}
+
+.close-button:hover {
+  background: var(--background-accent, #e0e0e0);
+  color: var(--text-primary, #1a1a1a);
+  transform: scale(1.05);
+}
+
+/* 모달 바디 */
+.vacation-modal-body {
+  padding: 20px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* 수정 모드 컨텍스트 정보 */
+.edit-context-info {
+  background: var(--background-secondary, #f8f9fa);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.context-header h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.context-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.context-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.context-label {
+  font-weight: 500;
+  color: var(--text-secondary, #666);
+  min-width: 80px;
+}
+
+.context-value {
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  text-align: right;
+}
+
+.context-subtitle {
+  margin: 4px 0 0 0;
+  font-size: 12px;
+  color: var(--text-secondary, #666);
+  font-weight: 400;
+}
+
+/* 연휴 날짜 선택 UI */
+.consecutive-date-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.date-option {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border: 2px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--background-primary, #ffffff);
+  position: relative;
+}
+
+.date-option:hover {
+  border-color: var(--primary-color, #4285f4);
+  background: var(--background-hover, #f8f9fa);
+}
+
+.date-option.selected {
+  border-color: var(--primary-color, #4285f4);
+  background: rgba(66, 133, 244, 0.05);
+  box-shadow: 0 0 0 1px var(--primary-color, #4285f4);
+}
+
+.date-option input[type="radio"] {
+  display: none;
+}
+
+.date-option-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.date-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary, #1a1a1a);
+}
+
+/* 연휴 선택된 날짜 표시 */
+.selected-date-display {
+  padding: 12px 16px;
+  border: 2px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  background: var(--background-secondary, #f8f9fa);
+}
+
+.date-display-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.date-display-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.date-display-note {
+  font-size: 12px;
+  color: var(--text-secondary, #666);
+  font-style: italic;
+}
+
+.vacation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 폼 필드 */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  font-size: 14px;
+}
+
+.label-text {
+  font-size: 14px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 모던 입력 필드들 */
+.modern-input,
+.modern-select,
+.modern-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  background: var(--background-primary, #ffffff);
+  color: var(--text-primary, #1a1a1a);
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.modern-input:focus,
+.modern-select:focus,
+.modern-textarea:focus {
+  outline: none;
+  border-color: var(--primary-color, #4285f4);
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+.modern-input.error,
+.modern-select.error,
+.modern-textarea.error {
+  border-color: var(--error-color, #ea4335);
+  box-shadow: 0 0 0 3px rgba(234, 67, 53, 0.1);
+}
+
+.modern-textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+/* 선택된 직원 미리보기 */
+.selected-employee-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: var(--background-secondary, #f8f9fa);
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #e0e0e0);
+}
+
+.employee-avatar {
+  width: 32px;
+  height: 32px;
+  background: var(--primary-color, #4285f4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: white;
+  font-size: 13px;
+}
+
+.employee-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.employee-name {
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  font-size: 14px;
+}
+
+.employee-team {
+  font-size: 12px;
+  color: var(--text-secondary, #666);
+}
+
+/* 휴가 유형 그리드 */
+.vacation-type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.vacation-type-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 2px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--background-primary, #ffffff);
+  position: relative;
+}
+
+.vacation-type-card:hover {
+  border-color: var(--primary-color, #4285f4);
+  background: var(--background-hover, #f8f9fa);
+  transform: translateY(-1px);
+}
+
+.vacation-type-card.selected {
+  border-color: var(--primary-color, #4285f4);
+  background: rgba(66, 133, 244, 0.05);
+  box-shadow: 0 0 0 1px var(--primary-color, #4285f4);
+}
+
+.type-radio {
+  display: none;
+}
+
+.type-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.type-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary, #1a1a1a);
+}
+
+/* 에러 메시지 */
+.error-message {
+  font-size: 12px;
+  color: var(--error-color, #ea4335);
+  font-weight: 500;
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.alert-warning {
+  background: rgba(251, 188, 4, 0.1);
+  border: 1px solid rgba(251, 188, 4, 0.3);
+  color: #f57c00;
+}
+
+.alert-error {
+  background: rgba(234, 67, 53, 0.1);
+  border: 1px solid rgba(234, 67, 53, 0.3);
+  color: var(--error-color, #ea4335);
+}
+
+.alert-text {
+  flex: 1;
+}
+
+/* 모달 푸터 */
+.vacation-modal-footer {
+  padding: 16px 20px 20px;
+  border-top: 1px solid var(--border-color, #e0e0e0);
+  background: var(--background-secondary, #fafafa);
+}
+
+.footer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.primary-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* 액션 버튼들 */
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  min-height: 40px;
+}
+
+.action-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cancel-button {
+  background: var(--background-hover, #f0f0f0);
+  color: var(--text-primary, #1a1a1a);
+  border: 1px solid var(--border-color, #e0e0e0);
+}
+
+.cancel-button:hover:not(:disabled) {
+  background: var(--background-accent, #e0e0e0);
+}
+
+.submit-button {
+  background: var(--primary-color, #4285f4);
+  color: white;
+  box-shadow: 0 2px 6px rgba(66, 133, 244, 0.3);
+}
+
+.submit-button:hover:not(:disabled) {
+  background: var(--primary-dark, #3367d6);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(66, 133, 244, 0.4);
+}
+
+.delete-button {
+  background: rgba(234, 67, 53, 0.1);
+  color: var(--error-color, #ea4335);
+  border: 1px solid rgba(234, 67, 53, 0.3);
+}
+
+.delete-button:hover:not(:disabled) {
+  background: rgba(234, 67, 53, 0.2);
+}
+
+.button-text {
+  font-size: 13px;
+}
+
+/* 다크 테마 */
+[data-theme="dark"] .vacation-modal-container {
+  background: var(--dark-bg-primary, #1e1e1e);
+  border: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .vacation-modal-header {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border-bottom: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .modal-title {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .modal-subtitle {
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .close-button {
+  background: var(--dark-bg-hover, #404040);
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .close-button:hover {
+  background: var(--dark-bg-accent, #505050);
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .field-label {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .modern-input,
+[data-theme="dark"] .modern-select,
+[data-theme="dark"] .modern-textarea {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 2px solid var(--dark-border, #333);
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .modern-input:focus,
+[data-theme="dark"] .modern-select:focus,
+[data-theme="dark"] .modern-textarea:focus {
+  border-color: var(--primary-color, #4285f4);
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.2);
+}
+
+[data-theme="dark"] .selected-employee-preview {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .employee-name {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .employee-team {
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .vacation-type-card {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 2px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .vacation-type-card:hover {
+  background: var(--dark-bg-hover, #404040);
+}
+
+[data-theme="dark"] .vacation-type-card.selected {
+  background: rgba(66, 133, 244, 0.1);
+}
+
+[data-theme="dark"] .type-label {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .vacation-modal-footer {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border-top: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .cancel-button {
+  background: var(--dark-bg-hover, #404040);
+  color: var(--dark-text-primary, #ffffff);
+  border: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .cancel-button:hover:not(:disabled) {
+  background: var(--dark-bg-accent, #505050);
+}
+
+[data-theme="dark"] .edit-context-info {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .context-header h4 {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .context-label {
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .context-value {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .context-subtitle {
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .date-option {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 2px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .date-option:hover {
+  background: var(--dark-bg-hover, #404040);
+}
+
+[data-theme="dark"] .date-option.selected {
+  background: rgba(66, 133, 244, 0.1);
+}
+
+[data-theme="dark"] .date-text {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .selected-date-display {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 2px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .date-display-text {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .date-display-note {
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+/* 반응형 */
+@media (max-width: 600px) {
+  .vacation-modal-overlay {
+    padding: 10px;
+  }
+  
+  .vacation-modal-container {
+    max-width: 100%;
+    max-height: 95vh;
+  }
+  
+  .vacation-modal-header {
+    padding: 16px 16px 12px;
+  }
+  
+  .modal-title {
+    font-size: 18px;
+  }
+  
+  .vacation-modal-body {
+    padding: 16px;
+  }
+  
+  .vacation-type-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .primary-actions {
+    width: 100%;
+  }
+  
+  .action-button {
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .consecutive-date-selector {
+    grid-template-columns: 1fr;
+  }
+  
+  .date-option {
+    justify-content: center;
+  }
+}

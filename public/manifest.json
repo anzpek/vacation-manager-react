@@ -1,0 +1,65 @@
+{
+  "short_name": "휴가관리",
+  "name": "부서휴가관리 시스템",
+  "description": "다중 테넌트 휴가 관리 및 시각화 시스템",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#4285f4",
+  "background_color": "#ffffff",
+  "orientation": "any",
+  "categories": ["business", "productivity", "utilities"],
+  "lang": "ko",
+  "scope": "/",
+  "screenshots": [
+    {
+      "src": "screenshot1.png",
+      "type": "image/png",
+      "sizes": "1280x720",
+      "label": "메인 달력 화면"
+    },
+    {
+      "src": "screenshot2.png", 
+      "type": "image/png",
+      "sizes": "1280x720",
+      "label": "부서별 로그인"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "오늘 휴가 확인",
+      "short_name": "오늘",
+      "description": "오늘의 휴가 현황을 빠르게 확인",
+      "url": "/?view=today",
+      "icons": [{ "src": "today-icon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "휴가 등록",
+      "short_name": "등록",
+      "description": "새로운 휴가 일정 등록",
+      "url": "/?action=add",
+      "icons": [{ "src": "add-icon.png", "sizes": "96x96" }]
+    }
+  ],
+  "prefer_related_applications": false,
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "edge_side_panel": {
+    "preferred_width": 480
+  }
+}

@@ -1,0 +1,369 @@
+/* TeamVacationOverview.css - 팀별 휴가 현황 위젯 스타일 */
+
+.team-vacation-overview {
+  padding: 20px;
+  background: var(--background-primary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.overview-header {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.overview-title {
+  margin: 0 0 4px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.overview-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.team-card {
+  background: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.2s ease;
+}
+
+.team-card:hover {
+  background: var(--background-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.team-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.team-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.team-member-count {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.team-status {
+  display: flex;
+  align-items: center;
+}
+
+.status-icon {
+  font-size: 20px;
+}
+
+.team-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px;
+  background: var(--background-primary);
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.stat-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.vacation-breakdown {
+  margin-bottom: 16px;
+}
+
+.breakdown-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.breakdown-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.breakdown-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--background-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 4px 6px;
+  font-size: 11px;
+}
+
+.breakdown-type {
+  color: var(--text-secondary);
+}
+
+.breakdown-count {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.no-vacations {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-style: italic;
+  text-align: center;
+  padding: 4px;
+}
+
+.current-status {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.status-section {
+  background: var(--background-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.status-title {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.vacation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vacation-person {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 0;
+}
+
+.person-name {
+  font-size: 12px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.vacation-type {
+  font-size: 10px;
+  color: var(--text-secondary);
+  background: var(--background-secondary);
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+.no-vacation-today,
+.no-vacation-week {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-style: italic;
+  text-align: center;
+}
+
+.week-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.week-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.week-detail {
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+.team-impact {
+  margin-top: 8px;
+}
+
+.impact-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.impact-label {
+  font-size: 10px;
+  color: var(--text-secondary);
+  min-width: 60px;
+}
+
+.impact-meter {
+  flex: 1;
+  height: 4px;
+  background: var(--background-accent);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.impact-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.impact-percentage {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-primary);
+  min-width: 32px;
+  text-align: right;
+}
+
+.no-teams {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  color: var(--text-secondary);
+}
+
+.no-teams-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.no-teams-text {
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* 다크모드 호버 효과 */
+[data-theme="dark"] .team-card:hover {
+  background: var(--background-hover);
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .team-vacation-overview {
+    padding: 16px;
+  }
+  
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .team-card {
+    padding: 12px;
+  }
+  
+  .overview-title {
+    font-size: 16px;
+  }
+  
+  .team-name {
+    font-size: 14px;
+  }
+  
+  .current-status {
+    gap: 8px;
+  }
+  
+  .status-section {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-vacation-overview {
+    padding: 12px;
+  }
+  
+  .team-card {
+    padding: 10px;
+  }
+  
+  .team-stats {
+    gap: 8px;
+  }
+  
+  .stat-item {
+    padding: 6px;
+  }
+  
+  .breakdown-items {
+    gap: 4px;
+  }
+  
+  .current-status {
+    gap: 6px;
+  }
+  
+  .impact-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+  
+  .impact-label {
+    min-width: auto;
+    text-align: center;
+  }
+  
+  .impact-percentage {
+    text-align: center;
+    min-width: auto;
+  }
+}
