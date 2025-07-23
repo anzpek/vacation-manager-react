@@ -28,7 +28,9 @@ const SecuritySettings = ({ isOpen, onClose }) => {
       return;
     }
 
-    if (currentPassword !== 'admin2024!') {
+    // 저장된 관리자 비밀번호 확인 (기본값: admin2025!)
+    const storedAdminPassword = localStorage.getItem('adminPassword') || 'admin2025!';
+    if (currentPassword !== storedAdminPassword) {
       showError('인증 실패', '현재 비밀번호가 틀렸습니다.');
       return;
     }
@@ -46,8 +48,9 @@ const SecuritySettings = ({ isOpen, onClose }) => {
     setIsLoading(true);
 
     try {
-      // 실제로는 서버에 비밀번호 변경 요청
+      // 로컬스토리지에 새 비밀번호 저장
       await new Promise(resolve => setTimeout(resolve, 1000));
+      localStorage.setItem('adminPassword', newPassword);
       
       showSuccess('비밀번호 변경', '관리자 비밀번호가 성공적으로 변경되었습니다.');
       setCurrentPassword('');

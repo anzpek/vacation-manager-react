@@ -13,8 +13,8 @@ const AdminModal = ({ isOpen, onClose }) => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
-    // 관리자 비밀번호 (실제 운영에서는 보안 강화 필요)
-    const ADMIN_PASSWORD = 'admin2025!';
+    // 관리자 비밀번호 (로컬스토리지에서 동적으로 관리)
+    const getAdminPassword = () => localStorage.getItem('adminPassword') || 'admin2025!';
 
     const resetForm = useCallback(() => {
         setSelectedDepartment('');
@@ -38,7 +38,7 @@ const AdminModal = ({ isOpen, onClose }) => {
             return;
         }
 
-        if (adminPassword !== ADMIN_PASSWORD) {
+        if (adminPassword !== getAdminPassword()) {
             setError('관리자 비밀번호가 올바르지 않습니다.');
             return;
         }
@@ -173,7 +173,7 @@ const AdminModal = ({ isOpen, onClose }) => {
                                     disabled={isLoading}
                                 />
                                 <div className="admin-hint">
-                                    💡 힌트: admin2025!
+                                    💡 힌트: {getAdminPassword()}
                                 </div>
                             </div>
                         </div>
