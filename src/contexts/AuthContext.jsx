@@ -69,93 +69,83 @@ export function AuthProvider({ children }) {
 
   // 부서 추가 (관리자 기능)
   const addDepartment = async (departmentData) => {
-    return new Promise((resolve, reject) => {
-      try {
-        // 부서 코드 중복 검사
-        if (departments.some(dept => dept.code === departmentData.code)) {
-          reject(new Error('이미 존재하는 부서 코드입니다.'));
-          return;
-        }
-
-        const newDepartment = {
-          ...departmentData,
-          id: Date.now()
-        };
-
-        const updatedDepartments = [...departments, newDepartment];
-        setDepartments(updatedDepartments);
-        localStorage.setItem('departments', JSON.stringify(updatedDepartments));
-        
-        // Firebase에도 저장
-        if (database) {
-          const departmentsRef = ref(database, 'system/departments');
-          await set(departmentsRef, updatedDepartments);
-        }
-        
-        console.log(`🏢 새 부서 추가: ${newDepartment.name} (${newDepartment.code})`);
-        resolve(newDepartment);
-      } catch (error) {
-        console.error('부서 추가 실패:', error);
-        reject(error);
+    try {
+      // 부서 코드 중복 검사
+      if (departments.some(dept => dept.code === departmentData.code)) {
+        throw new Error('이미 존재하는 부서 코드입니다.');
       }
-    });
+
+      const newDepartment = {
+        ...departmentData,
+        id: Date.now()
+      };
+
+      const updatedDepartments = [...departments, newDepartment];
+      setDepartments(updatedDepartments);
+      localStorage.setItem('departments', JSON.stringify(updatedDepartments));
+      
+      // Firebase에도 저장
+      if (database) {
+        const departmentsRef = ref(database, 'system/departments');
+        await set(departmentsRef, updatedDepartments);
+      }
+      
+      console.log(`🏢 새 부서 추가: ${newDepartment.name} (${newDepartment.code})`);
+      return newDepartment;
+    } catch (error) {
+      console.error('부서 추가 실패:', error);
+      throw error;
+    }
   };
 
   // 부서 수정 (관리자 기능)
   const updateDepartment = async (deptCode, departmentData) => {
-    return new Promise((resolve, reject) => {
-      try {
-        const updatedDepartments = departments.map(dept => 
-          dept.code === deptCode 
-            ? { ...dept, ...departmentData }
-            : dept
-        );
-        
-        setDepartments(updatedDepartments);
-        localStorage.setItem('departments', JSON.stringify(updatedDepartments));
-        
-        // Firebase에도 저장
-        if (database) {
-          const departmentsRef = ref(database, 'system/departments');
-          await set(departmentsRef, updatedDepartments);
-        }
-        
-        console.log(`🔧 부서 수정: ${departmentData.name || deptCode}`);
-        resolve();
-      } catch (error) {
-        console.error('부서 수정 실패:', error);
-        reject(error);
+    try {
+      const updatedDepartments = departments.map(dept => 
+        dept.code === deptCode 
+          ? { ...dept, ...departmentData }
+          : dept
+      );
+      
+      setDepartments(updatedDepartments);
+      localStorage.setItem('departments', JSON.stringify(updatedDepartments));
+      
+      // Firebase에도 저장
+      if (database) {
+        const departmentsRef = ref(database, 'system/departments');
+        await set(departmentsRef, updatedDepartments);
       }
-    });
+      
+      console.log(`🔧 부서 수정: ${departmentData.name || deptCode}`);
+    } catch (error) {
+      console.error('부서 수정 실패:', error);
+      throw error;
+    }
   };
 
   // 부서 삭제 (관리자 기능)
   const deleteDepartment = async (deptCode) => {
-    return new Promise((resolve, reject) => {
-      try {
-        const department = departments.find(d => d.code === deptCode);
-        if (!department) {
-          reject(new Error('존재하지 않는 부서입니다.'));
-          return;
-        }
-
-        const updatedDepartments = departments.filter(dept => dept.code !== deptCode);
-        setDepartments(updatedDepartments);
-        localStorage.setItem('departments', JSON.stringify(updatedDepartments));
-        
-        // Firebase에도 저장
-        if (database) {
-          const departmentsRef = ref(database, 'system/departments');
-          await set(departmentsRef, updatedDepartments);
-        }
-        
-        console.log(`🗑️ 부서 삭제: ${department.name} (${deptCode})`);
-        resolve();
-      } catch (error) {
-        console.error('부서 삭제 실패:', error);
-        reject(error);
+    try {
+      const department = departments.find(d => d.code === deptCode);
+      if (!department) {
+        throw new Error('존재하지 않는 부서입니다.');
       }
-    });
+
+      const updatedDepartments = departments.filter(dept => dept.code !== deptCode);
+      setDepartments(updatedDepartments);
+      localStorage.setItem('departments', JSON.stringify(updatedDepartments));
+      
+      // Firebase에도 저장
+      if (database) {
+        const departmentsRef = ref(database, 'system/departments');
+        await set(departmentsRef, updatedDepartments);
+      }
+      
+      console.log(`🗑️ 부서 삭제: ${department.name} (${deptCode})`);
+    } catch (error) {
+      console.error('부서 삭제 실패:', error);
+      throw error;
+    }
   };
 
   // 부서 비밀번호 변경 (관리자 기능)

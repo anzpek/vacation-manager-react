@@ -2,7 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
-import { getDatabase } from 'firebase/database';
+import { getDatabase, ref, set, get } from 'firebase/database';
 
 // config/firebase-config.js 에 있는 설정 값 사용
 const firebaseConfig = {
@@ -21,6 +21,10 @@ const app = initializeApp(firebaseConfig);
 // Firebase 서비스 export
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+export const database = getDatabase(app);
 export const realtimeDb = getDatabase(app);
+
+// Realtime Database 함수들 export
+export { ref, set, get };
 
 export default app;
