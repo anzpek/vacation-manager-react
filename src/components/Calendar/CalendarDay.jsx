@@ -410,8 +410,8 @@ const CalendarDay = React.forwardRef(({
                             const consecutiveGroup = getConsecutiveGroupForDate(date, vacation.employeeId);
                             
                             // 연속휴가인 경우 실제 시작일과 종료일 사용, 아니면 현재 날짜 사용
-                            const vacationStartDate = consecutiveGroup ? new Date(consecutiveGroup.startDate) : new Date(vacation.date);
-                            const vacationEndDate = consecutiveGroup ? new Date(consecutiveGroup.endDate) : new Date(vacation.date);
+                            const vacationStartDate = consecutiveGroup ? new Date(consecutiveGroup.startDate + 'T00:00:00') : new Date(vacation.date + 'T00:00:00');
+                            const vacationEndDate = consecutiveGroup ? new Date(consecutiveGroup.endDate + 'T23:59:59') : new Date(vacation.date + 'T23:59:59');
 
                             let assignedTrack = -1;
                             for (let i = 0; i < tracks.length; i++) {
@@ -426,6 +426,7 @@ const CalendarDay = React.forwardRef(({
                                 assignedTrack = tracks.length; // 새 트랙 할당
                             }
                             tracks[assignedTrack] = vacationEndDate; // 트랙의 종료일 업데이트
+                            
                             fullDayVacationsWithTracks.push({ ...vacation, trackIndex: assignedTrack });
                         });
                         
