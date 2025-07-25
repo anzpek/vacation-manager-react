@@ -129,13 +129,8 @@ const CalendarDay = React.forwardRef(({
         
         // 연속휴가 내의 반차 처리 로직 개선
         if (consecutiveGroup && consecutiveGroup.isConsecutive) {
-            const isStartOfGroup = consecutiveGroup.startDate === dateString;
-            const isEndOfGroup = consecutiveGroup.endDate === dateString;
-            
-            // 연휴 시작일이나 끝일의 반차는 연휴 막대바와 함께 렌더링되므로 개별 반차는 표시하지 않음
-            if (isStartOfGroup || isEndOfGroup) {
-                return null;
-            }
+            // 반차가 연속휴가의 일부라면 연휴 막대바에 포함되므로 개별 반차는 렌더링하지 않음
+            return null;
         }
         
         // 단독 반차는 기존 로직 유지
@@ -382,58 +377,15 @@ const CalendarDay = React.forwardRef(({
                         });
                         
                         
+                        // Calendar.jsx에서 이미 트랙이 할당된 상태이므로 재정렬만 수행
                         const sorted = fullDayVacations.sort((a, b) => {
-                            // CalendarDay에서 직접 정렬: 연속휴가 기간 기준
-                            const groupA = getConsecutiveGroupForDate(date, a.employeeId);
-                            const groupB = getConsecutiveGroupForDate(date, b.employeeId);
-                            
-                            const durationA = groupA ? 
-                                (new Date(groupA.endDate).getTime() - new Date(groupA.startDate).getTime()) / (1000 * 60 * 60 * 24) + 1 : 
-                                1;
-                            const durationB = groupB ? 
-                                (new Date(groupB.endDate).getTime() - new Date(groupB.startDate).getTime()) / (1000 * 60 * 60 * 24) + 1 : 
-                                1;
-                            
-                            // 정렬 진행
-                            
-                            if (durationA !== durationB) {
-                                return durationB - durationA; // 긴 연휴가 먼저
-                            }
-                            return a.employeeId - b.employeeId;
-                        });
-
-                        // 트랙 할당 시스템 (겹침 방지)
-                        const tracks = []; // 각 트랙의 휴가 종료일을 저장
-                        const fullDayVacationsWithTracks = [];
-
-                        sorted.forEach(vacation => {
-                            const consecutiveGroup = getConsecutiveGroupForDate(date, vacation.employeeId);
-                            
-                            // 연속휴가인 경우 실제 시작일과 종료일 사용, 아니면 현재 날짜 사용
-                            const vacationStartDate = consecutiveGroup ? new Date(consecutiveGroup.startDate + 'T00:00:00') : new Date(vacation.date + 'T00:00:00');
-                            const vacationEndDate = consecutiveGroup ? new Date(consecutiveGroup.endDate + 'T23:59:59') : new Date(vacation.date + 'T23:59:59');
-
-                            let assignedTrack = -1;
-                            for (let i = 0; i < tracks.length; i++) {
-                                // 현재 트랙의 마지막 휴가가 현재 휴가 시작 전에 끝나면 이 트랙 사용 (겹치지 않음)
-                                if (!tracks[i] || new Date(tracks[i]).getTime() < vacationStartDate.getTime()) {
-                                    assignedTrack = i;
-                                    break;
-                                }
-                            }
-
-                            if (assignedTrack === -1) {
-                                assignedTrack = tracks.length; // 새 트랙 할당
-                            }
-                            tracks[assignedTrack] = vacationEndDate; // 트랙의 종료일 업데이트
-                            
-                            fullDayVacationsWithTracks.push({ ...vacation, trackIndex: assignedTrack });
+                            // trackIndex 기준으로 정렬 (Calendar.jsx에서 할당된 순서 유지)
+                            return (a.trackIndex || 0) - (b.trackIndex || 0);
                         });
                         
-                        // 트랙 할당 완료
-                        
-                        const rendered = fullDayVacationsWithTracks.map((vacation) => {
-                            return renderVacationBar(vacation, vacation.trackIndex);
+                        const rendered = sorted.map((vacation) => {
+                            // Calendar.jsx에서 할당된 trackIndex 사용
+                            return renderVacationBar(vacation, vacation.trackIndex || 0);
                         }).filter(Boolean); // null 제거
                         
                         return rendered;
@@ -457,18 +409,22 @@ const CalendarDay = React.forwardRef(({
                         return isHalfDayStart && isStartOfGroup;
                     });
                     
-                    // 실제로 렌더링되는 연차 막대바 개수를 계산 (현재 스코프 밖의 fullDayVacations 사용)
+                    // Calendar.jsx에서 할당된 trackIndex 사용하여 최대 트랙 인덱스 계산
                     const currentFullDayVacations = vacations.filter(v => !['오전', '오후'].includes(v.type));
-                    const renderedFullDayCount = currentFullDayVacations.length;
                     
-                    // 반차 연속휴가가 있는 경우의 위치 계산
+                    let maxTrackIndex = -1;
+                    currentFullDayVacations.forEach(vacation => {
+                        maxTrackIndex = Math.max(maxTrackIndex, vacation.trackIndex || 0);
+                    });
+                    
+                    // 반차 연속휴가가 있는 경우의 위치 계산 - 트랙 시스템 고려
                     let halfDayStartTop;
                     if (hasConsecutiveHalfDay) {
-                        // 반차 연속휴가가 있으면 렌더링된 연차 막대바들 아래에 배치
-                        halfDayStartTop = (renderedFullDayCount * 22) + 6;
+                        // 반차 연속휴가가 있으면 모든 트랙 아래에 배치
+                        halfDayStartTop = ((maxTrackIndex + 1) * 22) + 6;
                     } else {
-                        // 일반 반차는 연차 막대바들 아래에 배치
-                        halfDayStartTop = (renderedFullDayCount * 22) + 6;
+                        // 일반 반차는 모든 트랙 아래에 배치
+                        halfDayStartTop = ((maxTrackIndex + 1) * 22) + 6;
                     }
                     // z-index 조정: 반차 연속휴가는 연차 막대바 아래에 배치
                     const halfDayZIndex = hasConsecutiveHalfDay ? 18 : 10;

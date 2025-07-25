@@ -103,8 +103,11 @@ function App() {
 }
 
 export default function AppWrapper() {
+  // GitHub Pages 배포를 위한 basename 설정
+  const basename = process.env.NODE_ENV === 'production' ? '/vacation-manager-react' : '';
+  
   return (
-    <Router>
+    <Router basename={basename}>
       <ThemeProvider>
         <AuthProvider>
           <App />

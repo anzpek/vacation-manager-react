@@ -206,6 +206,7 @@ const Calendar = ({ holidays, filteredEmployees }) => {
     return holidays.find(holiday => holiday.date === dateString) || null;
   };
 
+
   const getVacationsForDate = (date) => {
     const dateStr = formatDateToYYYYMMDD(date);
     
@@ -262,23 +263,30 @@ const Calendar = ({ holidays, filteredEmployees }) => {
       }
     });
 
-    // 2. Sort full-day vacations by consecutive group duration (descending) BEFORE track assignment
+    // 2. 🔥 연휴 시작날짜 기준 정렬 (기간 길이 무관)
     fullDayVacations.sort((a, b) => {
       const groupA = getConsecutiveGroupForDate(date, a.employeeId);
       const groupB = getConsecutiveGroupForDate(date, b.employeeId);
 
-      // 연속휴가가 있으면 실제 일수 계산, 없으면 단일휴가(1일)로 처리
-      const durationA = groupA ? 
-        (new Date(groupA.endDate).getTime() - new Date(groupA.startDate).getTime()) / (1000 * 60 * 60 * 24) + 1 : 
-        1; // 단일 휴가는 1일
-      const durationB = groupB ? 
-        (new Date(groupB.endDate).getTime() - new Date(groupB.startDate).getTime()) / (1000 * 60 * 60 * 24) + 1 : 
-        1; // 단일 휴가는 1일
-
-      if (durationA !== durationB) {
-        return durationB - durationA; // 긴 연휴가 먼저 (상단에 표시)
+      // 연휴와 단일휴가 분리
+      const isConsecutiveA = groupA && groupA.isConsecutive;
+      const isConsecutiveB = groupB && groupB.isConsecutive;
+      
+      // 연휴가 단일휴가보다 우선
+      if (isConsecutiveA && !isConsecutiveB) return -1;
+      if (!isConsecutiveA && isConsecutiveB) return 1;
+      
+      if (isConsecutiveA && isConsecutiveB) {
+        // 둘 다 연휴면 시작날짜 순으로 정렬 (먼저 시작하는 연휴가 상단)
+        const startA = new Date(groupA.startDate);
+        const startB = new Date(groupB.startDate);
+        if (startA.getTime() !== startB.getTime()) {
+          return startA - startB;
+        }
       }
-      return a.employeeId - b.employeeId; // 일수가 같으면 직원 ID순
+      
+      // 같은 타입이면 직원 ID순
+      return a.employeeId - b.employeeId;
     });
 
     // 3. Track assignment for full-day vacations (이미 정렬된 상태)
@@ -287,52 +295,43 @@ const Calendar = ({ holidays, filteredEmployees }) => {
 
     fullDayVacations.forEach(vacation => {
       const consecutiveGroup = getConsecutiveGroupForDate(date, vacation.employeeId);
-      const vacationEndDate = consecutiveGroup ? new Date(consecutiveGroup.endDate) : new Date(vacation.date);
+      
+      // 현재 휴가의 시작일과 종료일 결정 (모두 문자열로 통일)
+      const currentStartDate = consecutiveGroup ? consecutiveGroup.startDate : vacation.date;
+      const currentEndDate = consecutiveGroup ? consecutiveGroup.endDate : vacation.date;
 
       let assignedTrack = -1;
       for (let i = 0; i < tracks.length; i++) {
-        // If the current track's last vacation ends before the current vacation starts, use this track
-        if (!tracks[i] || new Date(tracks[i]) < new Date(vacation.date)) {
+        if (!tracks[i]) {
+          assignedTrack = i;
+          break;
+        }
+        
+        // 문자열 날짜 비교로 통일 (YYYY-MM-DD 형식)
+        const trackEndDate = tracks[i].endDate;
+        
+        // 겹침 검사: 트랙의 마지막 휴가가 끝난 다음 날부터 새 휴가 배치 가능  
+        if (trackEndDate < currentStartDate) {
           assignedTrack = i;
           break;
         }
       }
 
       if (assignedTrack === -1) {
-        assignedTrack = tracks.length; // Assign a new track
+        assignedTrack = tracks.length; // 새 트랙 할당
       }
-      tracks[assignedTrack] = vacationEndDate; // Update the track's end date
+      
+      // 트랙에 현재 휴가 정보 저장
+      tracks[assignedTrack] = {
+        endDate: currentEndDate,
+        employeeId: vacation.employeeId,
+        startDate: currentStartDate
+      };
+      
       fullDayVacationsWithTracks.push({ ...vacation, trackIndex: assignedTrack });
     });
 
-    // 정렬된 순서를 유지하면서 trackIndex 할당
-    // 트랙 할당 과정에서 순서가 바뀔 수 있으므로 연휴 기간 기준으로 다시 정렬
-    fullDayVacationsWithTracks.sort((a, b) => {
-      const groupA = getConsecutiveGroupForDate(date, a.employeeId);
-      const groupB = getConsecutiveGroupForDate(date, b.employeeId);
-      
-      const durationA = groupA ? 
-        (new Date(groupA.endDate).getTime() - new Date(groupA.startDate).getTime()) / (1000 * 60 * 60 * 24) + 1 : 
-        1;
-      const durationB = groupB ? 
-        (new Date(groupB.endDate).getTime() - new Date(groupB.startDate).getTime()) / (1000 * 60 * 60 * 24) + 1 : 
-        1;
-      
-      
-      if (durationA !== durationB) {
-        return durationB - durationA; // 긴 연휴가 먼저 (작은 trackIndex = 상단)
-      }
-      return a.employeeId - b.employeeId;
-    });
-
-    // 정렬된 순서대로 trackIndex 재할당 (0=상단, 1=중간, 2=하단)
-    fullDayVacationsWithTracks.forEach((vacation, index) => {
-      vacation.trackIndex = index;
-      const group = getConsecutiveGroupForDate(date, vacation.employeeId);
-      const duration = group ? 
-        (new Date(group.endDate).getTime() - new Date(group.startDate).getTime()) / (1000 * 60 * 60 * 24) + 1 : 
-        1;
-    });
+    // 🔥 기존 정렬 순서 유지 - 휴가 기간이 변경되어도 위치 고정
 
     // 4. Filter based on selected employees
     const filterVacations = (vacationList) => {

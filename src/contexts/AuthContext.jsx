@@ -52,7 +52,8 @@ export function AuthProvider({ children }) {
     setCurrentUser(mockUser);
     setCurrentDepartment(department);
     
-    // 로컬스토리지에 부서 정보 저장
+    // 로컬스토리지에 사용자 정보와 부서 정보 저장
+    localStorage.setItem('currentUser', JSON.stringify(mockUser));
     localStorage.setItem('currentDepartment', JSON.stringify(department));
     
     return Promise.resolve(mockUser);
@@ -157,6 +158,7 @@ export function AuthProvider({ children }) {
   const logout = () => {
     setCurrentUser(null);
     setCurrentDepartment(null);
+    localStorage.removeItem('currentUser');
     localStorage.removeItem('currentDepartment');
     
     if (!DEV_MODE) {
@@ -234,19 +236,21 @@ export function AuthProvider({ children }) {
     
     loadFromFirebase();
 
+    // localStorage에서 사용자 세션 복원 (개발모드와 프로덕션 모두)
+    const savedUser = localStorage.getItem('currentUser');
     const savedDepartment = localStorage.getItem('currentDepartment');
-    if (savedDepartment && DEV_MODE) {
+    
+    if (savedUser && savedDepartment) {
       try {
+        const user = JSON.parse(savedUser);
         const department = JSON.parse(savedDepartment);
+        
+        setCurrentUser(user);
         setCurrentDepartment(department);
-        setCurrentUser({
-          email: `${department.code}@company.com`,
-          uid: `user-${department.code}`,
-          department: department
-        });
-        console.log(`🏢 부서 세션 복원: ${department.name}`);
+        console.log(`🏢 사용자 세션 복원: ${department.name} (${user.email})`);
       } catch (error) {
-        console.error('부서 정보 복원 실패:', error);
+        console.error('사용자 세션 복원 실패:', error);
+        localStorage.removeItem('currentUser');
         localStorage.removeItem('currentDepartment');
       }
     }

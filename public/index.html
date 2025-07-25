@@ -137,7 +137,8 @@
         // Service Worker 등록
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
+                const swPath = window.location.hostname === 'anzpek.github.io' ? '/vacation-manager-react/sw.js' : '/sw.js';
+                navigator.serviceWorker.register(swPath)
                     .then(registration => {
                         console.log('✅ SW 등록 성공:', registration.scope);
                     })
