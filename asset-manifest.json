@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/vacation-manager-react/static/css/main.4c3af445.css",
-    "main.js": "/vacation-manager-react/static/js/main.8f2b707c.js",
+    "main.js": "/vacation-manager-react/static/js/main.a9b200c5.js",
     "index.html": "/vacation-manager-react/index.html"
   },
   "entrypoints": [
     "static/css/main.4c3af445.css",
-    "static/js/main.8f2b707c.js"
+    "static/js/main.a9b200c5.js"
   ]
 }
