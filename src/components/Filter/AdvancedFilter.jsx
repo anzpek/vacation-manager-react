@@ -334,6 +334,7 @@ const AdvancedFilter = React.memo(() => {
                             onChange={() => handleEmployeeToggle(employee.id)}
                             className="employee-checkbox-input"
                             onClick={(e) => e.stopPropagation()} // 중복 클릭 방지
+                            aria-label={`${employee.name} ${POSITION_NAMES[employee.position] || employee.position} 표시 여부`}
                           />
                           <div className="checkbox-design employee-checkbox"></div>
                           

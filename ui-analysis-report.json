@@ -1,0 +1,90 @@
+{
+  "timestamp": "2025-08-24T06:39:43.063Z",
+  "analysis": {
+    "loginScreen": {
+      "elements": {
+        "hasForm": true,
+        "inputCount": 2,
+        "buttonCount": 3,
+        "hasThemeToggle": true,
+        "title": "부서휴가관리 시스템",
+        "bodyClasses": ""
+      },
+      "accessibility": {
+        "hasProperLabels": true,
+        "hasAriaAttributes": false,
+        "hasFormValidation": true
+      },
+      "performance": {
+        "loadTime": 3786.2000000476837
+      }
+    },
+    "dashboard": {
+      "hasHeader": true,
+      "hasSidebar": true,
+      "hasCalendar": true,
+      "hasFilters": true,
+      "layout": {
+        "isResponsive": false,
+        "headerHeight": 92,
+        "sidebarWidth": 320
+      }
+    },
+    "mobile": {
+      "isMobileViewport": true,
+      "sidebarHidden": true,
+      "calendarResponsive": true,
+      "hasHamburgerMenu": false
+    },
+    "calendar": {
+      "hasDays": true,
+      "isInteractive": true,
+      "dayCount": 38
+    },
+    "theming": {
+      "hasThemeToggle": true,
+      "themeChanged": false
+    },
+    "accessibility": {
+      "imagesWithoutAlt": 0,
+      "buttonsWithoutLabel": 9,
+      "linksWithoutText": 0,
+      "inputsWithoutLabels": 16,
+      "headingStructure": [
+        "h1",
+        "h4",
+        "h4",
+        "h4"
+      ],
+      "hasSkipLink": false
+    },
+    "performance": {
+      "domContentLoaded": 0.09999990463256836,
+      "loadComplete": 0.2999999523162842,
+      "firstPaint": 984,
+      "firstContentfulPaint": 984,
+      "resourceCount": 28
+    }
+  },
+  "screenshots": [
+    "ui-analysis-screenshots/01-login-screen.png",
+    "ui-analysis-screenshots/02-dashboard.png",
+    "ui-analysis-screenshots/03-mobile-view.png",
+    "ui-analysis-screenshots/04-calendar-interaction.png",
+    "ui-analysis-screenshots/06-dark-theme.png"
+  ],
+  "recommendations": [
+    {
+      "category": "Accessibility",
+      "priority": "High",
+      "issue": "16 inputs missing labels",
+      "solution": "Add proper labels or aria-label attributes to all inputs"
+    },
+    {
+      "category": "Accessibility",
+      "priority": "Medium",
+      "issue": "No skip navigation link found",
+      "solution": "Add skip link for keyboard navigation users"
+    }
+  ]
+}

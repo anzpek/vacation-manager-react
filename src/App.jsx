@@ -95,6 +95,18 @@ function App() {
   if (!isLoggedIn) {
     return (
       <NotificationProvider>
+        <a 
+          href="#main-content" 
+          className="skip-navigation"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              document.getElementById('main-content')?.focus();
+            }
+          }}
+        >
+          메인 콘텐츠로 건너뛰기
+        </a>
         <DepartmentLogin onShowAdminLogin={handleShowAdminLogin} />
         <NotificationContainer />
       </NotificationProvider>
@@ -104,6 +116,18 @@ function App() {
   // 일반 부서 사용자 대시보드
   return (
     <NotificationProvider>
+      <a 
+        href="#main-content" 
+        className="skip-navigation"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            document.getElementById('main-content')?.focus();
+          }
+        }}
+      >
+        메인 콘텐츠로 건너뛰기
+      </a>
       <VacationProvider>
         <Routes>
           <Route path="/login" element={<DepartmentLogin onShowAdminLogin={handleShowAdminLogin} />} />

@@ -278,7 +278,9 @@ const DepartmentModal = () => {
                             <div className="add-section">
                                 <h3>부서 추가</h3>
                                 <div className="add-form">
+                                    <label htmlFor="new-department-input" className="form-label visually-hidden">새 부서명</label>
                                     <input
+                                        id="new-department-input"
                                         type="text"
                                         placeholder="부서명 입력"
                                         value={newDepartment}
@@ -290,6 +292,7 @@ const DepartmentModal = () => {
                                             }
                                         }}
                                         className="form-input"
+                                        aria-label="새 부서명 입력"
                                     />
                                     <button 
                                         className="btn btn-primary"
@@ -318,6 +321,7 @@ const DepartmentModal = () => {
                                                             }
                                                         }}
                                                         className="form-input"
+                                                        aria-label={`부서명 편집: ${dept.name}`}
                                                     />
                                                     <button 
                                                         className="btn btn-small btn-primary"
@@ -392,6 +396,7 @@ const DepartmentModal = () => {
                                             }
                                         }}
                                         className="form-input"
+                                        aria-label="새 팀명 입력"
                                     />
                                     <button 
                                         className="btn btn-primary"
@@ -455,6 +460,7 @@ const DepartmentModal = () => {
                                             }
                                         }}
                                         className="form-input"
+                                        aria-label="새 직원명 입력"
                                     />
                                     <select
                                         value={newEmployee.team}

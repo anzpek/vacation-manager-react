@@ -239,11 +239,12 @@ const Header = ({ user, onLogout }) => {
                             </button>
                         </div>
                         
-                        <div className="theme-toggle">
+                        <div className="theme-toggle header-theme-toggle">
                             <button 
-                                className="theme-button"
+                                className="theme-button header-theme-button"
                                 onClick={toggleTheme}
                                 title={`현재: ${theme === 'light' ? '라이트 모드' : theme === 'dark' ? '다크 모드' : '시스템 설정'}`}
+                                aria-label="테마 변경"
                             >
                                 <span className="theme-icon">{theme === 'light' ? 'Light' : theme === 'dark' ? 'Dark' : 'Auto'}</span>
                             </button>
@@ -344,7 +345,7 @@ const Header = ({ user, onLogout }) => {
                                 <button 
                                     className="sidebar-menu-item"
                                     onClick={() => {
-                                        actions.toggleFilter();
+                                        actions.toggleMobileFilter();
                                         setIsSidebarOpen(false);
                                     }}
                                 >

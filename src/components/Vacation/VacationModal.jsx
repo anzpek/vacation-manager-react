@@ -6,7 +6,7 @@ import './VacationModal.css';
 
 // 연휴 날짜 선택 컴포넌트
 const ConsecutiveVacationSelector = ({ consecutiveGroup, selectedEmployee, formData, setFormData, formatDateToKorean }) => {
-    const [selectedDate, setSelectedDate] = useState(formData.date);
+    const [selectedDate, setSelectedDate] = useState(formData.date || '');
     
     // 연휴 기간의 모든 날짜 생성
     const getVacationDates = () => {
@@ -155,10 +155,10 @@ const VacationModal = () => {
                 console.log('[VacationModal] ✅ editVacation 모드 - vacation 데이터 있음:', ui.modalProps.vacation);
                 const { vacation } = ui.modalProps;
                 setFormData({
-                    id: vacation.id,
-                    date: vacation.date,
-                    employeeId: vacation.employeeId,
-                    type: vacation.type,
+                    id: vacation.id || null,
+                    date: vacation.date || '',
+                    employeeId: vacation.employeeId || '',
+                    type: vacation.type || '연차',
                     description: vacation.description || ''
                 });
                 console.log('[VacationModal] 📝 formData 설정 완료');
@@ -167,7 +167,7 @@ const VacationModal = () => {
                 // modalProps에서 date가 있으면 우선 사용
                 setFormData({
                     id: null,
-                    date: ui.modalProps.date,
+                    date: ui.modalProps.date || '',
                     employeeId: ui.modalProps.employee?.id || '',
                     type: ui.modalProps.type || '연차',
                     description: ''

@@ -257,21 +257,26 @@ const EmployeeManager = React.memo(({ isOpen, onClose }) => {
                                 {/* 직원 추가 폼 */}
                                 <div className="add-team-form">
                                     <div className="form-group">
-                                        <label className="form-label">새 직원 추가</label>
+                                        <label htmlFor="new-employee-name" className="form-label">새 직원 추가</label>
                                         <input
+                                            id="new-employee-name"
                                             className="form-input"
                                             type="text"
                                             placeholder="직원 이름"
                                             value={newEmployee.name}
                                             onChange={(e) => setNewEmployee({ ...newEmployee, name: e.target.value })}
                                             onKeyPress={(e) => handleKeyPress(e, handleAddEmployee)}
+                                            aria-label="새 직원 이름 입력"
                                         />
                                     </div>
                                     <div className="form-group">
+                                        <label htmlFor="new-employee-team" className="form-label visually-hidden">부서 선택</label>
                                         <select
+                                            id="new-employee-team"
                                             className="select-input"
                                             value={newEmployee.team}
                                             onChange={(e) => setNewEmployee({ ...newEmployee, team: e.target.value })}
+                                            aria-label="직원 부서 선택"
                                         >
                                             <option value="">부서 선택</option>
                                             {availableTeams.map(team => (
@@ -280,10 +285,13 @@ const EmployeeManager = React.memo(({ isOpen, onClose }) => {
                                         </select>
                                     </div>
                                     <div className="form-group">
+                                        <label htmlFor="new-employee-position" className="form-label visually-hidden">직급 선택</label>
                                         <select
+                                            id="new-employee-position"
                                             className="select-input"
                                             value={newEmployee.position}
                                             onChange={(e) => setNewEmployee({ ...newEmployee, position: e.target.value })}
+                                            aria-label="직원 직급 선택"
                                         >
                                             <option value="member">일반</option>
                                             <option value="leader">팀장</option>
@@ -355,11 +363,13 @@ const EmployeeManager = React.memo(({ isOpen, onClose }) => {
                                                         value={editingEmployee?.name || ''}
                                                         onChange={(e) => setEditingEmployee({ ...editingEmployee, name: e.target.value })}
                                                         placeholder="직원 이름"
+                                                        aria-label={`직원 이름 편집: ${editingEmployee?.name || ''}`}
                                                     />
                                                     <select
                                                         className="select-input"
                                                         value={editingEmployee?.team || ''}
                                                         onChange={(e) => setEditingEmployee({ ...editingEmployee, team: e.target.value })}
+                                                        aria-label="직원 부서 편집"
                                                     >
                                                         {availableTeams.map(team => (
                                                             <option key={team} value={team}>{team}</option>
@@ -369,6 +379,7 @@ const EmployeeManager = React.memo(({ isOpen, onClose }) => {
                                                         className="select-input"
                                                         value={editingEmployee?.position || 'member'}
                                                         onChange={(e) => setEditingEmployee({ ...editingEmployee, position: e.target.value })}
+                                                        aria-label="직원 직급 편집"
                                                     >
                                                         <option value="member">일반</option>
                                                         <option value="leader">팀장</option>
@@ -481,14 +492,16 @@ const EmployeeManager = React.memo(({ isOpen, onClose }) => {
                                 {/* 부서 추가 폼 */}
                                 <div className="add-team-form">
                                     <div className="form-group">
-                                        <label className="form-label">새 부서 추가</label>
+                                        <label htmlFor="new-department-name" className="form-label">새 부서 추가</label>
                                         <input
+                                            id="new-department-name"
                                             className="form-input"
                                             type="text"
                                             placeholder="부서 이름"
                                             value={newDepartment.name}
                                             onChange={(e) => setNewDepartment({ ...newDepartment, name: e.target.value })}
                                             onKeyPress={(e) => handleKeyPress(e, handleAddDepartment)}
+                                            aria-label="새 부서 이름 입력"
                                         />
                                     </div>
                                     <button className="add-button" onClick={handleAddDepartment}>
@@ -511,6 +524,7 @@ const EmployeeManager = React.memo(({ isOpen, onClose }) => {
                                                             onChange={(e) => setEditingDepartment({ ...editingDepartment, name: e.target.value })}
                                                             placeholder="부서 이름"
                                                             onKeyPress={(e) => handleKeyPress(e, handleSaveDepartment)}
+                                                            aria-label={`부서 이름 편집: ${editingDepartment?.name || ''}`}
                                                         />
                                                     </div>
                                                     <div className="edit-actions">

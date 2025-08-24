@@ -46,14 +46,15 @@ const DepartmentLogin = ({ onShowAdminLogin }) => {
 
   return (
     <div className="login-container">
-      <div className="login-card">
+      <div className="login-card" id="main-content" tabIndex="-1">
         <div className="login-header">
           <div className="header-top">
-            <div className="theme-toggle">
+            <div className="theme-toggle login-theme-toggle">
               <button 
-                className="theme-button"
+                className="theme-button login-theme-button"
                 onClick={toggleTheme}
                 title={`현재: ${theme === 'light' ? '라이트 모드' : theme === 'dark' ? '다크 모드' : '시스템 설정'}`}
+                aria-label="테마 변경"
               >
                 <span className="theme-icon">{theme === 'light' ? 'Light' : theme === 'dark' ? 'Dark' : 'Auto'}</span>
               </button>

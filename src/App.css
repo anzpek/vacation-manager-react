@@ -2,6 +2,46 @@
    App Component Styles
    ======================== */
 
+/* Skip Navigation Link for Accessibility */
+.skip-navigation {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background-color: var(--primary-color, #4285f4);
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 10000;
+  font-size: 14px;
+  font-weight: 500;
+  transition: top 0.3s;
+  border: 2px solid transparent;
+}
+
+.skip-navigation:focus {
+  top: 6px;
+  outline: none;
+  border-color: var(--text-primary, #1a1a1a);
+}
+
+.skip-navigation:hover {
+  background-color: var(--primary-dark, #3367d6);
+}
+
+/* Visually hidden labels for accessibility */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 .app {
   min-height: 100vh;
   background: var(--gradient-primary);

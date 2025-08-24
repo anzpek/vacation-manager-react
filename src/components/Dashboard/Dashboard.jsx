@@ -18,7 +18,9 @@ function Dashboard() {
       <Header user={currentUser} onLogout={logout} />
 
       {/* 메인 컨텐츠 */}
-      <MainContent />
+      <main id="main-content" tabIndex="-1">
+        <MainContent />
+      </main>
 
       {/* 로딩 상태 */}
       {state.ui.loading && (

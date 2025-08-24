@@ -87,7 +87,7 @@ const MainContent = React.memo(() => {
           <div 
             className="modal-backdrop"
             onClick={() => {
-              actions.toggleFilter();
+              actions.toggleMobileFilter();
             }}
           />
           <div className="modal-container mobile-filter-modal">
@@ -96,7 +96,7 @@ const MainContent = React.memo(() => {
               <button 
                 className="modal-close-btn"
                 onClick={() => {
-                  actions.toggleFilter();
+                  actions.toggleMobileFilter();
                 }}
                 aria-label="닫기"
               >
