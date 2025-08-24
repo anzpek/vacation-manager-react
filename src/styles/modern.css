@@ -1,0 +1,151 @@
+/* Modern Design System - Main Entry Point */
+@import './variables.css';
+@import './typography.css';
+@import './glassmorphism.css';
+@import './animations.css';
+
+/* Global Styles Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+  color: var(--gray-700);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+/* App Container with Glassmorphism Background */
+.app-container {
+  min-height: 100vh;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 50%);
+  backdrop-filter: blur(1px);
+}
+
+/* Bento Grid Layout */
+.bento-grid {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+/* Mobile First Grid */
+@media (min-width: 320px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+      "header"
+      "main"
+      "sidebar";
+  }
+}
+
+/* Tablet Layout */
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: 280px 1fr;
+    grid-template-areas: 
+      "header header"
+      "sidebar main";
+    gap: 2rem;
+    padding: 2rem;
+  }
+}
+
+/* Desktop Layout */
+@media (min-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: 320px 1fr;
+    gap: 2.5rem;
+    padding: 2.5rem;
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1280px) {
+  .bento-grid {
+    grid-template-columns: 360px 1fr 280px;
+    grid-template-areas: 
+      "header header header"
+      "sidebar main tools";
+    gap: 3rem;
+    padding: 3rem;
+  }
+}
+
+/* Grid Areas */
+.grid-header {
+  grid-area: header;
+}
+
+.grid-sidebar {
+  grid-area: sidebar;
+}
+
+.grid-main {
+  grid-area: main;
+}
+
+.grid-tools {
+  grid-area: tools;
+}
+
+/* Utility Classes */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.gap-6 {
+  gap: 1.5rem;
+}
+
+.rounded {
+  border-radius: 8px;
+}
+
+.rounded-lg {
+  border-radius: 12px;
+}
+
+.rounded-xl {
+  border-radius: 16px;
+}
+
+.shadow-soft {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-medium {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-strong {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}

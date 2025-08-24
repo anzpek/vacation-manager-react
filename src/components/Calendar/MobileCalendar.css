@@ -1,0 +1,495 @@
+/* MobileCalendar.css - 모바일 전용 달력 스타일 */
+
+.mobile-calendar-container {
+  height: calc(100vh - 60px);
+  padding: 0; /* 모든 패딩 제거 */
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* 모든 간격 제거 */
+  background: var(--background-primary, #ffffff);
+  border-radius: 0;
+  margin: 0;
+  margin-top: 0;
+  box-shadow: none;
+  border: none;
+  position: fixed; /* absolute에서 fixed로 변경 */
+  top: 60px; /* 헤더 높이만큼 */
+  left: 0;
+  right: 0;
+  overflow: visible;
+  z-index: 1;
+}
+
+/* 요일 헤더 - 일/토요일 좁게, 평일 넓게 */
+.mobile-weekdays {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr 1.2fr 1.2fr 1.2fr 1.2fr 0.8fr;
+  gap: 1px;
+  background: var(--border-color, #e5e7eb);
+  border-radius: 0;
+  overflow: hidden;
+  margin: 0; /* 모든 마진 제거 */
+  margin-bottom: 0;
+  padding: 0; /* 패딩도 제거 */
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0; /* 높이 고정 */
+}
+
+.mobile-weekday {
+  background: var(--background-secondary, #f8fafc);
+  padding: 10px 4px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text-primary, #374151);
+  line-height: 1;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* 너비 명시적 지정 */
+  box-sizing: border-box; /* 패딩 포함한 전체 너비 */
+}
+
+.mobile-weekday.sunday {
+  color: #dc2626;
+}
+
+.mobile-weekday.saturday {
+  color: #2563eb;
+}
+
+/* 달력 그리드 - 일/토요일 좁게, 평일 넓게 */
+.mobile-calendar-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr 1.2fr 1.2fr 1.2fr 1.2fr 0.8fr; /* 일요일과 토요일을 좁게, 평일을 넓게 */
+  grid-template-rows: repeat(6, minmax(75px, 1fr));
+  gap: 1px;
+  background: var(--border-color, #e5e7eb);
+  border-radius: 8px;
+  overflow: visible; /* 연속휴가 막대바가 그리드 밖으로 확장 가능하도록 */
+  min-height: 450px;
+  position: relative;
+  z-index: 1; /* 낮은 z-index로 변경 */
+}
+
+/* 개별 날짜 셀 */
+.mobile-calendar-day {
+  background: var(--background-primary, #ffffff);
+  display: flex;
+  flex-direction: column;
+  padding: 2px 0; /* 좌우 패딩 제거, 상하만 최소 패딩 */
+  min-height: 85px; /* 연속휴가 막대바 트랙을 위해 높이 증가 */
+  overflow: visible; /* 연속휴가가 다른 셀로 확장 가능하도록 */
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%; /* 너비 명시적 지정 */
+  box-sizing: border-box; /* 패딩 포함한 전체 너비 */
+  z-index: auto; /* auto로 변경하여 자연스러운 스택 순서 */
+}
+
+.mobile-calendar-day:hover {
+  background-color: var(--background-hover, #f8f9fa);
+  box-shadow: inset 0 0 0 1px var(--primary-color, #4285f4);
+}
+
+.mobile-calendar-day.other-month {
+  background: var(--background-secondary, #f8fafc);
+  opacity: 1;
+  cursor: default;
+}
+
+.mobile-calendar-day.other-month:hover {
+  background: var(--background-secondary, #f8fafc);
+  box-shadow: none;
+}
+
+.mobile-calendar-day.other-month .mobile-day-number {
+  opacity: 0.4;
+}
+
+.mobile-calendar-day.today {
+  background: rgba(66, 133, 244, 0.1);
+  border: 2px solid var(--primary-color, #4285f4);
+}
+
+.mobile-calendar-day.holiday {
+  background: rgba(255, 71, 87, 0.05);
+}
+
+/* 날짜 헤더 */
+.mobile-day-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 2px;
+  min-height: 14px;
+  gap: 3px;
+}
+
+/* 날짜 번호 */
+.mobile-day-number {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--text-primary, #374151);
+  min-width: 20px;
+  text-align: center;
+}
+
+/* 모바일 헤더 오버플로우 표시 */
+.mobile-header-overflow {
+  font-size: 0.917em; /* 날짜 번호보다 약간 작게 (12px * 0.917 = 11px) */
+  color: #5f6368;
+  background: rgba(95, 99, 104, 0.1);
+  padding: 1px 3px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  border: 1px solid rgba(95, 99, 104, 0.2);
+  transition: all 0.2s ease;
+  display: inline-block;
+  line-height: 1;
+}
+
+/* 매우 작은 화면에서는 더 작게 */
+@media (max-width: 375px) {
+  .mobile-header-overflow {
+    font-size: 0.85em; /* 더 작은 화면에서 더 작게 */
+    padding: 0.5px 2px;
+  }
+}
+
+.mobile-calendar-day.sunday .mobile-day-number {
+  color: #dc2626;
+}
+
+.mobile-calendar-day.saturday .mobile-day-number {
+  color: #2563eb;
+}
+
+
+.mobile-calendar-day.today .mobile-day-number {
+  color: var(--primary-color, #4285f4);
+  font-weight: 700;
+}
+
+/* 공휴일 표시 */
+.mobile-holiday-indicator {
+  font-size: 8px;
+  line-height: 1;
+}
+
+.mobile-holiday-name {
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  right: 2px;
+  font-size: 7px;
+  color: #dc2626;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1px 2px;
+  border-radius: 2px;
+  text-align: center;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  z-index: 2;
+}
+
+/* 휴가 컨테이너 */
+.mobile-vacations {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  overflow: visible; /* 연속휴가가 다른 셀로 확장 가능하도록 변경 */
+  min-height: 0;
+  position: relative;
+}
+
+/* 연속 휴가 바 (여러 셀에 걸침) - PC 버전과 동일한 스타일 */
+.mobile-consecutive-bar,
+.mobile-vacation-bar.consecutive-bar {
+  height: 16px;
+  border-radius: 4px !important; /* 둥글이 줄이기 8px -> 4px */
+  margin-bottom: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 2px; /* 좌우 패딩 줄이기 6px -> 2px */
+  font-size: 9px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  position: absolute;
+  overflow: visible; /* 중요: 다른 셀로 확장 가능 */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  backdrop-filter: blur(2px);
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 20; /* 연속휴가는 높은 z-index */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* 연속휴가 시작 부분 */
+.mobile-consecutive-bar.consecutive-start {
+  border-radius: 8px 4px 4px 8px; /* 왼쪽만 둥글게 */
+}
+
+/* 연속휴가 중간/끝 부분 */
+.mobile-consecutive-bar.consecutive-continue {
+  border-radius: 4px 8px 8px 4px; /* 오른쪽만 둥글게 */
+  font-size: 8px; /* 텍스트 크기 조금 줄임 */
+}
+
+/* 실제 연결되는 연속휴가 막대바 */
+.mobile-consecutive-bar.consecutive-spanning {
+  border-radius: 8px; /* 전체 둥글게 */
+  height: 18px;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 8px; /* 텍스트가 왼쪽에서 시작 */
+  font-size: 9px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* 절대 위치 기반 연속휴가 막대바 (PC 버전 방식) */
+.mobile-consecutive-bar.consecutive-absolute {
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 6px;
+  font-size: 8px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  white-space: nowrap;
+  overflow: visible;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(2px);
+}
+
+/* 단일 휴가 바 - PC 버전과 동일한 스타일 */
+.mobile-vacation-bar {
+  height: 16px;
+  border-radius: 4px !important; /* 둥글이 줄이기 8px -> 4px */
+  margin: 0; /* 모든 마진 제거 */
+  margin-bottom: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 1px; /* 좌우 패딩 줄이기 4px -> 1px */
+  font-size: 9px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  backdrop-filter: blur(2px);
+  border-left: 3px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 1;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 휴가 텍스트 - PC 버전과 동일한 스타일 */
+.mobile-vacation-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+}
+
+/* 연속휴가 컨텐트 스타일 - PC 버전과 동일 */
+.consecutive-vacation-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+/* 단일휴가 컨텐트 스타일 - PC 버전과 동일 */
+.single-vacation-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+/* 호버 효과 - PC 버전과 동일 */
+.mobile-consecutive-bar:hover,
+.mobile-vacation-bar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+  filter: brightness(1.1);
+}
+
+/* 반차 컨테이너 - PC처럼 오전/오후 분리 */
+.mobile-half-day-container {
+  display: flex;
+  flex-direction: row; /* 가로로 배치 */
+  gap: 1px;
+  margin-top: auto;
+  min-height: 20px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* 오전 반차 컨테이너 - 왼쪽 */
+.mobile-morning-half {
+  display: flex;
+  gap: 1px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 18px;
+  width: 50%; /* 정확히 절반 너비 */
+}
+
+/* 오후 반차 컨테이너 - 오른쪽 */
+.mobile-afternoon-half {
+  display: flex;
+  gap: 1px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 18px;
+  width: 50%; /* 정확히 절반 너비 */
+}
+
+/* 기존 반차 컨테이너 (호환성 유지) */
+.mobile-half-day-vacations {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: auto;
+  min-height: 16px;
+  padding: 2px 0;
+}
+
+/* 반차 아이템 - PC 버전과 동일한 스타일 */
+.mobile-half-day-item {
+  width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255,255,255,0.3);
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobile-half-day-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  filter: brightness(1.1);
+  transform: scale(1.05);
+}
+
+/* 휴가 타입별 색상 - PC버전과 동일 */
+.vacation-annual {
+  background-color: rgba(52, 152, 219, 0.9); /* 파란색 - 연차 */
+}
+
+.vacation-오전 {
+  background-color: rgba(155, 89, 182, 0.9); /* 보라색 - 오전 반차 */
+}
+
+.vacation-오후 {
+  background-color: rgba(230, 126, 34, 0.9); /* 주황색 - 오후 반차 */
+}
+
+.vacation-morning {
+  background-color: rgba(155, 89, 182, 0.9);
+}
+
+.vacation-afternoon {
+  background-color: rgba(230, 126, 34, 0.9);
+}
+
+.vacation-special {
+  background-color: rgba(231, 76, 60, 0.9); /* 빨간색 - 특별휴가 */
+}
+
+.vacation-sick {
+  background-color: rgba(149, 165, 166, 0.9); /* 회색 - 병가 */
+}
+
+.vacation-연휴 {
+  background-color: rgba(22, 160, 133, 0.9); /* 청록색 - 연휴 */
+}
+
+.vacation-work {
+  background-color: rgba(52, 73, 94, 0.9); /* 진회색 - 근무일 */
+}
+
+/* 다크 테마 대응 */
+@media (prefers-color-scheme: dark) {
+  .mobile-calendar-container {
+    background: #1f2937;
+    border-color: #374151;
+  }
+  
+  .mobile-weekdays {
+    background: #374151;
+  }
+  
+  .mobile-weekday {
+    background: #4b5563;
+    color: #f9fafb;
+  }
+  
+  .mobile-calendar-grid {
+    background: #374151;
+  }
+  
+  .mobile-calendar-day {
+    background: #1f2937;
+  }
+  
+  .mobile-calendar-day.other-month {
+    background: #374151;
+  }
+  
+  .mobile-day-number {
+    color: #f9fafb;
+  }
+  
+  .mobile-holiday-name {
+    background: rgba(31, 41, 55, 0.9);
+  }
+}

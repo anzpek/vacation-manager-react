@@ -1,0 +1,323 @@
+/* DepartmentLogin.css - 부서별 로그인 스타일 */
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.login-card {
+  background: var(--background-primary, white);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  width: 100%;
+  max-width: 600px;
+  backdrop-filter: blur(10px);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.header-top {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.theme-button {
+  background: var(--background-secondary, #f8f9fa);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary, #666);
+}
+
+.theme-button:hover {
+  background: var(--background-hover, #e9ecef);
+  border-color: var(--primary-color, #4285f4);
+  color: var(--primary-color, #4285f4);
+}
+
+.theme-icon {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.company-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.company-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-primary, #1a1a1a);
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.login-subtitle {
+  font-size: 16px;
+  color: var(--text-secondary, #666);
+  margin: 0;
+  font-weight: 500;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  font-size: 14px;
+}
+
+/* 부서명 입력 필드 */
+.department-suggestions {
+  margin-top: 6px;
+  padding: 6px 8px;
+  background: var(--background-secondary, #f8f9fa);
+  border-radius: 4px;
+  border: 1px solid var(--border-light, #f0f0f0);
+}
+
+.department-suggestions small {
+  color: var(--text-secondary, #666);
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* 비밀번호 입력 */
+.form-input {
+  padding: 16px;
+  border: 2px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+  background: var(--background-primary, white);
+  color: var(--text-primary, #1a1a1a);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-color, #4285f4);
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+.form-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.form-input::placeholder {
+  color: var(--text-secondary, #999);
+}
+
+/* 에러 메시지 */
+.error-message {
+  padding: 12px 16px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 8px;
+  color: var(--error-color, #ef4444);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 로그인 버튼 */
+.login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 24px;
+  background: var(--primary-color, #4285f4);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.login-button:hover:not(:disabled) {
+  background: #3367d6;
+  transform: translateY(-1px);
+}
+
+.login-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 도움말 */
+.login-help {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color, #e0e0e0);
+}
+
+.help-title {
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.help-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+}
+
+.help-item {
+  background: var(--background-secondary, #f8f9fa);
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  border: 1px solid var(--border-color, #e0e0e0);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.help-item strong {
+  color: var(--text-primary, #1a1a1a);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.help-text {
+  color: var(--text-secondary, #666);
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+  padding: 12px;
+  background: var(--background-secondary, #f8f9fa);
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #e0e0e0);
+}
+
+/* 관리자 섹션 */
+.admin-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.admin-button {
+  padding: 8px 16px;
+  background: var(--background-secondary, #f8f9fa);
+  color: var(--text-secondary, #666);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-button:hover {
+  background: var(--background-hover, #e9ecef);
+  color: var(--text-primary, #1a1a1a);
+  border-color: var(--primary-color, #4285f4);
+}
+
+/* 다크모드 지원 */
+[data-theme="dark"] .login-card {
+  background: var(--background-primary);
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .department-card {
+  background: var(--background-secondary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .form-input {
+  background: var(--background-primary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .help-item {
+  background: var(--background-primary);
+  border-color: var(--border-color);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 12px;
+  }
+  
+  .login-card {
+    padding: 24px;
+    border-radius: 16px;
+  }
+  
+  .department-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 6px;
+  }
+  
+  .department-card {
+    padding: 10px 6px;
+  }
+  
+  .company-title {
+    font-size: 24px;
+  }
+  
+  .help-grid {
+    grid-template-columns: 1fr;
+  }
+}

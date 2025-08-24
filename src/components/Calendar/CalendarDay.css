@@ -1,0 +1,643 @@
+/* CalendarDay.css - 개별 날짜 셀 스타일 */
+
+.calendar-day {
+    min-height: 100px;
+    width: 100%; /* 고정 너비 설정 */
+    max-width: 140px; /* 최대 너비 제한 */
+    min-width: 140px; /* 최소 너비 보장 */
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    background: var(--background-primary);
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: visible; /* 연속휴가가 다른 셀로 확장될 수 있도록 변경 */
+    box-sizing: border-box; /* 패딩과 보더를 너비에 포함 */
+}
+
+.calendar-day:hover {
+    background-color: var(--background-hover);
+    box-shadow: inset 0 0 0 2px var(--primary-color);
+}
+
+.calendar-day:nth-child(7n) {
+    border-right: none;
+}
+
+.calendar-day.other-month {
+    background-color: var(--background-secondary);
+    color: var(--text-secondary);
+    cursor: default;
+}
+
+.calendar-day.other-month:hover {
+    background-color: var(--background-secondary);
+    box-shadow: none;
+}
+
+.calendar-day.today {
+    background-color: var(--primary-bg, rgba(66, 133, 244, 0.1));
+    box-shadow: inset 0 0 0 2px var(--primary-color);
+}
+
+.calendar-day.today:hover {
+    background-color: var(--primary-bg-hover, rgba(66, 133, 244, 0.15));
+    box-shadow: inset 0 0 0 2px var(--primary-dark);
+}
+
+.calendar-day.sunday .day-number {
+    color: var(--error-color);
+    font-weight: 600;
+}
+
+.calendar-day.saturday .day-number {
+    color: var(--info-color);
+    font-weight: 600;
+}
+
+.calendar-day.holiday {
+    background-color: var(--holiday-day-bg);
+}
+
+.calendar-day.holiday .day-number {
+    color: var(--holiday-text-color);
+    font-weight: 600;
+}
+
+.calendar-day.has-vacation {
+    background-color: var(--vacation-day-bg, rgba(66, 133, 244, 0.03));
+}
+
+
+.day-header {
+    padding: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border-color-light, rgba(0, 0, 0, 0.05));
+    position: relative;
+    min-height: 32px;
+    flex-shrink: 0;
+}
+
+/* 헤더 오버플로우 표시 */
+.header-overflow-indicator {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    font-size: 0.875em; /* 날짜 번호보다 약간 작게 (16px * 0.875 = 14px) */
+}
+
+/* 반응형 크기 조정 */
+@media (max-width: 768px) {
+    .header-overflow-indicator {
+        font-size: 0.85em; /* 더 작게 조정 */
+    }
+}
+
+@media (max-width: 480px) {
+    .header-overflow-indicator {
+        font-size: 0.8em; /* 모바일에서 더 작게 */
+    }
+}
+
+.day-number {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.holiday-name {
+    font-size: 10px;
+    color: var(--holiday-text-color);
+    background: var(--holiday-bg);
+    padding: 2px 4px;
+    border-radius: 3px;
+    max-width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.day-content {
+    flex: 1;
+    padding: 2px 0; /* 좌우 패딩 제거, 상하만 최소 패딩 */
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: visible; /* 연속휴가가 다른 셀로 확장될 수 있도록 유지 */
+    position: relative;
+}
+
+/* 반차 표시용 컨테이너 */
+.half-day-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns for morning and afternoon */
+    width: 100%;
+    gap: 0px; /* No gap between columns */
+    margin-bottom: 4px;
+}
+
+.morning-half {
+    grid-column: 1 / 2; /* Place in the first column */
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.afternoon-half {
+    grid-column: 2 / 3; /* Place in the second column */
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+
+.half-vacation-bar {
+    display: flex;
+    align-items: center;
+    padding: 2px 0;
+    border-radius: 4px !important; /* 둥글이 줄이기 8px -> 4px */
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    min-height: 16px;
+    font-weight: 500;
+    box-sizing: border-box;
+    position: absolute; /* 절대 위치로 변경 */
+    top: 0;
+    height: 100%;
+}
+
+.morning-half .half-vacation-bar {
+    justify-content: flex-start;
+    text-align: left;
+    left: 0; /* 왼쪽 끝에서 시작 */
+    width: 50%; /* 정확히 절반 너비 */
+    padding-left: 4px; /* 왼쪽 여백 추가 */
+}
+
+.afternoon-half .half-vacation-bar {
+    justify-content: flex-end;
+    text-align: right;
+    left: 50%; /* 가운데에서 시작 */
+    right: auto; /* right 자동 설정 제거 */
+    width: 50%; /* 정확히 절반 너비 */
+    padding-right: 4px; /* 오른쪽 여백 추가 */
+}
+
+.half-vacation-bar:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.1);
+}
+
+.half-vacation-text {
+    font-size: 10px; /* Match vacation-employee-name font-size */
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-grow: 1;
+}
+
+/* 연속 반차 막대바 */
+.consecutive-half-bar {
+    overflow: visible !important;
+    white-space: nowrap !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.consecutive-half-bar .half-vacation-text {
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    font-size: 10px;
+    font-weight: 600;
+    padding-left: 4px;
+}
+
+/* 일반 휴가 표시 영역 */
+.full-day-vacations {
+    display: flex;
+    flex-direction: column;
+    gap: 1px; /* Very small gap between bars */
+}
+
+
+.vacation-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 0; /* 상하 패딩만 유지, 좌우 패딩 제거 */
+    margin: 0; /* 모든 마진 제거 */
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    min-height: 16px;
+    font-weight: 500;
+    backdrop-filter: blur(2px);
+    margin-bottom: 1px;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 4px !important; /* 둥글이 줄이기 8px -> 4px */
+    text-align: center;
+}
+
+/* 연속휴가 막대바도 둥글게 처리 */
+.vacation-bar.consecutive-bar {
+    border-radius: 4px !important; /* 둥글이 줄이기 */
+}
+
+/* Google 스타일 휴가 내용 */
+.google-vacation-content {
+    width: 100%;
+    text-align: center !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vacation-bar:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.1);
+}
+
+.vacation-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 1px; /* 좌우 최소 패딩만 설정 */
+}
+
+.vacation-employee-name {
+    font-size: 10px; /* Match half-vacation-text font-size */
+    font-weight: 600;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.vacation-type-badge {
+    font-size: 9px;
+    background: rgba(255, 255, 255, 0.25);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    flex-shrink: 0;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* 연속휴가 전용 스타일 */
+.consecutive-vacation-content {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: row;
+}
+
+.consecutive-vacation-text {
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    text-align: center;
+}
+
+/* 단일휴가 전용 스타일 */
+.single-vacation-content {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: row;
+}
+
+.single-vacation-text {
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    text-align: center;
+}
+
+
+.add-vacation-hint {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 24px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.calendar-day:hover .add-vacation-hint {
+    opacity: 0.4;
+}
+
+.add-vacation-icon {
+    color: #3498db;
+    transition: color 0.2s ease;
+}
+
+.add-vacation-icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* 휴가 유형별 스타일 - 더 선명한 색상 */
+.vacation-bar.vacation-annual {
+    /* background and border-left-color removed to use employee's color */
+}
+
+.vacation-bar.vacation-morning,
+.half-vacation-bar.morning {
+    /* background and border-left-color removed to use employee's color */
+}
+
+.vacation-bar.vacation-afternoon,
+.half-vacation-bar.afternoon {
+    /* background and border-left-color removed to use employee's color */
+}
+
+.vacation-bar.vacation-special {
+    /* background and border-left-color removed to use employee's color */
+}
+
+.vacation-bar.vacation-sick {
+    /* background and border-left-color removed to use employee's color */
+}
+
+.vacation-bar.vacation-work {
+    /* background and border-left-color removed to use employee's color */
+}
+
+/* 다크모드 대응 */
+@media (prefers-color-scheme: dark) {
+    .calendar-day {
+        background: var(--gray-800);
+        border-color: var(--gray-600);
+    }
+    
+    .calendar-day:hover {
+        background-color: var(--gray-700);
+    }
+    
+    .calendar-day.other-month {
+        background-color: var(--gray-900);
+        color: var(--gray-500);
+    }
+    
+    .calendar-day.other-month:hover {
+        background-color: var(--gray-900);
+    }
+    
+    .calendar-day.today {
+        background-color: rgba(59, 130, 246, 0.1);
+        box-shadow: inset 0 0 0 2px #3b82f6;
+    }
+    
+    .calendar-day.today:hover {
+        background-color: rgba(59, 130, 246, 0.15);
+    }
+    
+    .calendar-day.has-vacation {
+        background-color: var(--gray-750);
+    }
+    
+    .day-number {
+        color: var(--gray-200);
+    }
+    
+    .day-header {
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .add-vacation-icon {
+        color: #60a5fa;
+    }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .calendar-day {
+        min-height: 80px; /* 최소 높이 설정 */
+        height: auto; /* 컨텐츠에 따라 자동 조절 */
+        min-width: auto;
+        max-width: none;
+        width: 100%;
+        background: var(--background-primary, #ffffff);
+        border: 1px solid var(--border-color, #e0e0e0);
+        overflow: visible; /* 컨텐츠가 넘치면 보이도록 */
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .day-header {
+        padding: 4px 6px;
+        min-height: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--border-color, #e0e0e0);
+        background: var(--background-secondary, #f8f9fa);
+    }
+    
+    .day-number {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-primary, #1a1a1a);
+    }
+    
+    .day-content {
+        flex: 1;
+        padding: 4px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        overflow-y: auto;
+    }
+    
+    .holiday-name {
+        font-size: 8px;
+        max-width: 60px;
+        padding: 1px 3px;
+        background: var(--holiday-bg, rgba(255, 71, 87, 0.1));
+        border: 1px solid var(--holiday-border, rgba(255, 71, 87, 0.3));
+        border-radius: 3px;
+        color: var(--holiday-text, #ff4757);
+        text-align: center;
+        font-weight: 600;
+    }
+    
+    .vacation-bar {
+        padding: 3px 6px;
+        font-size: 9px;
+        min-height: 18px;
+        border-radius: 4px;
+        color: white;
+        font-weight: 600;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 2px;
+        overflow: hidden;
+        position: relative;
+        /* 기본 스타일은 CSS 변수나 인라인 스타일로 설정 */
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    
+    .vacation-employee-name {
+        font-size: 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        flex: 1;
+        line-height: 1.2;
+        font-weight: 600;
+    }
+    
+    .vacation-type-badge {
+        font-size: 7px;
+        padding: 1px 3px;
+        border-radius: 3px;
+        background: rgba(255, 255, 255, 0.3);
+        margin-left: 3px;
+        flex-shrink: 0;
+        line-height: 1;
+        font-weight: 500;
+    }
+    
+    .half-vacation-bar {
+        padding: 2px 6px;
+        min-height: 16px;
+        font-size: 8px;
+        margin-bottom: 2px;
+        border-radius: 3px;
+        color: white;
+        font-weight: 600;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+    }
+    
+    .half-vacation-text {
+        font-size: 7px;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendar-day {
+        min-height: 0;
+        height: 100%;
+    }
+    
+    .day-header {
+        padding: 3px 4px;
+        min-height: 18px;
+    }
+    
+    .day-number {
+        font-size: 11px;
+    }
+    
+    .holiday-name {
+        font-size: 7px;
+        max-width: 45px;
+        padding: 1px 2px;
+    }
+    
+    .day-content {
+        padding: 3px;
+        gap: 1px;
+    }
+    
+    .vacation-bar {
+        padding: 2px 4px;
+        font-size: 8px;
+        min-height: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .vacation-employee-name {
+        font-size: 7px;
+        flex: 1;
+    }
+    
+    .vacation-type-badge {
+        font-size: 6px;
+        padding: 1px 2px;
+        margin-left: 1px;
+    }
+    
+    .half-vacation-bar {
+        padding: 2px 3px;
+        min-height: 12px;
+        font-size: 7px;
+    }
+    
+    .half-vacation-text {
+        font-size: 6px;
+    }
+}
+
+/* 인쇄용 스타일 */
+@media print {
+    .calendar-day {
+        break-inside: avoid;
+        min-height: 80px;
+        background: white !important;
+        border-color: #000 !important;
+    }
+    
+    .calendar-day:hover {
+        background-color: white !important;
+        box-shadow: none !important;
+    }
+    
+    .add-vacation-hint {
+        display: none;
+    }
+    
+    .vacation-bar {
+        background: #f0f0f0 !important;
+        color: #333 !important;
+        border: 1px solid #999 !important;
+        text-shadow: none !important;
+    }
+    
+    .half-vacation-bar {
+        background: #f0f0f0 !important;
+        color: #333 !important;
+        border: 1px solid #999 !important;
+        text-shadow: none !important;
+    }
+    
+    .vacation-type-badge {
+        background: #ddd !important;
+        color: #333 !important;
+    }
+}

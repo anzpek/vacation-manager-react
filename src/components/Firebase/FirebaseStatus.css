@@ -1,0 +1,97 @@
+/* FirebaseStatus.css - Firebase 상태 표시 컴포넌트 스타일 */
+
+.firebase-status {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--background-secondary);
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.firebase-status.connected {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.firebase-status.syncing {
+  border-color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.firebase-status.disconnected {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.status-icon {
+  font-size: 12px;
+  animation: none;
+}
+
+.firebase-status.syncing .status-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.status-text {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.sync-info {
+  margin-top: 4px;
+}
+
+.sync-time {
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.offline-notice {
+  margin-top: 4px;
+  color: var(--text-secondary);
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+/* 다크모드 지원 */
+[data-theme="dark"] .firebase-status.connected {
+  background: rgba(34, 197, 94, 0.15);
+}
+
+[data-theme="dark"] .firebase-status.syncing {
+  background: rgba(59, 130, 246, 0.15);
+}
+
+[data-theme="dark"] .firebase-status.disconnected {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .firebase-status {
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+  
+  .status-icon {
+    font-size: 11px;
+  }
+  
+  .sync-time,
+  .offline-notice {
+    font-size: 10px;
+  }
+}

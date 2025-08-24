@@ -1,0 +1,65 @@
+/* 2025 Modern Design System - Variables */
+:root {
+  /* Primary Gradient - Purple to Cyan */
+  --primary-start: #8b5cf6;
+  --primary-end: #06b6d4;
+  --primary-gradient: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+  
+  /* Semantic Colors */
+  --success: #10b981;    /* 휴가 승인 */
+  --warning: #f59e0b;    /* 대기 중 */
+  --error: #ef4444;      /* 충돌/거부 */
+  --info: #06b6d4;       /* 정보 */
+  
+  /* Neutral Colors - Warm Grays */
+  --gray-50: #fafaf9;
+  --gray-100: #f5f5f4;
+  --gray-200: #e7e5e4;
+  --gray-300: #d6d3d1;
+  --gray-400: #a8a29e;
+  --gray-500: #78716c;
+  --gray-600: #57534e;
+  --gray-700: #44403c;
+  --gray-800: #292524;
+  --gray-900: #1c1917;
+
+  /* Text Colors */
+  --text-color: var(--gray-800); /* 기본 텍스트 색상 (라이트 모드) */
+  --text-color-light: var(--gray-600); /* 밝은 텍스트 색상 (라이트 모드) */
+  --text-color-dark: var(--gray-900); /* 어두운 텍스트 색상 (라이트 모드) */
+
+  /* Background Colors */
+  --background-primary: #ffffff; /* 기본 배경색 (라이트 모드) */
+  --background-secondary: var(--gray-50); /* 보조 배경색 (라이트 모드) */
+
+  /* Input Colors */
+  --input-bg: #ffffff; /* 입력 필드 배경색 (라이트 모드) */
+  --input-border: var(--gray-300); /* 입력 필드 테두리색 (라이트 모드) */
+  --input-text-color: var(--text-color); /* 입력 필드 텍스트 색상 (라이트 모드) */
+
+  /* Dark Mode Colors */
+  --dark-text-color: var(--gray-50); /* 기본 텍스트 색상 (다크 모드) */
+  --dark-text-color-light: var(--gray-200); /* 밝은 텍스트 색상 (다크 모드) */
+  --dark-text-color-dark: var(--gray-100); /* 어두운 텍스트 색상 (다크 모드) */
+
+  --dark-background-primary: var(--gray-900); /* 기본 배경색 (다크 모드) */
+  --dark-background-secondary: var(--gray-800); /* 보조 배경색 (다크 모드) */
+
+  --dark-input-bg: var(--gray-700); /* 입력 필드 배경색 (다크 모드) */
+  --dark-input-border: var(--gray-600); /* 입력 필드 테두리색 (다크 모드) */
+  --dark-input-text-color: var(--dark-text-color); /* 입력 필드 텍스트 색상 (다크 모드) */
+  
+  /* Glassmorphism Effects */
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-bg-strong: rgba(255, 255, 255, 0.25);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --glass-shadow-strong: 0 12px 40px rgba(0, 0, 0, 0.15);
+  --backdrop-blur: blur(20px);
+  --backdrop-blur-light: blur(10px);
+  
+  /* Animation Timing */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-quick: all 0.2s ease-out;
+  --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}

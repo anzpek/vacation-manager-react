@@ -1,0 +1,1652 @@
+/* Header.css - 모던한 헤더 스타일 */
+
+.modern-header {
+  background: var(--background-primary, #ffffff);
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+  padding: 16px 24px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* 모바일 헤더 */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+}
+
+.burger-menu-btn,
+.account-btn {
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  color: var(--text-primary, #374151);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.burger-menu-btn:hover,
+.account-btn:hover {
+  background: var(--background-hover, #f3f4f6);
+}
+
+.mobile-nav-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  color: var(--text-primary, #374151);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-btn:hover {
+  background: var(--background-hover, #f3f4f6);
+}
+
+.mobile-date-display {
+  display: flex;
+  align-items: center;
+  min-width: 120px;
+  justify-content: center;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  gap: 6px;
+  position: relative;
+}
+
+.mobile-date-display:hover {
+  background: var(--background-hover, rgba(0, 0, 0, 0.05));
+}
+
+.dropdown-icon {
+  transition: transform 0.2s ease;
+}
+
+.mobile-date-display:hover .dropdown-icon {
+  transform: translateY(1px);
+}
+
+.date-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary, #374151);
+  white-space: nowrap;
+}
+
+/* 사이드바 스타일 */
+.sidebar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 200;
+  backdrop-filter: blur(4px);
+}
+
+.mobile-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  background: var(--background-primary, #ffffff);
+  z-index: 201;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  animation: slideInLeft 0.3s ease-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+  background: var(--background-secondary, #f8f9fa);
+}
+
+.sidebar-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-title .logo-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--primary-color, #3b82f6);
+}
+
+.sidebar-title h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary, #374151);
+}
+
+.sidebar-title p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.sidebar-close {
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  color: var(--text-secondary, #6b7280);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sidebar-close:hover {
+  background: var(--background-hover, #f3f4f6);
+  color: var(--text-primary, #374151);
+}
+
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 0;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 20px;
+}
+
+.sidebar-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  color: var(--text-primary, #374151);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  width: 100%;
+}
+
+.sidebar-menu-item:hover {
+  background: var(--background-hover, #f3f4f6);
+}
+
+.sidebar-menu-item.logout {
+  color: #dc2626;
+  margin-top: 8px;
+}
+
+.sidebar-menu-item.logout:hover {
+  background: #fef2f2;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: var(--border-color, #e0e0e0);
+  margin: 16px 0;
+}
+
+/* 데스크톱 헤더 */
+.desktop-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* 데스크톱 헤더 중앙 네비게이션 표시 */
+@media (min-width: 769px) {
+  .desktop-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .mobile-header {
+    display: none !important;
+  }
+  
+  /* 데스크톱에서만 중앙 네비게이션 표시 */
+  .header-center {
+    display: flex;
+  }
+  
+  .date-navigation {
+    display: flex;
+  }
+}
+
+.mobile-header {
+  display: none;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--primary-color, #3b82f6);
+}
+
+.title-section h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary, #374151);
+}
+
+.title-section p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: none;
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  color: var(--text-primary, #374151);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.action-button:hover {
+  background: var(--background-hover, #f3f4f6);
+  border-color: var(--border-hover, #d1d5db);
+}
+
+.theme-button {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background: none;
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  color: var(--text-primary, #374151);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.theme-button:hover {
+  background: var(--background-hover, #f3f4f6);
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-avatar {
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  color: var(--text-primary, #374151);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.user-avatar:hover {
+  background: var(--background-hover, #f3f4f6);
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: none;
+  border: 1px solid #dc2626;
+  border-radius: 8px;
+  color: #dc2626;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.logout-button:hover {
+  background: #fef2f2;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  gap: 24px;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .modern-header {
+    padding: 12px 16px;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+  
+  .mobile-header {
+    display: flex;
+  }
+  
+  .desktop-header {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  
+  .header-right {
+    justify-content: center;
+  }
+  
+  .action-buttons {
+    justify-content: center;
+  }
+}
+
+/* 왼쪽: 로고 & 제목 - 필터와 열 맞춤 */
+.header-left {
+  margin-left: 25px; /* 좌측 마진 추가 */
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  flex-shrink: 0;
+  justify-content: flex-start;
+}
+
+/* 모바일 날짜 네비게이션 - 데스크톱에서 숨김 */
+.mobile-date-nav {
+  display: none;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--primary-color, #4285f4), #34a853);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+}
+
+.title-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.main-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary, #1a1a1a);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.department-name {
+  font-size: 12px;
+  color: var(--text-secondary, #666);
+  margin: 0;
+  font-weight: 500;
+}
+
+/* 중앙: 날짜 네비게이션 - 데스크톱 전용 */
+@media (min-width: 769px) {
+  .header-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .date-navigation {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--background-secondary, #f8f9fa);
+    padding: 8px 16px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color, #e0e0e0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+}
+
+/* 모바일에서는 데스크톱 중앙 네비게이션 숨김 */
+@media (max-width: 768px) {
+  .header-center {
+    display: none !important;
+  }
+  
+  .date-navigation {
+    display: none !important;
+  }
+}
+
+/* 데스크톱 전용 네비게이션 버튼 */
+@media (min-width: 769px) {
+  .nav-button {
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: var(--background-primary, #ffffff);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-secondary, #666);
+    border: 1px solid var(--border-color, #e0e0e0);
+  }
+
+  .nav-button:hover {
+    background: var(--background-hover, #f0f0f0);
+    color: var(--text-primary, #1a1a1a);
+    transform: scale(1.05);
+  }
+
+  .date-selectors {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .year-selector,
+  .month-selector {
+    background: var(--background-primary, #ffffff);
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary, #1a1a1a);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    min-width: 80px;
+  }
+
+  .year-selector:focus,
+  .month-selector:focus {
+    outline: none;
+    border-color: var(--primary-color, #4285f4);
+    box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+  }
+}
+
+/* 오른쪽: 액션 버튼들 */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--background-secondary, #f8f9fa);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary, #666);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.action-button:hover {
+  background: var(--background-hover, #f0f0f0);
+  color: var(--text-primary, #1a1a1a);
+  transform: translateY(-1px);
+}
+
+.today-button {
+  background: var(--primary-color, #4285f4);
+  color: white;
+  border-color: var(--primary-color, #4285f4);
+  box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
+}
+
+.today-button:hover {
+  background: var(--primary-dark, #3367d6);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(66, 133, 244, 0.4);
+}
+
+/* 테마 토글 */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.theme-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--background-secondary, #f8f9fa);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary, #666);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  white-space: nowrap;
+  min-height: 40px;
+  box-sizing: border-box;
+}
+
+.theme-button:hover {
+  background: var(--background-hover, #f0f0f0);
+  color: var(--text-primary, #1a1a1a);
+  transform: translateY(-1px);
+}
+
+.theme-icon {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+
+/* 사용자 섹션 */
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  background: var(--background-secondary, #f8f9fa);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary, #666);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.user-avatar:hover {
+  background: var(--background-hover, #e9ecef);
+  border-color: var(--primary-color, #4285f4);
+  color: var(--primary-color, #4285f4);
+  transform: scale(1.05);
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: transparent;
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary, #666);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.logout-button:hover {
+  background: rgba(234, 67, 53, 0.1);
+  border-color: rgba(234, 67, 53, 0.3);
+  color: var(--error-color, #ea4335);
+}
+
+/* 다크 테마 */
+[data-theme="dark"] .modern-header {
+  background: var(--dark-bg-primary, #1e1e1e);
+  border-bottom: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .main-title {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .department-name {
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .date-navigation {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .nav-button {
+  background: var(--dark-bg-primary, #1e1e1e);
+  border: 1px solid var(--dark-border, #333);
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .nav-button:hover {
+  background: var(--dark-bg-hover, #404040);
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .year-selector,
+[data-theme="dark"] .month-selector {
+  background: var(--dark-bg-primary, #1e1e1e);
+  border: 1px solid var(--dark-border, #333);
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .action-button {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 1px solid var(--dark-border, #333);
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .action-button:hover {
+  background: var(--dark-bg-hover, #404040);
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .theme-button {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 1px solid var(--dark-border, #333);
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .theme-button:hover {
+  background: var(--dark-bg-hover, #404040);
+  color: var(--dark-text-primary, #ffffff);
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .user-avatar {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 1px solid var(--dark-border, #333);
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .user-avatar:hover {
+  background: var(--dark-bg-hover, #404040);
+  border-color: var(--primary-color, #4285f4);
+  color: var(--primary-color, #4285f4);
+}
+
+[data-theme="dark"] .mobile-account-btn-top,
+[data-theme="dark"] .mobile-logout-btn-top {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border-color: var(--dark-border, #333);
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .mobile-account-btn-top:hover {
+  background: var(--dark-bg-hover, #404040);
+  border-color: var(--primary-color, #4285f4);
+  color: var(--primary-color, #4285f4);
+}
+
+[data-theme="dark"] .mobile-logout-btn-top {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: var(--error-color, #ef4444);
+  color: var(--error-color, #ef4444);
+}
+
+[data-theme="dark"] .mobile-logout-btn-top:hover {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: var(--error-color, #ef4444);
+  color: var(--error-color, #ef4444);
+}
+
+[data-theme="dark"] .logout-button {
+  border: 1px solid var(--dark-border, #333);
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .logout-button:hover {
+  background: rgba(234, 67, 53, 0.2);
+  border-color: rgba(234, 67, 53, 0.4);
+  color: var(--error-color, #ea4335);
+}
+
+/* 다크 테마 - 모바일 메뉴 */
+[data-theme="dark"] .mobile-menu-button {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border-color: var(--dark-border, #333);
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .mobile-menu-button:hover {
+  background: var(--dark-bg-hover, #404040);
+  border-color: var(--primary-color, #4285f4);
+  color: var(--primary-color, #4285f4);
+}
+
+[data-theme="dark"] .mobile-menu {
+  background: var(--dark-bg-primary, #1e1e1e);
+  border-color: var(--dark-border, #333);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .mobile-menu-section {
+  border-bottom-color: var(--dark-border, #333);
+}
+
+[data-theme="dark"] .mobile-menu-section h3 {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .mobile-menu-item {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .mobile-menu-item:hover {
+  background: var(--dark-bg-hover, #404040);
+}
+
+[data-theme="dark"] .mobile-date-navigation {
+  background: var(--dark-bg-secondary, #2a2a2a);
+}
+
+[data-theme="dark"] .mobile-nav-button {
+  background: var(--dark-bg-primary, #1e1e1e);
+  border-color: var(--dark-border, #333);
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .mobile-nav-button:hover {
+  background: var(--dark-bg-hover, #404040);
+  border-color: var(--primary-color, #4285f4);
+}
+
+[data-theme="dark"] .mobile-date-info {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+/* 다크 테마 - 모바일 액션 버튼 */
+[data-theme="dark"] .mobile-action-btn {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border-color: var(--dark-border, #333);
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .mobile-action-btn:hover {
+  background: var(--dark-bg-hover, #404040);
+  border-color: var(--primary-color, #4285f4);
+  color: var(--primary-color, #4285f4);
+}
+
+[data-theme="dark"] .mobile-action-btn.logout-btn {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: var(--error-color, #ef4444);
+}
+
+/* 모바일 액션 버튼들 */
+.mobile-actions {
+  display: none;
+  gap: 4px;
+  align-items: center;
+}
+
+.mobile-action-btn,
+.mobile-action-btn-compact {
+  width: 32px;
+  height: 32px;
+  background: var(--background-secondary, #f8f9fa);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-secondary, #666);
+}
+
+.mobile-action-btn:hover,
+.mobile-action-btn-compact:hover {
+  background: var(--background-hover, #e9ecef);
+  border-color: var(--primary-color, #4285f4);
+  color: var(--primary-color, #4285f4);
+}
+
+.mobile-action-btn.logout-btn {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: var(--error-color, #ef4444);
+}
+
+.mobile-action-btn.logout-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: var(--error-color, #ef4444);
+}
+
+.mobile-menu-button {
+  background: var(--background-secondary, #f8f9fa);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 6px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-secondary, #666);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-menu-button:hover {
+  background: var(--background-hover, #e9ecef);
+  border-color: var(--primary-color, #4285f4);
+  color: var(--primary-color, #4285f4);
+}
+
+.mobile-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--background-primary, #ffffff);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-top: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.mobile-menu-section {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+
+.mobile-menu-section:last-child {
+  border-bottom: none;
+}
+
+.mobile-menu-section h3 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mobile-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary, #1a1a1a);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 4px;
+}
+
+.mobile-menu-item:hover {
+  background: var(--background-hover, #f0f0f0);
+}
+
+.mobile-menu-item.logout-item {
+  color: var(--error-color, #dc2626);
+}
+
+.mobile-menu-item.logout-item:hover {
+  background: rgba(220, 38, 38, 0.1);
+}
+
+.mobile-date-navigation {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 8px;
+  background: var(--background-secondary, #f8f9fa);
+  border-radius: 8px;
+}
+
+.mobile-nav-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: var(--background-primary, #ffffff);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary, #1a1a1a);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-nav-button:hover {
+  background: var(--background-hover, #f0f0f0);
+  border-color: var(--primary-color, #4285f4);
+}
+
+.mobile-date-info {
+  flex: 1;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.mobile-menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+.desktop-only {
+  display: flex;
+}
+
+/* 모바일 전용 요소들은 기본적으로 숨김 */
+.mobile-user-buttons,
+.mobile-logout-btn-top,
+.mobile-simple-header,
+.mobile-calendar-nav,
+.mobile-action-buttons {
+  display: none;
+}
+
+/* 반응형 */
+@media (max-width: 1024px) {
+  .header-container {
+    gap: 16px;
+  }
+  
+  .action-buttons {
+    gap: 6px;
+    flex-wrap: nowrap;
+  }
+  
+  .action-button span {
+    display: inline;
+    white-space: nowrap;
+  }
+  
+  .logout-button span {
+    display: inline;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .modern-header {
+    padding: 12px 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: var(--background-primary, #ffffff);
+    border-bottom: 1px solid var(--border-color, #e0e0e0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    min-height: 60px;
+  }
+  
+  /* 모바일에서만 표시되는 요소들 */
+  .mobile-user-buttons,
+  .mobile-logout-btn-top,
+  .mobile-simple-header,
+  .mobile-calendar-nav,
+  .mobile-action-buttons {
+    display: block;
+  }
+  
+  .mobile-user-buttons {
+    display: flex;
+  }
+  
+  .header-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 120px;
+    padding-right: 40px; /* 로그아웃 버튼 공간 */
+    gap: 8px;
+  }
+  
+  /* 모바일 헤더 레이아웃 */
+  .mobile-simple-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 4px;
+    padding-left: 0;
+  }
+  
+  /* 모바일 달력 네비게이션 */
+  .mobile-calendar-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+    width: 100%;
+    position: relative;
+  }
+  
+  .mobile-date-picker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--background-secondary, #f8f9fa);
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color, #e0e0e0);
+    width: fit-content;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+  }
+  
+  .mobile-date-picker .nav-button {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: var(--background-primary, #ffffff);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-secondary, #666);
+    border: 1px solid var(--border-color, #e0e0e0);
+  }
+  
+  .mobile-date-picker .nav-button:hover {
+    background: var(--background-hover, #f0f0f0);
+    color: var(--text-primary, #1a1a1a);
+  }
+  
+  .date-selectors {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .year-select,
+  .month-select {
+    background: var(--background-primary, #ffffff);
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary, #1a1a1a);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+  }
+  
+  .year-select {
+    min-width: 60px;
+  }
+  
+  .month-select {
+    min-width: 50px;
+  }
+  
+  .year-select:focus,
+  .month-select:focus {
+    outline: none;
+    border-color: var(--primary-color, #4285f4);
+    box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.1);
+  }
+  
+  /* 모바일 액션 버튼들 */
+  .mobile-action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: -16px;
+  }
+  
+  .mobile-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding: 6px 10px;
+    background: var(--background-secondary, #f8f9fa);
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-secondary, #666);
+    font-size: 11px;
+    font-weight: 500;
+    min-height: 32px;
+    flex: 1;
+    max-width: 95px;
+    justify-content: center;
+  }
+  
+  .mobile-action-btn:hover {
+    background: var(--background-hover, #e9ecef);
+    border-color: var(--primary-color, #4285f4);
+    color: var(--primary-color, #4285f4);
+  }
+  
+  .mobile-action-btn svg {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+  }
+  
+  .mobile-action-btn span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  
+  .mobile-action-btn.theme-btn {
+    background: var(--background-secondary, #f8f9fa);
+  }
+  
+  .theme-icon-mobile {
+    font-size: 12px;
+  }
+  
+  /* 모바일 사용자 버튼 컨테이너 */
+  .mobile-user-buttons {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    display: flex;
+    gap: 6px;
+    z-index: 10;
+  }
+  
+  /* 계정 관리 및 로그아웃 버튼 */
+  .mobile-account-btn-top,
+  .mobile-logout-btn-top {
+    width: 32px;
+    height: 32px;
+    background: var(--background-secondary, #f8f9fa);
+    border: 1px solid var(--border-color, #e0e0e0);
+    color: var(--text-secondary, #666);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .mobile-account-btn-top:hover {
+    background: var(--background-hover, #e9ecef);
+    border-color: var(--primary-color, #4285f4);
+    color: var(--primary-color, #4285f4);
+    transform: scale(1.05);
+  }
+  
+  .mobile-logout-btn-top {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: var(--error-color, #ef4444);
+    color: var(--error-color, #ef4444);
+  }
+  
+  .mobile-logout-btn-top:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: var(--error-color, #ef4444);
+    color: var(--error-color, #ef4444);
+    transform: scale(1.05);
+  }
+  
+  /* 다중 행 레이아웃 */
+  .mobile-multi-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-right: 80px; /* 계정 및 로그아웃 버튼 공간 확보 */
+  }
+  
+  /* 1행: 로고 + 타이틀 + 날짜 네비게이션 */
+  .mobile-row-1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 36px;
+    margin-bottom: 2px;
+  }
+  
+  /* 2행: 액션 버튼들 */
+  .mobile-row-2 {
+    display: flex;
+    justify-content: center;
+    min-height: 28px;
+  }
+  
+  /* 타이틀 섹션 */
+  .mobile-title-section {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  
+  .logo-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .mobile-main-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+    color: var(--text-primary, #1a1a1a);
+  }
+  
+  .mobile-department-name {
+    font-size: 10px;
+    margin: 0;
+    line-height: 1.2;
+    color: var(--text-secondary, #666);
+  }
+  
+  /* 컴팩트 액션 버튼들 */
+  .mobile-actions-expanded {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .mobile-action-btn-expanded {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    background: var(--background-secondary, #f8f9fa);
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-secondary, #666);
+    font-size: 11px;
+    font-weight: 500;
+    min-height: 32px;
+  }
+  
+  .mobile-action-btn-expanded:hover {
+    background: var(--background-hover, #e9ecef);
+    border-color: var(--primary-color, #4285f4);
+    color: var(--primary-color, #4285f4);
+  }
+  
+  .mobile-action-btn-expanded svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .mobile-action-btn-expanded span {
+    white-space: nowrap;
+  }
+  
+  
+  /* 컴팩트 날짜 네비게이션 */
+  .mobile-date-nav-compact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--background-secondary, #f8f9fa);
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color, #e0e0e0);
+    flex-shrink: 0;
+    min-height: 32px;
+  }
+  
+  .mobile-nav-btn-compact {
+    width: 24px;
+    height: 24px;
+    background: none;
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-secondary, #666);
+  }
+  
+  .mobile-nav-btn-compact svg {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .mobile-nav-btn-compact:hover {
+    background: var(--background-hover, #e9ecef);
+    color: var(--text-primary, #1a1a1a);
+  }
+  
+  /* 컴팩트 액션 버튼들 */
+  .mobile-actions-compact {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+  
+  .mobile-action-btn-small {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding: 4px 8px;
+    background: var(--background-secondary, #f8f9fa);
+    border: 1px solid var(--border-color, #e0e0e0);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-secondary, #666);
+    font-size: 9px;
+    font-weight: 500;
+    min-height: 28px;
+    white-space: nowrap;
+  }
+  
+  .mobile-action-btn-small:hover {
+    background: var(--background-hover, #e9ecef);
+    border-color: var(--primary-color, #4285f4);
+    color: var(--primary-color, #4285f4);
+  }
+  
+  .mobile-action-btn-small svg {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+  }
+  
+  .mobile-action-btn-small span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .desktop-only {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  
+  .header-left,
+  .header-center,
+  .header-right {
+    min-width: auto;
+    flex: none;
+  }
+  
+  .header-right {
+    justify-content: center;
+  }
+  
+  .action-buttons {
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .title-section {
+    text-align: center;
+  }
+}
+
+/* 날짜 선택 드롭다운 스타일 */
+.date-picker-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  z-index: 198;
+}
+
+.date-picker-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--background-primary, #ffffff);
+  border-radius: 12px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  z-index: 199;
+  width: 220px;
+  max-width: 90vw;
+}
+
+.date-picker-content {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.date-picker-selects {
+  display: flex;
+  gap: 8px;
+}
+
+.year-select,
+.month-select {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 6px;
+  background: var(--background-primary, #ffffff);
+  color: var(--text-primary, #374151);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.year-select:focus,
+.month-select:focus {
+  outline: none;
+  border-color: var(--primary-color, #4285f4);
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.1);
+}
+
+.date-picker-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.today-btn,
+.confirm-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.today-btn {
+  background: var(--background-secondary, #f8fafc);
+  color: var(--text-secondary, #6b7280);
+}
+
+.today-btn:hover {
+  background: var(--background-hover, #e2e8f0);
+  color: var(--text-primary, #374151);
+}
+
+.confirm-btn {
+  background: var(--primary-color, #4285f4);
+  color: #ffffff;
+}
+
+.confirm-btn:hover {
+  background: var(--primary-dark, #3367d6);
+}
+
+/* 모바일에서 날짜 선택기 조정 */
+@media (max-width: 768px) {
+  .date-picker-dropdown {
+    width: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .date-picker-content {
+    padding: 10px;
+    gap: 8px;
+  }
+  
+  .year-select,
+  .month-select {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+  
+  .today-btn,
+  .confirm-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}

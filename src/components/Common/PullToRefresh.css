@@ -1,0 +1,84 @@
+/* Pull-to-Refresh 컴포넌트 */
+.pull-to-refresh {
+  position: fixed;
+  top: -80px;
+  left: 0;
+  right: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0, 123, 255, 0.95) 0%, rgba(40, 167, 69, 0.95) 100%);
+  backdrop-filter: blur(10px);
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  z-index: 9000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pull-to-refresh.pulling {
+  transition: none;
+}
+
+.pull-to-refresh.refreshing {
+  transform: translateY(80px) !important;
+  opacity: 1 !important;
+}
+
+.refresh-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  text-align: center;
+}
+
+.refresh-arrow {
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.refresh-text {
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.9;
+  white-space: nowrap;
+}
+
+.refresh-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 모바일에서만 표시 */
+@media (min-width: 769px) {
+  .pull-to-refresh {
+    display: none;
+  }
+}
+
+/* 다크 테마 지원 */
+[data-theme="dark"] .pull-to-refresh {
+  background: linear-gradient(135deg, rgba(55, 65, 81, 0.95) 0%, rgba(75, 85, 99, 0.95) 100%);
+}
+
+/* 애니메이션 최적화 */
+.pull-to-refresh,
+.refresh-arrow,
+.refresh-spinner {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}

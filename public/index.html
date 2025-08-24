@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="theme-color" content="#4285f4" />
+    <meta name="description" content="다중 테넌트 부서휴가관리 시스템 - 부서별 데이터 분리, 실시간 동기화, 모바일 최적화" />
+    <meta name="keywords" content="휴가관리, 부서관리, 일정관리, PWA, 모바일앱" />
+    <meta name="author" content="부서휴가관리 시스템" />
+    
+    <!-- PWA 메타 태그 -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="휴가관리" />
+    <meta name="application-name" content="휴가관리" />
+    <meta name="msapplication-TileColor" content="#4285f4" />
+    <meta name="msapplication-config" content="%PUBLIC_URL%/browserconfig.xml" />
+    
+    <!-- PWA 아이콘 -->
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    
+    <!-- PWA 매니페스트 -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <title>부서휴가관리 시스템</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #f5f5f5;
+            /* PWA 모바일 최적화 */
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            overscroll-behavior: none;
+        }
+
+        code {
+            font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+                monospace;
+        }
+        
+        /* PWA 로딩 스크린 */
+        .pwa-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            color: white;
+        }
+        
+        .pwa-loading.hidden {
+            display: none;
+        }
+        
+        .pwa-logo {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+        
+        .pwa-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .pwa-subtitle {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-bottom: 40px;
+        }
+        
+        .pwa-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <noscript>JavaScript를 활성화해야 이 앱을 사용할 수 있습니다.</noscript>
+    
+    <!-- PWA 로딩 스크린 -->
+    <div id="pwa-loading" class="pwa-loading">
+        <div class="pwa-logo">🏢</div>
+        <div class="pwa-title">휴가관리 시스템</div>
+        <div class="pwa-subtitle">앱을 불러오는 중입니다...</div>
+        <div class="pwa-spinner"></div>
+        <div style="margin-top: 20px; font-size: 14px; opacity: 0.7;">
+            잠시만 기다려주세요
+        </div>
+    </div>
+    
+    <div id="root"></div>
+    
+    <!-- GitHub Pages SPA 라우팅 스크립트 -->
+    <script type="text/javascript">
+        (function(l) {
+            if (l.search[1] === '/' ) {
+                var decoded = l.search.slice(1).split('&').map(function(s) { 
+                    return s.replace(/~and~/g, '&')
+                }).join('?');
+                window.history.replaceState(null, null,
+                    l.pathname.slice(0, -1) + decoded + l.hash
+                );
+            }
+        }(window.location))
+    </script>
+    
+    <script>
+        // Service Worker 등록 (GitHub Pages에서는 비활성화)
+        if ('serviceWorker' in navigator && window.location.hostname !== 'anzpek.github.io') {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('✅ SW 등록 성공:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('❌ SW 등록 실패:', error);
+                    });
+            });
+        } else if (window.location.hostname === 'anzpek.github.io') {
+            console.log('ℹ️ GitHub Pages에서는 Service Worker 비활성화됨');
+        }
+        
+        // PWA 설치 프롬프트
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('💾 PWA 설치 가능');
+        });
+        
+        // 로딩 스크린 제거 - React 앱이 로드되지 않을 경우 대비
+        window.addEventListener('load', () => {
+            // 3초 후에 강제로 로딩 스크린 제거
+            setTimeout(() => {
+                const loading = document.getElementById('pwa-loading');
+                const root = document.getElementById('root');
+                
+                if (loading) {
+                    // React 앱이 로드되었는지 확인
+                    if (root && root.children.length > 0) {
+                        // React 앱이 정상 로드됨
+                        loading.classList.add('hidden');
+                    } else {
+                        // React 앱이 로드되지 않음 - 에러 메시지 표시
+                        loading.innerHTML = `
+                            <div class="pwa-logo">⚠️</div>
+                            <div class="pwa-title">로딩 오류</div>
+                            <div class="pwa-subtitle">앱을 불러오는 중 문제가 발생했습니다.</div>
+                            <button onclick="window.location.reload()" style="
+                                background: white;
+                                color: #667eea;
+                                border: none;
+                                padding: 12px 24px;
+                                border-radius: 8px;
+                                font-size: 16px;
+                                font-weight: 600;
+                                cursor: pointer;
+                                margin-top: 20px;
+                            ">페이지 새로고침</button>
+                        `;
+                    }
+                }
+            }, 3000);
+            
+            // React 앱 로드 감지
+            const checkReactApp = () => {
+                const root = document.getElementById('root');
+                if (root && root.children.length > 0) {
+                    const loading = document.getElementById('pwa-loading');
+                    if (loading) {
+                        loading.classList.add('hidden');
+                    }
+                    return true;
+                }
+                return false;
+            };
+            
+            // 100ms마다 React 앱 로드 확인
+            const interval = setInterval(() => {
+                if (checkReactApp()) {
+                    clearInterval(interval);
+                }
+            }, 100);
+            
+            // 10초 후 강제 중단
+            setTimeout(() => {
+                clearInterval(interval);
+            }, 10000);
+        });
+    </script>
+</body>
+</html>

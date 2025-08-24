@@ -1,0 +1,50 @@
+/* Typography System - Inter Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.heading-1 { 
+  font-size: 2.5rem; 
+  font-weight: 700; 
+  line-height: 1.2;
+  letter-spacing: -0.025em; 
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heading-2 { 
+  font-size: 2rem; 
+  font-weight: 600; 
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--gray-800);
+}
+
+.heading-3 { 
+  font-size: 1.5rem; 
+  font-weight: 600; 
+  line-height: 1.4;
+  color: var(--gray-700);
+}
+
+.body-large { 
+  font-size: 1.125rem; 
+  line-height: 1.6;
+  color: var(--gray-600);
+}
+
+.body-regular { 
+  font-size: 1rem; 
+  line-height: 1.5;
+  color: var(--gray-600);
+}
+
+.body-small { 
+  font-size: 0.875rem; 
+  line-height: 1.4;
+  color: var(--gray-500);
+}

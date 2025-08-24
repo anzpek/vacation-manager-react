@@ -1,0 +1,1051 @@
+/* AdvancedFilter.css - 콤팩트하고 모던한 필터 스타일 */
+
+.advanced-filter {
+  background: var(--background-primary, #ffffff);
+  border-radius: 12px;
+  padding: 16px;
+  border: 1px solid var(--border-color, #e0e0e0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 모바일 필터 콤팩트 모드 */
+@media (max-width: 768px) {
+  .mobile-filter-content .advanced-filter {
+    padding: 0px !important;
+    margin: 0px !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    height: auto !important;
+    max-height: calc(100vh - 70px) !important;
+    overflow-y: auto !important;
+    box-sizing: border-box !important;
+  }
+  
+  .mobile-filter-content .filter-controls-unified {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    margin: 0px !important;
+    margin-bottom: 12px !important;
+    padding: 12px !important;
+    background: var(--background-secondary, #f8f9fa) !important;
+    border-radius: 8px !important;
+    border: 1px solid var(--border-color, #e0e0e0) !important;
+    height: auto !important;
+    flex-wrap: nowrap !important;
+    min-height: 48px !important;
+    flex-direction: row !important;
+  }
+  
+  .mobile-filter-content .global-checkbox-container {
+    gap: 8px;
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+  }
+  
+  .mobile-filter-content .global-checkbox-label {
+    font-size: 15px;
+    line-height: 1.3;
+    font-weight: 600;
+    color: var(--text-primary, #1a1a1a);
+  }
+  
+  .mobile-filter-content .filter-stats {
+    padding: 2px 4px;
+    font-size: 11px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    line-height: 1.2;
+    background: var(--primary-color, #4285f4);
+    color: white;
+    font-weight: 600;
+    margin: 0 2px;
+    min-height: 16px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .mobile-filter-content .reset-button {
+    padding: 2px 4px;
+    font-size: 12px;
+    border-radius: 2px;
+    min-height: 24px;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--background-hover, #f0f0f0);
+    border: 1px solid var(--border-color, #e0e0e0);
+    color: var(--text-secondary, #666);
+    font-weight: 600;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .mobile-filter-content .reset-button svg {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .mobile-filter-content .mobile-calendar-btn {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    background: var(--primary-color, #4285f4);
+    color: white;
+    border: none;
+    padding: 3px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    height: 22px;
+    min-width: 42px;
+    line-height: 1.2;
+    box-shadow: 0 1px 2px rgba(66, 133, 244, 0.3);
+  }
+  
+  .mobile-filter-content .mobile-calendar-btn:hover,
+  .mobile-filter-content .mobile-calendar-btn:active {
+    background: var(--primary-dark, #0056b3);
+  }
+  
+  .mobile-filter-content .mobile-calendar-btn svg {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .mobile-filter-content .team-filters {
+    margin: 0px !important;
+    padding: 0px !important;
+  }
+  
+  .mobile-filter-content .advanced-filter .team-list {
+    gap: 8px !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    grid-auto-rows: min-content !important;
+    align-items: start !important;
+    width: 100% !important;
+    flex-direction: unset !important;
+    flex: unset !important;
+    margin: 0px !important;
+    padding: 8px !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* 더 구체적인 선택자로 2열 그리드 강제 */
+  .mobile-filter-content .team-filters .team-list {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-gap: 8px !important;
+    width: 100% !important;
+    margin: 0px !important;
+    padding: 8px !important;
+  }
+  
+  .mobile-filter-content .team-item {
+    border: 1px solid var(--border-color, #e0e0e0) !important;
+    border-radius: 6px !important;
+    background: var(--background-primary, #ffffff) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: auto !important;
+    max-height: none !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  .mobile-filter-content .team-header {
+    padding: 6px !important;
+    gap: 4px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    min-height: 32px !important;
+    background: var(--background-secondary, #f8f9fa) !important;
+    border-bottom: 1px solid var(--border-color, #e0e0e0) !important;
+    flex-wrap: nowrap !important;
+  }
+  
+  .mobile-filter-content .team-checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  
+  .mobile-filter-content .team-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+  }
+  
+  .mobile-filter-content .team-name {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--text-primary, #1a1a1a);
+    margin: 0;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .mobile-filter-content .team-count {
+    font-size: 10px;
+    line-height: 1.2;
+    color: var(--text-secondary, #666);
+    font-weight: 500;
+    margin: 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  
+  .mobile-filter-content .team-status {
+    flex-shrink: 0;
+  }
+  
+  .mobile-filter-content .collapse-toggle {
+    width: 14px !important;
+    height: 14px !important;
+    flex-shrink: 0 !important;
+    min-width: 14px !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .mobile-filter-content .employee-list {
+    padding: 6px !important;
+    gap: 4px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: unset !important;
+    min-height: auto !important;
+    max-height: none !important;
+    margin: 0px !important;
+  }
+  
+  .mobile-filter-content .employee-list:empty {
+    padding: 0;
+    min-height: 0;
+  }
+  
+  .mobile-filter-content .employee-item {
+    padding: 4px !important;
+    gap: 4px !important;
+    border-radius: 4px !important;
+    min-width: 60px !important;
+    min-height: 28px !important;
+    font-size: 11px !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+  }
+  
+  .mobile-filter-content .employee-avatar {
+    width: 12px !important;
+    height: 12px !important;
+    border-radius: 50% !important;
+    flex-shrink: 0 !important;
+  }
+  
+  .mobile-filter-content .employee-name {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.1;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 2px;
+  }
+  
+  .mobile-filter-content .employee-team {
+    font-size: 8px;
+    padding: 1px 3px;
+    border-radius: 3px;
+    line-height: 1.0;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  
+  .mobile-filter-content .checkbox-design {
+    width: 12px !important;
+    height: 12px !important;
+  }
+  
+  .mobile-filter-content .checkbox-design::after {
+    width: 4px !important;
+    height: 7px !important;
+    left: 4px !important;
+    top: 1px !important;
+  }
+  
+  /* 하단 표시중인 팀 섹션 */
+  .mobile-filter-content .filter-summary {
+    padding: 2px !important;
+    margin: 2px !important;
+  }
+  
+  .mobile-filter-content .summary-title {
+    font-size: 9px !important;
+    margin-bottom: 2px !important;
+    line-height: 1.0 !important;
+    color: var(--text-primary, #1a1a1a) !important;
+    font-weight: 600 !important;
+  }
+  
+  .mobile-filter-content .visible-teams {
+    gap: 1px !important;
+  }
+  
+  .mobile-filter-content .team-summary-tag {
+    padding: 1px 3px !important;
+    font-size: 9px !important;
+    line-height: 1.0 !important;
+    border-radius: 4px !important;
+  }
+  
+  .mobile-filter-content .team-tag-name {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  
+  .mobile-filter-content .team-tag-count {
+    font-size: 13px;
+    padding: 1px 2px;
+    border-radius: 3px;
+  }
+  
+  .mobile-filter-content .no-teams {
+    font-size: 13px;
+    padding: 3px 6px;
+    line-height: 1.1;
+    border-radius: 6px;
+  }
+  
+  .mobile-filter-content .no-teams-text {
+    font-size: 13px;
+    font-weight: 500;
+  }
+}
+
+/* 필터 헤더 */
+.filter-header {
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+
+.filter-title-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* 데스크톱에서 모바일 달력 버튼 숨기기 */
+.mobile-calendar-btn {
+  display: none;
+}
+
+.filter-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary, #1a1a1a);
+  margin: 0;
+}
+
+.filter-stats {
+  background: var(--primary-color, #4285f4);
+  color: white;
+  padding: 3px 10px;
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(66, 133, 244, 0.3);
+}
+
+/* 전체 컨트롤 */
+.filter-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  background: var(--background-secondary, #f8f9fa);
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border-color, #e0e0e0);
+  flex-shrink: 0;
+}
+
+/* 통합된 필터 컨트롤 */
+.filter-controls-unified {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px;
+  background: var(--background-secondary, #f8f9fa);
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border-color, #e0e0e0);
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+}
+
+/* 모던한 체크박스 디자인 */
+.global-checkbox-container,
+.team-checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* 직원 체크박스는 별도 처리 (label 제거) */
+.employee-checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.global-checkbox-input,
+.team-checkbox-input,
+.employee-checkbox-input {
+  display: none;
+}
+
+/* 체크박스 크기 증가 */
+.checkbox-design {
+  width: 16px; /* 크기 증가 */
+  height: 16px;
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 3px; /* 라운드 증가 */
+  background: var(--background-primary, #ffffff);
+  position: relative;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.checkbox-design::after {
+  content: '';
+  position: absolute;
+  left: 4px; /* 위치 조정 */
+  top: 1px;
+  width: 5px; /* 크기 증가 */
+  height: 8px;
+  border: solid white;
+  border-width: 0 1px 1px 0;
+  transform: rotate(45deg) scale(0);
+  transition: transform 0.2s ease;
+}
+
+.global-checkbox-input:checked + .checkbox-design,
+.team-checkbox-input:checked + .checkbox-design,
+.employee-checkbox-input:checked + .checkbox-design {
+  background: var(--primary-color, #4285f4);
+  border-color: var(--primary-color, #4285f4);
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+
+.global-checkbox-input:checked + .checkbox-design::after,
+.team-checkbox-input:checked + .checkbox-design::after,
+.employee-checkbox-input:checked + .checkbox-design::after {
+  transform: rotate(45deg) scale(1);
+}
+
+.global-checkbox-input:indeterminate + .checkbox-design {
+  background: var(--primary-color, #4285f4);
+  border-color: var(--primary-color, #4285f4);
+}
+
+.global-checkbox-input:indeterminate + .checkbox-design::after {
+  left: 2px;
+  top: 7px;
+  width: 10px;
+  height: 2px;
+  border: none;
+  background: white;
+  transform: rotate(0deg) scale(1);
+}
+
+.global-checkbox-label {
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  font-size: 13px;
+}
+
+/* 리셋 버튼 */
+.reset-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--background-hover, #f0f0f0);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary, #666);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.reset-button:hover:not(:disabled) {
+  background: var(--background-accent, #e0e0e0);
+  color: var(--text-primary, #1a1a1a);
+  transform: translateY(-1px);
+}
+
+.reset-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 팀 필터 영역 */
+.team-filters {
+  margin-bottom: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.team-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+/* 팀 아이템 */
+.team-item {
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background: var(--background-primary, #ffffff);
+  display: flex; /* Make it a flex container */
+  flex-direction: column; /* Stack children vertically */
+}
+
+.team-item.team-visible {
+  border-color: var(--primary-color, #4285f4);
+  box-shadow: 0 1px 4px rgba(66, 133, 244, 0.1);
+  flex: 1; /* Allow it to expand when visible */
+}
+
+.team-item.team-hidden {
+  opacity: 0.5;
+  background: var(--background-secondary, #f8f9fa);
+  /* 팀을 보이게 유지하되 시각적으로 비활성화 표시 */
+}
+
+/* 팀 헤더 */
+.team-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: var(--background-secondary, #f8f9fa);
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+}
+
+.team-item.team-visible .team-header {
+  background: rgba(66, 133, 244, 0.03);
+}
+
+.collapse-toggle {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: var(--background-primary, #ffffff);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color, #e0e0e0);
+}
+
+.collapse-toggle:hover {
+  background: var(--background-hover, #f0f0f0);
+  transform: scale(1.05);
+}
+
+.toggle-arrow {
+  transition: transform 0.2s ease;
+  color: var(--text-secondary, #666);
+}
+
+.toggle-arrow.collapsed {
+  transform: rotate(-90deg);
+}
+
+.toggle-arrow.expanded {
+  transform: rotate(0deg);
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.team-name {
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  font-size: 14px;
+}
+
+.team-count {
+  font-size: 11px;
+  color: var(--text-secondary, #666);
+  font-weight: 500;
+}
+
+.team-status {
+  margin-left: auto;
+  font-size: 11px;
+  transition: all 0.2s ease;
+}
+
+.partial-selection {
+  background: var(--warning-color, #fbbc04);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 10px;
+}
+
+/* 직원 목록 - 가로 배열로 수정 */
+.employee-list {
+  padding: 4px; /* 더 줄임 */
+  background: var(--background-primary, #ffffff);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 2px; /* 더 줄임 */
+  overflow-y: auto;
+  line-height: 1; /* 줄간격 최소화 */
+}
+
+.employee-list.horizontal-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 2px; /* 더 줄임 */
+}
+
+.employee-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 양쪽 정렬로 변경 */
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  background: var(--background-secondary, #f8f9fa);
+  min-width: 90px;
+  max-width: 100%;
+  height: 28px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.horizontal-layout .employee-item {
+  flex: 1;
+  min-width: 120px;
+  max-width: 100%;
+}
+
+.employee-item:hover {
+  background: var(--background-hover, #f0f0f0);
+  border-color: var(--border-color, #e0e0e0);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.employee-item.employee-visible {
+  background: rgba(66, 133, 244, 0.08);
+  border-color: rgba(66, 133, 244, 0.2);
+}
+
+.employee-item.employee-hidden {
+  opacity: 0.6;
+  background: var(--background-secondary, #f5f5f5);
+}
+
+.employee-info {
+  display: flex;
+  align-items: center;
+  gap: 2px; /* Reduced gap */
+  min-width: 0;
+}
+
+.employee-info.horizontal {
+  flex-direction: row;
+}
+
+/* 색상 아바타 원래 크기로 복구 */
+.employee-avatar {
+  width: 16px; /* 원래 크기로 복구 */
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15); /* 그림자 줄임 */
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.employee-info {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+  overflow: hidden;
+  flex: 1;
+  justify-content: flex-start; /* 왼쪽 정렬 명시 */
+}
+
+.employee-info.horizontal {
+  flex-direction: row;
+}
+
+.employee-name {
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  font-size: 13px; /* 원래 크기로 복구 */
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+  margin-right: 2px; /* 여백 줄임 */
+}
+
+.employee-team {
+  font-size: 10px; /* 원래 크기로 복구 */
+  line-height: 1.2;
+  color: var(--text-secondary, #666);
+  background: var(--background-accent, #e8e8e8);
+  padding: 2px 4px; /* 패딩 증가 */
+  border-radius: 4px; /* 라운드 증가 */
+  font-weight: 500; /* 폰트 굵기 증가 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: auto; /* 우측 정렬 */
+  flex-shrink: 0;
+}
+
+.employee-team.manager {
+  background: #dc2626;
+  color: white;
+  font-weight: 500;
+}
+
+.employee-team.leader {
+  background: #059669;
+  color: white;
+  font-weight: 500;
+}
+
+.employee-position {
+  font-size: 8px;
+  color: var(--text-secondary, #666);
+  background: var(--background-accent, #e8e8e8);
+  padding: 1px 3px;
+  border-radius: 3px;
+  font-weight: 400;
+  white-space: nowrap;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+/* 기존 employee-status-indicator 스타일 제거 */
+.employee-status-indicator {
+  display: none;
+}
+
+/* 빈 상태 */
+.empty-team,
+.empty-filter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px;
+  text-align: center;
+  color: var(--text-secondary, #666);
+}
+
+.empty-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.empty-message,
+.empty-description {
+  font-size: 12px;
+  color: var(--text-secondary, #666);
+}
+
+/* 필터 요약 */
+.filter-summary {
+  padding: 12px;
+  background: var(--background-secondary, #f8f9fa);
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #e0e0e0);
+  flex-shrink: 0; /* Added */
+}
+
+.summary-title {
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.visible-teams {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.team-summary-tag {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--primary-color, #4285f4);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(66, 133, 244, 0.3);
+}
+
+.team-tag-name {
+  font-weight: 600;
+}
+
+.team-tag-count {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1px 4px;
+  border-radius: 6px;
+  font-size: 10px;
+}
+
+.no-teams {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--background-hover, #f0f0f0);
+  color: var(--text-secondary, #666);
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.no-teams-text {
+  font-weight: 500;
+}
+
+/* 다크 테마 */
+[data-theme="dark"] .advanced-filter {
+  background: var(--dark-bg-primary, #1e1e1e);
+  border: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .filter-title {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .filter-controls {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .global-checkbox-label {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .reset-button {
+  background: var(--dark-bg-hover, #404040);
+  color: var(--dark-text-secondary, #b0b0b0);
+  border: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .reset-button:hover:not(:disabled) {
+  background: var(--dark-bg-accent, #505050);
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .team-item {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .team-item.team-visible {
+  border-color: var(--primary-color, #4285f4);
+  box-shadow: 0 1px 4px rgba(66, 133, 244, 0.2);
+}
+
+[data-theme="dark"] .team-header {
+  background: var(--dark-bg-primary, #1e1e1e);
+  border-bottom: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .team-item.team-visible .team-header {
+  background: rgba(66, 133, 244, 0.1);
+}
+
+[data-theme="dark"] .collapse-toggle {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .collapse-toggle:hover {
+  background: var(--dark-bg-hover, #404040);
+}
+
+[data-theme="dark"] .toggle-arrow {
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .team-name {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .team-count {
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .employee-list {
+  background: var(--dark-bg-secondary, #2a2a2a);
+}
+
+[data-theme="dark"] .employee-item {
+  background: var(--dark-bg-primary, #1e1e1e);
+}
+
+[data-theme="dark"] .employee-item:hover {
+  background: var(--dark-bg-hover, #404040);
+  border-color: var(--dark-border, #333);
+}
+
+[data-theme="dark"] .employee-item.employee-visible {
+  background: rgba(66, 133, 244, 0.1);
+  border-color: rgba(66, 133, 244, 0.3);
+}
+
+[data-theme="dark"] .employee-item.employee-hidden {
+  background: var(--dark-bg-secondary, #2a2a2a);
+}
+
+[data-theme="dark"] .employee-name {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .employee-position {
+  color: var(--dark-text-secondary, #b0b0b0);
+  background: var(--dark-bg-hover, #404040);
+}
+
+[data-theme="dark"] .checkbox-design {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 2px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .filter-summary {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .summary-title {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .no-teams {
+  background: var(--dark-bg-hover, #404040);
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .empty-title {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .empty-message,
+[data-theme="dark"] .empty-description {
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .advanced-filter {
+    padding: 12px;
+  }
+  
+  .filter-title-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  
+  .filter-controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .team-header {
+    padding: 10px;
+  }
+  
+  .employee-list {
+    padding: 10px;
+  }
+  
+  .employee-item {
+    padding: 6px;
+  }
+  
+  .employee-avatar {
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+  }
+  
+  .visible-teams {
+    justify-content: center;
+  }
+}

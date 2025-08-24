@@ -1,0 +1,43 @@
+/* LoginScreen.css */
+
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--primary-start), var(--primary-end));
+  padding: 2rem;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 420px;
+  padding: 3rem 2.5rem;
+}
+
+.error-banner {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.form-group label {
+  color: var(--gray-200);
+}
+
+.form-group .glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.form-group .glass-card::placeholder {
+  color: var(--gray-400);
+}
+
+.bg-primary-gradient {
+    background-image: var(--primary-gradient);
+}

@@ -1,0 +1,1022 @@
+/* VacationModal.css - 깔끔한 모달 스타일 (이모티콘 제거) */
+
+/* 모달 오버레이 */
+.vacation-modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(8px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 1000004 !important;
+  padding: 20px !important;
+  animation: fadeIn 0.2s ease-out;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: none !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 모달 컨테이너 */
+.vacation-modal-container {
+  background: var(--background-primary, #ffffff) !important;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 460px;
+  max-height: 80vh;
+  overflow: hidden;
+  animation: slideUp 0.3s ease-out;
+  border: 1px solid var(--border-color, #e0e0e0);
+  z-index: 1000005 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 모바일 대응 - 더 콤팩트하게 */
+@media (max-width: 768px) {
+  .vacation-modal-overlay {
+    padding: 8px;
+    align-items: center;
+    backdrop-filter: none !important;
+  }
+  
+  .vacation-modal-container {
+    max-width: none;
+    width: 100%;
+    max-height: 85vh;
+    border-radius: 24px;
+    animation: slideUpMobile 0.3s ease-out;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vacation-modal-header {
+    padding: 12px 16px 8px;
+    border-radius: 24px 24px 0 0;
+  }
+
+  .vacation-modal-content {
+    padding: 12px 16px;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .vacation-modal-footer {
+    padding: 8px 16px 12px;
+    border-radius: 0 0 24px 24px;
+  }
+
+  /* 폼 필드 간격 줄이기 */
+  .vacation-form {
+    gap: 8px;
+  }
+
+  .form-field {
+    gap: 4px;
+  }
+
+  /* 입력 필드 컴팩트하게 */
+  .modern-input,
+  .modern-select {
+    padding: 6px 10px;
+    font-size: 14px;
+    min-height: 32px;
+    height: 32px;
+  }
+
+  .modern-textarea {
+    padding: 6px 10px;
+    min-height: 50px;
+    font-size: 14px;
+  }
+
+  /* 휴가 유형 그리드 더 콤팩트하게 */
+  .vacation-type-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+    width: 100% !important;
+  }
+
+  .vacation-type-card {
+    padding: 6px 8px;
+    min-height: 32px;
+    height: 32px;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .type-label {
+    font-size: 12px;
+  }
+
+  /* 컨텍스트 정보 콤팩트하게 */
+  .edit-context-info {
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 16px;
+  }
+
+  .consecutive-date-selector {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+    margin: 6px 0;
+  }
+
+  .date-option {
+    padding: 4px 6px;
+    min-height: 28px;
+    height: 28px;
+  }
+
+  .date-text {
+    font-size: 11px;
+  }
+
+  /* 비음 공간 줄이기 */
+  .field-label {
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+
+  .vacation-modal-title {
+    font-size: 15px;
+  }
+
+  .context-header h4 {
+    font-size: 12px;
+    margin: 0 0 6px 0;
+  }
+
+  .context-item {
+    font-size: 11px;
+    gap: 3px;
+  }
+
+  .context-details {
+    gap: 0 !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .context-item {
+    display: inline !important;
+  }
+
+  .context-label {
+    margin-right: 3px !important;
+  }
+}
+
+@keyframes slideUpMobile {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .vacation-modal-overlay {
+    padding: 4px;
+    align-items: center;
+  }
+  
+  .vacation-modal-container {
+    border-radius: 24px;
+    max-height: 88vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vacation-modal-header {
+    padding: 8px 12px 4px;
+    border-radius: 24px 24px 0 0;
+  }
+
+  .vacation-modal-content {
+    padding: 8px 12px;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .vacation-modal-footer {
+    padding: 4px 12px 8px;
+    border-radius: 0 0 24px 24px;
+  }
+
+  .vacation-form {
+    gap: 6px !important;
+  }
+
+  .edit-context-info {
+    padding: 6px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .vacation-modal-title {
+    font-size: 16px;
+  }
+
+  .vacation-modal-close {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* 더 작은 입력 필드 */
+  .modern-input,
+  .modern-select {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .modern-textarea {
+    padding: 8px 12px;
+    min-height: 60px;
+  }
+
+  /* 액션 버튼 더 콤팩트하게 */
+  .action-button {
+    padding: 8px 12px;
+    font-size: 12px;
+    min-height: 36px;
+  }
+
+  .button-text {
+    font-size: 12px;
+  }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 모달 헤더 */
+.vacation-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+  background: var(--background-secondary, #fafafa);
+  border-radius: 24px 24px 0 0;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.modal-title,
+.vacation-modal-title {
+  font-size: clamp(14px, 3.5vw, 18px);
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  margin: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 50px);
+}
+
+.modal-subtitle {
+  font-size: 13px;
+  color: var(--text-secondary, #666);
+  margin: 0;
+  font-weight: 500;
+}
+
+.close-button,
+.vacation-modal-close {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: var(--background-hover, #f0f0f0);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer !important;
+  color: var(--text-secondary, #666);
+  transition: all 0.2s ease;
+  pointer-events: auto !important;
+  z-index: 1000006 !important;
+  position: relative;
+}
+
+.close-button:hover,
+.vacation-modal-close:hover {
+  background: var(--background-accent, #e0e0e0);
+  color: var(--text-primary, #1a1a1a);
+  transform: scale(1.05);
+}
+
+/* 모달 콘텐츠 */
+.vacation-modal-content {
+  padding: 16px 20px;
+  flex: 1;
+  overflow-y: auto;
+  border-radius: 0;
+}
+
+/* 모달 바디 (호환성) */
+.vacation-modal-body {
+  padding: 20px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* 수정 모드 컨텍스트 정보 */
+.edit-context-info {
+  background: var(--background-secondary, #f8f9fa);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 16px;
+  padding: 10px;
+  margin-bottom: 12px;
+}
+
+.context-header h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.context-details {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.context-item {
+  display: inline;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.context-label {
+  font-weight: 500;
+  color: var(--text-secondary, #666);
+  margin-right: 4px;
+}
+
+.context-value {
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  margin-left: 0;
+}
+
+.context-subtitle {
+  margin: 4px 0 0 0;
+  font-size: 12px;
+  color: var(--text-secondary, #666);
+  font-weight: 400;
+}
+
+/* 연휴 날짜 선택 UI */
+.consecutive-date-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.date-option {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border: 2px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--background-primary, #ffffff);
+  position: relative;
+}
+
+.date-option:hover {
+  border-color: var(--primary-color, #4285f4);
+  background: var(--background-hover, #f8f9fa);
+}
+
+.date-option.selected {
+  border-color: var(--primary-color, #4285f4);
+  background: rgba(66, 133, 244, 0.05);
+  box-shadow: 0 0 0 1px var(--primary-color, #4285f4);
+}
+
+.date-option input[type="radio"] {
+  display: none;
+}
+
+.date-option-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.date-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary, #1a1a1a);
+}
+
+/* 연휴 선택된 날짜 표시 */
+.selected-date-display {
+  padding: 12px 16px;
+  border: 2px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  background: var(--background-secondary, #f8f9fa);
+}
+
+.date-display-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.date-display-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.date-display-note {
+  font-size: 12px;
+  color: var(--text-secondary, #666);
+  font-style: italic;
+}
+
+.vacation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 폼 필드 */
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  font-size: 14px;
+}
+
+.label-text {
+  font-size: 14px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 모던 입력 필드들 */
+.modern-input,
+.modern-select,
+.modern-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  background: var(--background-primary, #ffffff);
+  color: var(--text-primary, #1a1a1a);
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.modern-input:focus,
+.modern-select:focus,
+.modern-textarea:focus {
+  outline: none;
+  border-color: var(--primary-color, #4285f4);
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+.modern-input.error,
+.modern-select.error,
+.modern-textarea.error {
+  border-color: var(--error-color, #ea4335);
+  box-shadow: 0 0 0 3px rgba(234, 67, 53, 0.1);
+}
+
+.modern-textarea {
+  resize: vertical;
+  min-height: 65px;
+  line-height: 1.4;
+}
+
+/* 선택된 직원 미리보기 */
+.selected-employee-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: var(--background-secondary, #f8f9fa);
+  border-radius: 8px;
+  border: 1px solid var(--border-color, #e0e0e0);
+}
+
+.employee-avatar {
+  width: 32px;
+  height: 32px;
+  background: var(--primary-color, #4285f4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: white;
+  font-size: 13px;
+}
+
+.employee-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.employee-name {
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+  font-size: 14px;
+}
+
+.employee-team {
+  font-size: 12px;
+  color: var(--text-secondary, #666);
+}
+
+/* 휴가 유형 그리드 */
+.vacation-type-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  max-width: 100%;
+  width: 100%;
+}
+
+.vacation-type-card {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 2px solid var(--border-color, #e0e0e0);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: var(--background-primary, #ffffff);
+  position: relative;
+  min-height: 44px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.vacation-type-card:hover {
+  border-color: var(--primary-color, #4285f4);
+  background: var(--background-hover, #f8f9fa);
+  transform: translateY(-1px);
+}
+
+.vacation-type-card.selected {
+  border-color: var(--primary-color, #4285f4);
+  background: rgba(66, 133, 244, 0.05);
+  box-shadow: 0 0 0 1px var(--primary-color, #4285f4);
+}
+
+.type-radio {
+  display: none;
+}
+
+.type-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.type-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary, #1a1a1a);
+  text-align: left;
+  flex: 1;
+}
+
+/* 에러 메시지 */
+.error-message {
+  font-size: 12px;
+  color: var(--error-color, #ea4335);
+  font-weight: 500;
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.alert-warning {
+  background: rgba(251, 188, 4, 0.1);
+  border: 1px solid rgba(251, 188, 4, 0.3);
+  color: #f57c00;
+}
+
+.alert-error {
+  background: rgba(234, 67, 53, 0.1);
+  border: 1px solid rgba(234, 67, 53, 0.3);
+  color: var(--error-color, #ea4335);
+}
+
+.alert-text {
+  flex: 1;
+}
+
+/* 모달 푸터 */
+.vacation-modal-footer {
+  padding: 12px 20px 16px;
+  border-top: 1px solid var(--border-color, #e0e0e0);
+  background: var(--background-secondary, #fafafa);
+  border-radius: 0 0 24px 24px;
+}
+
+.footer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.primary-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* 액션 버튼들 */
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer !important;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  min-height: 36px;
+  pointer-events: auto !important;
+  z-index: 1000006 !important;
+  position: relative;
+}
+
+/* 모바일에서 휴가 유형 강제 2열 배치 */
+@media (max-width: 768px) {
+  .vacation-type-grid {
+    grid-template-columns: 1fr 1fr !important;
+    display: grid !important;
+    gap: 6px !important;
+  }
+  
+  .vacation-type-card {
+    display: flex !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+.action-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cancel-button {
+  background: var(--background-hover, #f0f0f0);
+  color: var(--text-primary, #1a1a1a);
+  border: 1px solid var(--border-color, #e0e0e0);
+}
+
+.cancel-button:hover:not(:disabled) {
+  background: var(--background-accent, #e0e0e0);
+}
+
+.submit-button {
+  background: var(--primary-color, #4285f4);
+  color: white;
+  box-shadow: 0 2px 6px rgba(66, 133, 244, 0.3);
+}
+
+.submit-button:hover:not(:disabled) {
+  background: var(--primary-dark, #3367d6);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(66, 133, 244, 0.4);
+}
+
+.delete-button {
+  background: rgba(234, 67, 53, 0.1);
+  color: var(--error-color, #ea4335);
+  border: 1px solid rgba(234, 67, 53, 0.3);
+}
+
+.delete-button:hover:not(:disabled) {
+  background: rgba(234, 67, 53, 0.2);
+}
+
+.button-text {
+  font-size: 13px;
+}
+
+/* 다크 테마 */
+[data-theme="dark"] .vacation-modal-container {
+  background: var(--dark-bg-primary, #1e1e1e);
+  border: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .vacation-modal-header {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border-bottom: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .modal-title {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .modal-subtitle {
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .close-button {
+  background: var(--dark-bg-hover, #404040);
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .close-button:hover {
+  background: var(--dark-bg-accent, #505050);
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .field-label {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .modern-input,
+[data-theme="dark"] .modern-select,
+[data-theme="dark"] .modern-textarea {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 2px solid var(--dark-border, #333);
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .modern-input:focus,
+[data-theme="dark"] .modern-select:focus,
+[data-theme="dark"] .modern-textarea:focus {
+  border-color: var(--primary-color, #4285f4);
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.2);
+}
+
+[data-theme="dark"] .selected-employee-preview {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .employee-name {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .employee-team {
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .vacation-type-card {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 2px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .vacation-type-card:hover {
+  background: var(--dark-bg-hover, #404040);
+}
+
+[data-theme="dark"] .vacation-type-card.selected {
+  background: rgba(66, 133, 244, 0.1);
+}
+
+[data-theme="dark"] .type-label {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .vacation-modal-footer {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border-top: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .cancel-button {
+  background: var(--dark-bg-hover, #404040);
+  color: var(--dark-text-primary, #ffffff);
+  border: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .cancel-button:hover:not(:disabled) {
+  background: var(--dark-bg-accent, #505050);
+}
+
+[data-theme="dark"] .edit-context-info {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 1px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .context-header h4 {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .context-label {
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .context-value {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .context-subtitle {
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+[data-theme="dark"] .date-option {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 2px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .date-option:hover {
+  background: var(--dark-bg-hover, #404040);
+}
+
+[data-theme="dark"] .date-option.selected {
+  background: rgba(66, 133, 244, 0.1);
+}
+
+[data-theme="dark"] .date-text {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .selected-date-display {
+  background: var(--dark-bg-secondary, #2a2a2a);
+  border: 2px solid var(--dark-border, #333);
+}
+
+[data-theme="dark"] .date-display-text {
+  color: var(--dark-text-primary, #ffffff);
+}
+
+[data-theme="dark"] .date-display-note {
+  color: var(--dark-text-secondary, #b0b0b0);
+}
+
+/* 반응형 */
+@media (max-width: 600px) {
+  .vacation-modal-overlay {
+    padding: 6px;
+  }
+  
+  .vacation-modal-container {
+    max-width: 100%;
+    max-height: 90vh;
+  }
+  
+  .vacation-modal-header {
+    padding: 10px 12px 6px;
+  }
+  
+  .modal-title {
+    font-size: 15px;
+  }
+  
+  .vacation-modal-content {
+    padding: 8px 12px;
+  }
+  
+  .modern-input,
+  .modern-select {
+    padding: 5px 8px !important;
+    font-size: 13px !important;
+    min-height: 30px !important;
+    height: 30px !important;
+  }
+  
+  .modern-textarea {
+    padding: 5px 8px !important;
+    min-height: 45px !important;
+    font-size: 13px !important;
+  }
+  
+  .vacation-type-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 5px !important;
+  }
+  
+  .vacation-type-card {
+    padding: 5px 6px !important;
+    min-height: 28px !important;
+    height: 28px !important;
+  }
+  
+  .type-label {
+    font-size: 11px !important;
+  }
+  
+  .footer-actions {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .primary-actions {
+    width: 100%;
+  }
+  
+  .action-button {
+    flex: 1;
+    justify-content: center;
+    min-height: 30px;
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+  
+  .consecutive-date-selector {
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+  }
+  
+  .date-option {
+    justify-content: center;
+    padding: 3px 5px;
+    min-height: 26px;
+    height: 26px;
+  }
+  
+  .vacation-form {
+    gap: 5px !important;
+  }
+  
+  .form-field {
+    gap: 2px !important;
+  }
+  
+  .field-label {
+    font-size: 12px !important;
+  }
+  
+  .edit-context-info {
+    padding: 5px 6px !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .context-item {
+    font-size: 10px !important;
+  }
+}

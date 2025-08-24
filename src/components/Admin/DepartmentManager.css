@@ -1,0 +1,548 @@
+/* DepartmentManager.css - 부서 관리 모달 스타일 */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.department-manager {
+  background: var(--background-primary, white);
+  border-radius: 20px;
+  padding: 0;
+  max-width: 800px;
+  width: 90%;
+  max-height: 85vh;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border-color, #e0e0e0);
+}
+
+/* 헤더 */
+.manager-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+  background: var(--background-secondary, #f8f9fa);
+}
+
+.manager-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: var(--text-secondary, #666);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.close-button:hover {
+  background: var(--background-hover, #e9ecef);
+  color: var(--text-primary, #1a1a1a);
+}
+
+/* 메인 콘텐츠 */
+.manager-content {
+  padding: 32px;
+  max-height: 65vh;
+  overflow-y: auto;
+}
+
+/* 부서 목록 */
+.department-list {
+  margin-bottom: 32px;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.list-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.add-button {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--primary-color, #4285f4) 0%, #3367d6 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+}
+
+.add-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
+}
+
+/* 빈 상태 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.empty-text {
+  font-size: 18px;
+  color: var(--text-secondary, #666);
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.empty-action {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--primary-color, #4285f4) 0%, #3367d6 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+}
+
+.empty-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
+}
+
+/* 부서 카드 */
+.department-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 16px;
+}
+
+.dept-card {
+  background: var(--background-secondary, #f8f9fa);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 12px;
+  padding: 0;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.dept-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-color, #4285f4);
+}
+
+.dept-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--border-color, #e0e0e0);
+  background: var(--background-primary, white);
+}
+
+.dept-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dept-color-indicator {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dept-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dept-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.dept-code {
+  font-size: 12px;
+  color: var(--text-secondary, #666);
+  font-weight: 500;
+}
+
+.dept-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-btn,
+.delete-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.edit-btn:hover {
+  background: rgba(66, 133, 244, 0.1);
+}
+
+.delete-btn:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.dept-card-body {
+  padding: 20px;
+}
+
+.dept-credential {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.credential-label {
+  color: var(--text-secondary, #666);
+  font-weight: 500;
+}
+
+.credential-value {
+  font-family: 'Courier New', monospace;
+  background: var(--background-accent, #f0f4f8);
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: var(--text-primary, #1a1a1a);
+  font-weight: 600;
+}
+
+/* 추가/수정 폼 */
+.add-form {
+  margin-top: 24px;
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.form-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.back-btn {
+  padding: 8px 16px;
+  background: var(--background-secondary, #f8f9fa);
+  color: var(--text-secondary, #666);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-btn:hover {
+  background: var(--background-hover, #e9ecef);
+  color: var(--text-primary, #1a1a1a);
+}
+
+.form-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.form-input {
+  padding: 12px 16px;
+  border: 2px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  font-size: 16px;
+  background: var(--background-primary, white);
+  color: var(--text-primary, #1a1a1a);
+  transition: all 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--primary-color, #4285f4);
+  box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.1);
+}
+
+.form-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--background-secondary, #f8f9fa);
+}
+
+.form-help {
+  font-size: 12px;
+  color: var(--text-secondary, #666);
+  margin-top: 4px;
+}
+
+/* 색상 선택기 */
+.color-picker {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.color-option {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.color-option.selected {
+  border-color: var(--text-primary, #1a1a1a);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* 비밀번호 입력 */
+.password-input {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.password-input .form-input {
+  flex: 1;
+}
+
+.generate-btn {
+  background: var(--background-secondary, #f8f9fa);
+  border: 2px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.generate-btn:hover {
+  background: var(--background-hover, #e9ecef);
+  border-color: var(--primary-color, #4285f4);
+}
+
+/* 폼 액션 */
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color, #e0e0e0);
+}
+
+.cancel-btn {
+  padding: 12px 24px;
+  background: var(--background-secondary, #f8f9fa);
+  color: var(--text-secondary, #666);
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-btn:hover {
+  background: var(--background-hover, #e9ecef);
+  color: var(--text-primary, #1a1a1a);
+}
+
+.submit-btn {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--primary-color, #4285f4) 0%, #3367d6 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
+}
+
+/* 다크모드 지원 */
+[data-theme="dark"] .department-manager {
+  background: var(--background-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .manager-header {
+  background: var(--background-secondary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .dept-card {
+  background: var(--background-secondary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .dept-card-header {
+  background: var(--background-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .form-input {
+  background: var(--background-primary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .form-input:disabled {
+  background: var(--background-secondary);
+}
+
+[data-theme="dark"] .generate-btn {
+  background: var(--background-secondary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .cancel-btn {
+  background: var(--background-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .back-btn {
+  background: var(--background-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .department-manager {
+    width: 95%;
+    max-height: 90vh;
+  }
+  
+  .manager-header {
+    padding: 20px 24px;
+  }
+  
+  .manager-title {
+    font-size: 20px;
+  }
+  
+  .manager-content {
+    padding: 24px;
+  }
+  
+  .department-cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .color-picker {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .cancel-btn,
+  .submit-btn {
+    width: 100%;
+  }
+  
+  .password-input {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .manager-content {
+    padding: 20px;
+  }
+  
+  .form-grid {
+    gap: 20px;
+  }
+  
+  .dept-card-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  
+  .dept-actions {
+    justify-content: center;
+  }
+}
