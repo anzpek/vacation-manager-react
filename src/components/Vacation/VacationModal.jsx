@@ -283,18 +283,15 @@ const VacationModal = () => {
                 actions.updateVacation(vacationData);
                 console.log('🎯 휴가 수정 완료 - 연속휴가 자동 재계산됨');
             } else {
-                const savedVacation = actions.addVacation(vacationData);
+                const savedVacation = await actions.addVacation(vacationData);
                 console.log('🎯 휴가 추가 완료:', savedVacation);
                 
                 // 추가 후 바로 검증
-                setTimeout(() => {
-                    // 올바른 storage key 사용
-                    const currentDepartment = JSON.parse(localStorage.getItem('currentDepartment') || '{}');
-                    const storageKey = `vacations_${currentDepartment.code || 'default'}`;
-                    const updatedVacations = JSON.parse(localStorage.getItem(storageKey) || '[]');
-                    const addedVacation = updatedVacations.find(v => v.id === savedVacation.id);
-                    console.log('🎯 추가된 휴가 localStorage 확인:', addedVacation);
-                }, 100);
+                if (savedVacation) {
+                    console.log('🎯 Firebase 저장 성공 - ID:', savedVacation.id);
+                } else {
+                    console.error('🎯 휴가 저장 실패 - savedVacation이 null/undefined');
+                }
             }
             
             actions.setModal(null);
@@ -310,7 +307,7 @@ const VacationModal = () => {
         }
     };
 
-    const handleDeleteSingleDay = () => {
+    const handleDeleteSingleDay = async () => {
         console.log('[VacationModal] 🗑️ handleDeleteSingleDay 시작');
         console.log('[VacationModal] 📋 삭제할 휴가 정보:', { 
             id: formData.id, 
@@ -329,15 +326,20 @@ const VacationModal = () => {
             `${selectedEmployee.name}님의 해당 날짜 휴가를 삭제하시겠습니까?`;
             
         if (window.confirm(confirmMessage)) {
-            console.log('[VacationModal] ✅ 사용자 확인 - 삭제 진행:', formData.id);
-            actions.deleteVacationDay(formData.id, formData.date);
-            actions.setModal(null);
+            try {
+                console.log('[VacationModal] ✅ 사용자 확인 - 삭제 진행:', formData.id);
+                await actions.deleteVacationDay(formData.id, formData.date);
+                actions.setModal(null);
+                console.log('[VacationModal] 🎯 삭제 완료');
+            } catch (error) {
+                console.error('[VacationModal] ❌ 삭제 실패:', error);
+            }
         } else {
             console.log('[VacationModal] ❌ 사용자 취소 - 삭제 중단');
         }
     };
 
-    const handleDeleteEntireVacation = () => {
+    const handleDeleteEntireVacation = async () => {
         const { consecutiveGroup } = ui.modalProps || {};
         if (consecutiveGroup && consecutiveGroup.isConsecutive && consecutiveGroup.startDate && consecutiveGroup.endDate) {
             const startDateStr = formatDateToKorean(consecutiveGroup.startDate);
@@ -356,8 +358,13 @@ const VacationModal = () => {
             }
         } else {
             if (window.confirm(`${selectedEmployee.name}님의 모든 ${formData.type} 휴가를 삭제하시겠습니까?`)) {
-                actions.deleteVacation(formData.id);
-                actions.setModal(null);
+                try {
+                    await actions.deleteVacation(formData.id);
+                    actions.setModal(null);
+                    console.log('[VacationModal] 🎯 전체 휴가 삭제 완료');
+                } catch (error) {
+                    console.error('[VacationModal] ❌ 전체 휴가 삭제 실패:', error);
+                }
             }
         }
     };

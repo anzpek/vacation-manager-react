@@ -68,7 +68,18 @@ class FirebaseService {
     const path = this.getDepartmentPath(departmentCode, 'vacations');
     try {
       const snapshot = await get(ref(realtimeDb, path));
-      return snapshot.exists() ? snapshot.val() : [];
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        // Firebase 객체를 배열로 변환
+        if (typeof data === 'object' && data !== null) {
+          const vacationsArray = Object.values(data);
+          console.log(`✅ [${departmentCode}] Firebase에서 휴가 ${vacationsArray.length}개 로드됨`);
+          return vacationsArray;
+        }
+        return [];
+      }
+      console.log(`📭 [${departmentCode}] Firebase에 휴가 데이터 없음`);
+      return [];
     } catch (error) {
       console.error(`❌ [${departmentCode}] 휴가 데이터 읽기 실패:`, error);
       return [];

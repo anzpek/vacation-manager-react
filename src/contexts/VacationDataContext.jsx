@@ -96,28 +96,105 @@ export function VacationDataProvider({ children }) {
     saveData('vacations', vacations);
   }, [saveData]);
 
-  const addVacation = useCallback((vacation) => {
-    dispatch({ type: VACATION_ACTIONS.ADD_VACATION, payload: vacation });
-    showSuccess(`${vacation.employeeName}님의 휴가가 추가되었습니다.`);
-  }, [showSuccess]);
+  const addVacation = useCallback(async (vacation) => {
+    try {
+      // ID가 없는 경우 생성
+      const newVacation = {
+        ...vacation,
+        id: vacation.id || Date.now() + Math.floor(Math.random() * 1000),
+        createdAt: Date.now(),
+        updatedAt: Date.now()
+      };
+
+      // Firebase에 저장 시도
+      if (currentDepartment?.code) {
+        const result = await firebaseService.addVacation(currentDepartment.code, newVacation);
+        if (result.success) {
+          // Firebase 저장 성공 시 반환된 데이터 사용
+          dispatch({ type: VACATION_ACTIONS.ADD_VACATION, payload: result.vacation });
+          showSuccess(`${newVacation.employeeName}님의 휴가가 추가되었습니다.`);
+          return result.vacation;
+        } else {
+          throw new Error('Firebase 저장 실패');
+        }
+      } else {
+        // 로컬 전용 모드
+        dispatch({ type: VACATION_ACTIONS.ADD_VACATION, payload: newVacation });
+        showSuccess(`${newVacation.employeeName}님의 휴가가 추가되었습니다.`);
+        return newVacation;
+      }
+    } catch (error) {
+      console.error('휴가 추가 실패:', error);
+      throw error;
+    }
+  }, [showSuccess, currentDepartment]);
 
   const updateVacation = useCallback((vacation) => {
     dispatch({ type: VACATION_ACTIONS.UPDATE_VACATION, payload: vacation });
     showSuccess('휴가가 수정되었습니다.');
   }, [showSuccess]);
 
-  const deleteVacation = useCallback((vacationId) => {
-    dispatch({ type: VACATION_ACTIONS.DELETE_VACATION, payload: vacationId });
-    showSuccess('휴가가 삭제되었습니다.');
-  }, [showSuccess]);
+  const deleteVacation = useCallback(async (vacationId) => {
+    try {
+      // Firebase에서 삭제 시도
+      if (currentDepartment?.code) {
+        const result = await firebaseService.deleteVacation(currentDepartment.code, vacationId);
+        if (result.success) {
+          dispatch({ type: VACATION_ACTIONS.DELETE_VACATION, payload: vacationId });
+          showSuccess('휴가가 삭제되었습니다.');
+          
+          // 로컬 스토리지도 업데이트
+          const updatedVacations = state.vacations.filter(v => v.id !== vacationId);
+          saveData('vacations', updatedVacations);
+          return true;
+        } else {
+          throw new Error('Firebase 삭제 실패');
+        }
+      } else {
+        // 로컬 전용 모드
+        dispatch({ type: VACATION_ACTIONS.DELETE_VACATION, payload: vacationId });
+        showSuccess('휴가가 삭제되었습니다.');
+        return true;
+      }
+    } catch (error) {
+      console.error('휴가 삭제 실패:', error);
+      throw error;
+    }
+  }, [showSuccess, currentDepartment, state.vacations, saveData]);
 
-  const deleteVacationDay = useCallback((vacationId, date) => {
-    dispatch({ 
-      type: VACATION_ACTIONS.DELETE_VACATION_DAY, 
-      payload: { vacationId, date } 
-    });
-    showSuccess('해당 날짜의 휴가가 삭제되었습니다.');
-  }, [showSuccess]);
+  const deleteVacationDay = useCallback(async (vacationId, date) => {
+    try {
+      // Firebase에서 삭제 시도
+      if (currentDepartment?.code) {
+        const result = await firebaseService.deleteVacation(currentDepartment.code, vacationId);
+        if (result.success) {
+          dispatch({ 
+            type: VACATION_ACTIONS.DELETE_VACATION_DAY, 
+            payload: { vacationId, date } 
+          });
+          showSuccess('해당 날짜의 휴가가 삭제되었습니다.');
+          
+          // 로컬 스토리지도 업데이트
+          const updatedVacations = state.vacations.filter(v => v.id !== vacationId);
+          saveData('vacations', updatedVacations);
+          return true;
+        } else {
+          throw new Error('Firebase 삭제 실패');
+        }
+      } else {
+        // 로컬 전용 모드
+        dispatch({ 
+          type: VACATION_ACTIONS.DELETE_VACATION_DAY, 
+          payload: { vacationId, date } 
+        });
+        showSuccess('해당 날짜의 휴가가 삭제되었습니다.');
+        return true;
+      }
+    } catch (error) {
+      console.error('휴가 삭제 실패:', error);
+      throw error;
+    }
+  }, [showSuccess, currentDepartment, state.vacations, saveData]);
 
   const deleteConsecutiveVacations = useCallback((startDate, endDate, employeeId) => {
     dispatch({ 
@@ -146,10 +223,20 @@ export function VacationDataProvider({ children }) {
 
   // Firebase에서 휴가 데이터 로드
   useEffect(() => {
-    const loadVacationsFromFirebase = async () => {
+    const loadAllVacationData = async () => {
       if (!currentDepartment?.code) return;
 
       try {
+        // 1. 먼저 로컬 스토리지에서 캐시된 데이터 로드
+        const storageKey = getStorageKey('vacations');
+        const cachedVacations = localStorage.getItem(storageKey);
+        if (cachedVacations) {
+          const parsedVacations = JSON.parse(cachedVacations);
+          console.log(`📱 [${currentDepartment.code}] 로컬에서 휴가 ${parsedVacations.length}개 로드됨`);
+          dispatch({ type: VACATION_ACTIONS.SET_VACATIONS, payload: parsedVacations });
+        }
+
+        // 2. Firebase에서 최신 데이터 로드하고 동기화
         console.log(`🔄 [${currentDepartment.code}] Firebase에서 휴가 데이터 로딩 중...`);
         const firebaseVacations = await firebaseService.getVacations(currentDepartment.code);
         
@@ -157,16 +244,19 @@ export function VacationDataProvider({ children }) {
           console.log(`✅ [${currentDepartment.code}] Firebase에서 휴가 ${firebaseVacations.length}개 로드됨`);
           dispatch({ type: VACATION_ACTIONS.SET_VACATIONS, payload: firebaseVacations });
           saveData('vacations', firebaseVacations);
-        } else {
-          console.log(`📭 [${currentDepartment.code}] Firebase에 휴가 데이터 없음`);
+        } else if (!cachedVacations) {
+          // Firebase에도 로컬에도 데이터가 없는 경우
+          console.log(`📭 [${currentDepartment.code}] 휴가 데이터 없음 (Firebase & 로컬)`);
+          dispatch({ type: VACATION_ACTIONS.SET_VACATIONS, payload: [] });
         }
       } catch (error) {
-        console.error('Firebase 휴가 데이터 로드 실패:', error);
+        console.error('휴가 데이터 로드 실패:', error);
+        // Firebase 실패 시 로컬 데이터라도 유지
       }
     };
 
-    loadVacationsFromFirebase();
-  }, [currentDepartment?.code, saveData]);
+    loadAllVacationData();
+  }, [currentDepartment?.code, getStorageKey, saveData]);
 
   const value = {
     // State
