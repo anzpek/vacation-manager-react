@@ -280,7 +280,7 @@ const VacationModal = () => {
             console.log('🎯 휴가 저장 대상 직원:', employee.name);
             
             if (isEditMode) {
-                actions.updateVacation(vacationData);
+                await actions.updateVacation(vacationData);
                 console.log('🎯 휴가 수정 완료 - 연속휴가 자동 재계산됨');
             } else {
                 const savedVacation = await actions.addVacation(vacationData);

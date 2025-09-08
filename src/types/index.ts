@@ -87,7 +87,7 @@ export interface VacationActions {
   // 휴가 관리
   setVacations: (vacations: Vacation[]) => void;
   addVacation: (vacation: Omit<Vacation, 'id'>) => Promise<Vacation>;
-  updateVacation: (vacation: Vacation) => Promise<void>;
+  updateVacation: (vacation: Vacation) => Promise<Vacation>;
   deleteVacation: (vacationId: ID) => void;
   deleteVacationDay: (vacationId: ID, date: string) => void;
   deleteConsecutiveVacations: (startDate: string, endDate: string, employeeId: ID) => void;

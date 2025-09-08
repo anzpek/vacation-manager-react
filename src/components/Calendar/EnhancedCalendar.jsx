@@ -38,6 +38,20 @@ const EnhancedCalendar = () => {
             vacations.forEach(vacation => {
                 const currentDate = new Date(vacation.date);
                 
+                // 업무일정은 연속휴가에서 제외 - 항상 개별 처리
+                if (vacation.type === '업무') {
+                    // 업무일정은 별도 개별 항목으로 처리
+                    consecutiveData[employeeId].push({
+                        id: vacation.id,
+                        startDate: vacation.date,
+                        endDate: vacation.date,
+                        type: vacation.type,
+                        description: vacation.description,
+                        employeeId: vacation.employeeId
+                    });
+                    return; // 업무일정은 연속휴가 로직을 거치지 않음
+                }
+                
                 if (!currentStreak) {
                     currentStreak = {
                         id: vacation.id,
@@ -52,6 +66,7 @@ const EnhancedCalendar = () => {
                     const nextDay = new Date(lastDate);
                     nextDay.setDate(nextDay.getDate() + 1);
                     
+                    // 다음 날짜가 연속되는지 확인 (업무일정이 아닌 경우에만)
                     if (currentDate.getTime() === nextDay.getTime()) {
                         currentStreak.endDate = vacation.date;
                         if (vacation.type !== currentStreak.type) {
@@ -85,7 +100,7 @@ const EnhancedCalendar = () => {
         );
     };
 
-    const onDragEnd = (result) => {
+    const onDragEnd = async (result) => {
         const { source, destination, draggableId } = result;
 
         if (!destination) {
@@ -108,7 +123,7 @@ const EnhancedCalendar = () => {
                 id: vacation.id, // Ensure id is passed to update action
                 date: newStartDate.toISOString().split('T')[0],
             };
-            actions.updateVacation(updatedVacation);
+            await actions.updateVacation(updatedVacation);
         }
     };
 

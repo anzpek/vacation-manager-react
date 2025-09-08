@@ -676,6 +676,21 @@ const MobileCalendar = ({ holidays, filteredEmployees }) => {
       employeeVacations.forEach((vacation, index) => {
         const currentDate = new Date(vacation.date);
         
+        // 업무일정은 연속휴가에서 제외 - 항상 개별 처리
+        if (vacation.type === '업무') {
+          // 업무일정은 별도 개별 그룹으로 처리
+          tempGroups.push({
+            employeeId: employee.id,
+            employeeName: employee.name,
+            startDate: vacation.date,
+            endDate: vacation.date,
+            type: vacation.type,
+            vacations: [vacation],
+            isConsecutive: false
+          });
+          return; // 업무일정은 연속휴가 로직을 거치지 않음
+        }
+        
         if (!currentGroup) {
           currentGroup = {
             employeeId: employee.id,
@@ -691,6 +706,7 @@ const MobileCalendar = ({ holidays, filteredEmployees }) => {
           const nextDay = new Date(lastDate);
           nextDay.setDate(nextDay.getDate() + 1);
           
+          // 다음 날짜가 연속되는지 확인 (업무일정이 아닌 경우에만)
           if (currentDate.getTime() === nextDay.getTime()) {
             currentGroup.endDate = vacation.date;
             currentGroup.vacations.push(vacation);
@@ -709,7 +725,7 @@ const MobileCalendar = ({ holidays, filteredEmployees }) => {
           }
         }
         
-        if (index === employeeVacations.length - 1) {
+        if (index === employeeVacations.length - 1 && currentGroup) {
           tempGroups.push({ ...currentGroup, vacations: [...currentGroup.vacations] });
         }
       });

@@ -129,10 +129,63 @@ export function VacationDataProvider({ children }) {
     }
   }, [showSuccess, currentDepartment]);
 
-  const updateVacation = useCallback((vacation) => {
-    dispatch({ type: VACATION_ACTIONS.UPDATE_VACATION, payload: vacation });
-    showSuccess('휴가가 수정되었습니다.');
-  }, [showSuccess]);
+  const updateVacation = useCallback(async (vacation) => {
+    try {
+      // Firebase에서 수정 시도
+      if (currentDepartment?.code) {
+        const result = await firebaseService.updateVacation(
+          currentDepartment.code, 
+          vacation.id, 
+          vacation
+        );
+        
+        if (result.success) {
+          dispatch({ type: VACATION_ACTIONS.UPDATE_VACATION, payload: vacation });
+          showSuccess('휴가가 수정되었습니다.');
+          
+          // 로컬 스토리지도 업데이트
+          const updatedVacations = state.vacations.map(v =>
+            v.id === vacation.id ? vacation : v
+          );
+          saveData('vacations', updatedVacations);
+          return vacation;
+        } else {
+          console.error('Firebase 휴가 수정 실패:', result.error);
+          // Firebase 실패 시에도 로컬은 업데이트
+          dispatch({ type: VACATION_ACTIONS.UPDATE_VACATION, payload: vacation });
+          showSuccess('휴가가 수정되었습니다. (오프라인 모드)');
+          
+          // 로컬 스토리지 업데이트
+          const updatedVacations = state.vacations.map(v =>
+            v.id === vacation.id ? vacation : v
+          );
+          saveData('vacations', updatedVacations);
+          return vacation;
+        }
+      } else {
+        // 부서 정보가 없으면 로컬만 업데이트
+        dispatch({ type: VACATION_ACTIONS.UPDATE_VACATION, payload: vacation });
+        
+        const updatedVacations = state.vacations.map(v =>
+          v.id === vacation.id ? vacation : v
+        );
+        saveData('vacations', updatedVacations);
+        showSuccess('휴가가 수정되었습니다.');
+        return vacation;
+      }
+    } catch (error) {
+      console.error('휴가 수정 중 오류 발생:', error);
+      // 에러 발생 시에도 로컬은 업데이트
+      dispatch({ type: VACATION_ACTIONS.UPDATE_VACATION, payload: vacation });
+      
+      const updatedVacations = state.vacations.map(v =>
+        v.id === vacation.id ? vacation : v
+      );
+      saveData('vacations', updatedVacations);
+      showSuccess('휴가가 수정되었습니다. (오프라인 모드)');
+      return vacation;
+    }
+  }, [showSuccess, currentDepartment, state.vacations, saveData]);
 
   const deleteVacation = useCallback(async (vacationId) => {
     try {
