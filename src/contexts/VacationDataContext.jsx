@@ -51,9 +51,13 @@ function vacationDataReducer(state, action) {
 
     case VACATION_ACTIONS.DELETE_VACATION_DAY:
       const { vacationId, date } = action.payload;
+      console.log(`🗑️ [Reducer] DELETE_VACATION_DAY: ID=${vacationId}, date=${date}`);
+      console.log(`📊 [Reducer] 삭제 전 휴가 개수: ${state.vacations.length}`);
+      const filteredVacations = state.vacations.filter(v => !(v.id === vacationId && v.date === date));
+      console.log(`📊 [Reducer] 삭제 후 휴가 개수: ${filteredVacations.length}`);
       return {
         ...state,
-        vacations: state.vacations.filter(v => !(v.id === vacationId && v.date === date))
+        vacations: filteredVacations
       };
 
     case VACATION_ACTIONS.DELETE_CONSECUTIVE_VACATIONS:
@@ -169,34 +173,33 @@ export function VacationDataProvider({ children }) {
   }, [showSuccess, currentDepartment]);
 
   const deleteVacationDay = useCallback(async (vacationId, date) => {
+    console.log(`🗑️ [VacationDataContext] deleteVacationDay 시작: ID=${vacationId}, date=${date}`);
+    console.log(`📊 [VacationDataContext] 삭제 전 휴가 개수: ${state.vacations.length}`);
+    
     try {
       // Firebase에서 삭제 시도
       if (currentDepartment?.code) {
         const result = await firebaseService.deleteVacation(currentDepartment.code, vacationId);
         if (result.success) {
+          console.log(`✅ [VacationDataContext] Firebase 삭제 성공, dispatch 호출 중...`);
           dispatch({ 
             type: VACATION_ACTIONS.DELETE_VACATION_DAY, 
             payload: { vacationId, date } 
           });
+          console.log(`📊 [VacationDataContext] dispatch 호출 완료`);
           showSuccess('해당 날짜의 휴가가 삭제되었습니다.');
           return true;
         } else {
           throw new Error('Firebase 삭제 실패');
         }
       } else {
-        // 로컬 전용 모드
-        dispatch({ 
-          type: VACATION_ACTIONS.DELETE_VACATION_DAY, 
-          payload: { vacationId, date } 
-        });
-        showSuccess('해당 날짜의 휴가가 삭제되었습니다.');
-        return true;
+        throw new Error('부서 정보가 없습니다.');
       }
     } catch (error) {
       console.error('휴가 삭제 실패:', error);
       throw error;
     }
-  }, [showSuccess, currentDepartment]);
+  }, [showSuccess, currentDepartment, state.vacations]);
 
   const deleteConsecutiveVacations = useCallback((startDate, endDate, employeeId) => {
     dispatch({ 
