@@ -227,8 +227,8 @@ export function VacationDataProvider({ children }) {
           });
           showSuccess('해당 날짜의 휴가가 삭제되었습니다.');
           
-          // 로컬 스토리지도 업데이트
-          const updatedVacations = state.vacations.filter(v => v.id !== vacationId);
+          // 로컬 스토리지도 업데이트 - 특정 날짜만 삭제
+          const updatedVacations = state.vacations.filter(v => !(v.id === vacationId && v.date === date));
           saveData('vacations', updatedVacations);
           return true;
         } else {
