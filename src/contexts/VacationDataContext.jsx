@@ -226,10 +226,6 @@ export function VacationDataProvider({ children }) {
             payload: { vacationId, date } 
           });
           showSuccess('해당 날짜의 휴가가 삭제되었습니다.');
-          
-          // 로컬 스토리지도 업데이트 - 특정 날짜만 삭제
-          const updatedVacations = state.vacations.filter(v => !(v.id === vacationId && v.date === date));
-          saveData('vacations', updatedVacations);
           return true;
         } else {
           throw new Error('Firebase 삭제 실패');
@@ -247,7 +243,7 @@ export function VacationDataProvider({ children }) {
       console.error('휴가 삭제 실패:', error);
       throw error;
     }
-  }, [showSuccess, currentDepartment, state.vacations, saveData]);
+  }, [showSuccess, currentDepartment, saveData]);
 
   const deleteConsecutiveVacations = useCallback((startDate, endDate, employeeId) => {
     dispatch({ 
@@ -293,15 +289,11 @@ export function VacationDataProvider({ children }) {
         console.log(`🔄 [${currentDepartment.code}] Firebase에서 휴가 데이터 로딩 중...`);
         const firebaseVacations = await firebaseService.getVacations(currentDepartment.code);
         
-        if (firebaseVacations && firebaseVacations.length > 0) {
-          console.log(`✅ [${currentDepartment.code}] Firebase에서 휴가 ${firebaseVacations.length}개 로드됨`);
-          dispatch({ type: VACATION_ACTIONS.SET_VACATIONS, payload: firebaseVacations });
-          saveData('vacations', firebaseVacations);
-        } else if (!cachedVacations) {
-          // Firebase에도 로컬에도 데이터가 없는 경우
-          console.log(`📭 [${currentDepartment.code}] 휴가 데이터 없음 (Firebase & 로컬)`);
-          dispatch({ type: VACATION_ACTIONS.SET_VACATIONS, payload: [] });
-        }
+        // Firebase 데이터를 항상 우선시 (빈 배열이라도 캐시보다 신뢰할 수 있음)
+        console.log(`✅ [${currentDepartment.code}] Firebase에서 휴가 ${firebaseVacations?.length || 0}개 로드됨`);
+        const finalVacations = firebaseVacations || [];
+        dispatch({ type: VACATION_ACTIONS.SET_VACATIONS, payload: finalVacations });
+        saveData('vacations', finalVacations);
       } catch (error) {
         console.error('휴가 데이터 로드 실패:', error);
         // Firebase 실패 시 로컬 데이터라도 유지
@@ -310,6 +302,13 @@ export function VacationDataProvider({ children }) {
 
     loadAllVacationData();
   }, [currentDepartment?.code, getStorageKey, saveData]);
+
+  // state.vacations 변경 시 자동으로 로컬 스토리지 업데이트
+  useEffect(() => {
+    if (currentDepartment?.code && state.vacations.length >= 0) {
+      saveData('vacations', state.vacations);
+    }
+  }, [state.vacations, currentDepartment?.code, saveData]);
 
   const value = {
     // State
