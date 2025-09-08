@@ -80,21 +80,12 @@ export function VacationDataProvider({ children }) {
   const { currentDepartment } = useAuth();
   const { showSuccess, showError } = useNotification();
 
-  // Storage 관련 함수들
-  const getStorageKey = useCallback((key) => {
-    return currentDepartment?.code ? `vacation_${currentDepartment.code}_${key}` : `vacation_local_${key}`;
-  }, [currentDepartment]);
-
-  const saveData = useCallback((key, data) => {
-    const storageKey = getStorageKey(key);
-    localStorage.setItem(storageKey, JSON.stringify(data));
-  }, [getStorageKey]);
+  // 로컬 캐시 완전 비활성화 - Firebase만 사용
 
   // Actions
   const setVacations = useCallback((vacations) => {
     dispatch({ type: VACATION_ACTIONS.SET_VACATIONS, payload: vacations });
-    saveData('vacations', vacations);
-  }, [saveData]);
+  }, []);
 
   const addVacation = useCallback(async (vacation) => {
     try {
@@ -142,50 +133,19 @@ export function VacationDataProvider({ children }) {
         if (result.success) {
           dispatch({ type: VACATION_ACTIONS.UPDATE_VACATION, payload: vacation });
           showSuccess('휴가가 수정되었습니다.');
-          
-          // 로컬 스토리지도 업데이트
-          const updatedVacations = state.vacations.map(v =>
-            v.id === vacation.id ? vacation : v
-          );
-          saveData('vacations', updatedVacations);
           return vacation;
         } else {
           console.error('Firebase 휴가 수정 실패:', result.error);
-          // Firebase 실패 시에도 로컬은 업데이트
-          dispatch({ type: VACATION_ACTIONS.UPDATE_VACATION, payload: vacation });
-          showSuccess('휴가가 수정되었습니다. (오프라인 모드)');
-          
-          // 로컬 스토리지 업데이트
-          const updatedVacations = state.vacations.map(v =>
-            v.id === vacation.id ? vacation : v
-          );
-          saveData('vacations', updatedVacations);
-          return vacation;
+          throw new Error('Firebase 휴가 수정 실패');
         }
       } else {
-        // 부서 정보가 없으면 로컬만 업데이트
-        dispatch({ type: VACATION_ACTIONS.UPDATE_VACATION, payload: vacation });
-        
-        const updatedVacations = state.vacations.map(v =>
-          v.id === vacation.id ? vacation : v
-        );
-        saveData('vacations', updatedVacations);
-        showSuccess('휴가가 수정되었습니다.');
-        return vacation;
+        throw new Error('부서 정보가 없습니다.');
       }
     } catch (error) {
       console.error('휴가 수정 중 오류 발생:', error);
-      // 에러 발생 시에도 로컬은 업데이트
-      dispatch({ type: VACATION_ACTIONS.UPDATE_VACATION, payload: vacation });
-      
-      const updatedVacations = state.vacations.map(v =>
-        v.id === vacation.id ? vacation : v
-      );
-      saveData('vacations', updatedVacations);
-      showSuccess('휴가가 수정되었습니다. (오프라인 모드)');
-      return vacation;
+      throw error;
     }
-  }, [showSuccess, currentDepartment, state.vacations, saveData]);
+  }, [showSuccess, currentDepartment]);
 
   const deleteVacation = useCallback(async (vacationId) => {
     try {
@@ -195,25 +155,18 @@ export function VacationDataProvider({ children }) {
         if (result.success) {
           dispatch({ type: VACATION_ACTIONS.DELETE_VACATION, payload: vacationId });
           showSuccess('휴가가 삭제되었습니다.');
-          
-          // 로컬 스토리지도 업데이트
-          const updatedVacations = state.vacations.filter(v => v.id !== vacationId);
-          saveData('vacations', updatedVacations);
           return true;
         } else {
           throw new Error('Firebase 삭제 실패');
         }
       } else {
-        // 로컬 전용 모드
-        dispatch({ type: VACATION_ACTIONS.DELETE_VACATION, payload: vacationId });
-        showSuccess('휴가가 삭제되었습니다.');
-        return true;
+        throw new Error('부서 정보가 없습니다.');
       }
     } catch (error) {
       console.error('휴가 삭제 실패:', error);
       throw error;
     }
-  }, [showSuccess, currentDepartment, state.vacations, saveData]);
+  }, [showSuccess, currentDepartment]);
 
   const deleteVacationDay = useCallback(async (vacationId, date) => {
     try {
@@ -243,7 +196,7 @@ export function VacationDataProvider({ children }) {
       console.error('휴가 삭제 실패:', error);
       throw error;
     }
-  }, [showSuccess, currentDepartment, saveData]);
+  }, [showSuccess, currentDepartment]);
 
   const deleteConsecutiveVacations = useCallback((startDate, endDate, employeeId) => {
     dispatch({ 
@@ -270,45 +223,27 @@ export function VacationDataProvider({ children }) {
     });
   }, [state.vacations]);
 
-  // Firebase에서 휴가 데이터 로드
+  // Firebase에서 휴가 데이터 로드 (로컬 캐시 비활성화)
   useEffect(() => {
-    const loadAllVacationData = async () => {
+    const loadVacationDataFromFirebase = async () => {
       if (!currentDepartment?.code) return;
 
       try {
-        // 1. 먼저 로컬 스토리지에서 캐시된 데이터 로드
-        const storageKey = getStorageKey('vacations');
-        const cachedVacations = localStorage.getItem(storageKey);
-        if (cachedVacations) {
-          const parsedVacations = JSON.parse(cachedVacations);
-          console.log(`📱 [${currentDepartment.code}] 로컬에서 휴가 ${parsedVacations.length}개 로드됨`);
-          dispatch({ type: VACATION_ACTIONS.SET_VACATIONS, payload: parsedVacations });
-        }
-
-        // 2. Firebase에서 최신 데이터 로드하고 동기화
         console.log(`🔄 [${currentDepartment.code}] Firebase에서 휴가 데이터 로딩 중...`);
         const firebaseVacations = await firebaseService.getVacations(currentDepartment.code);
         
-        // Firebase 데이터를 항상 우선시 (빈 배열이라도 캐시보다 신뢰할 수 있음)
         console.log(`✅ [${currentDepartment.code}] Firebase에서 휴가 ${firebaseVacations?.length || 0}개 로드됨`);
         const finalVacations = firebaseVacations || [];
         dispatch({ type: VACATION_ACTIONS.SET_VACATIONS, payload: finalVacations });
-        saveData('vacations', finalVacations);
       } catch (error) {
-        console.error('휴가 데이터 로드 실패:', error);
-        // Firebase 실패 시 로컬 데이터라도 유지
+        console.error('Firebase 휴가 데이터 로드 실패:', error);
+        // Firebase 실패 시 빈 배열로 초기화
+        dispatch({ type: VACATION_ACTIONS.SET_VACATIONS, payload: [] });
       }
     };
 
-    loadAllVacationData();
-  }, [currentDepartment?.code, getStorageKey, saveData]);
-
-  // state.vacations 변경 시 자동으로 로컬 스토리지 업데이트
-  useEffect(() => {
-    if (currentDepartment?.code && state.vacations.length >= 0) {
-      saveData('vacations', state.vacations);
-    }
-  }, [state.vacations, currentDepartment?.code, saveData]);
+    loadVacationDataFromFirebase();
+  }, [currentDepartment?.code]);
 
   const value = {
     // State
