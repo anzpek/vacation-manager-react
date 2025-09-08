@@ -134,19 +134,24 @@
     </script>
     
     <script>
-        // Service Worker 등록 (GitHub Pages에서는 비활성화)
-        if ('serviceWorker' in navigator && window.location.hostname !== 'anzpek.github.io') {
+        // Service Worker 등록 (개발환경에서 활성화)
+        if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(registration => {
-                        console.log('✅ SW 등록 성공:', registration.scope);
-                    })
-                    .catch(error => {
-                        console.log('❌ SW 등록 실패:', error);
-                    });
+                // HTTPS 또는 localhost에서만 Service Worker 등록
+                if (window.location.protocol === 'https:' || window.location.hostname === 'localhost') {
+                    navigator.serviceWorker.register('/sw.js')
+                        .then(registration => {
+                            console.log('✅ SW 등록 성공:', registration.scope);
+                        })
+                        .catch(error => {
+                            console.log('❌ SW 등록 실패:', error);
+                        });
+                } else {
+                    console.log('ℹ️ HTTPS 또는 localhost가 아니므로 Service Worker 비활성화됨');
+                }
             });
-        } else if (window.location.hostname === 'anzpek.github.io') {
-            console.log('ℹ️ GitHub Pages에서는 Service Worker 비활성화됨');
+        } else {
+            console.log('ℹ️ Service Worker를 지원하지 않는 브라우저입니다');
         }
         
         // PWA 설치 프롬프트
