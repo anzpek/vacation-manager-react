@@ -539,9 +539,9 @@ const CalendarDay = React.forwardRef(({
                 <div className="full-day-vacations">
                     {(() => {
                         let fullDayVacations = vacations.filter(v => !['오전', '오후'].includes(v.type));
-                        
+
                         // 반차로 시작하는 연속휴가 처리: 해당 날짜에 연휴 막대바를 렌더링하기 위해 가상 휴가 추가
-                        const halfDayVacations = vacations.filter(v => ['오전', '오후'].includes(v.type));
+                        // halfDayVacations prop을 직접 사용 (vacations는 fullDay만 포함)
                         halfDayVacations.forEach(halfVacation => {
                             const consecutiveGroup = getConsecutiveGroupForDate(date, halfVacation.employeeId);
                             if (consecutiveGroup && consecutiveGroup.isConsecutive) {
@@ -583,6 +583,7 @@ const CalendarDay = React.forwardRef(({
 
                 {/* 반차 렌더링 (좌우로 구분) */}
                 {(() => {
+                    // halfDayVacations prop을 직접 사용 (vacations에서 다시 필터링하지 않음)
                     const morningVacations = halfDayVacations.filter(v => v.type === '오전');
                     const afternoonVacations = halfDayVacations.filter(v => v.type === '오후');
                     

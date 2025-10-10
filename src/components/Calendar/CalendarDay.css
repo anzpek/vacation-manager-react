@@ -138,7 +138,7 @@
     grid-template-columns: 1fr 1fr; /* Two equal columns for morning and afternoon */
     width: 100%;
     gap: 0px; /* No gap between columns */
-    margin-bottom: 4px;
+    height: 18px; /* 명시적 높이 설정 - 반차 바 높이 */
 }
 
 .morning-half {
@@ -146,6 +146,7 @@
     display: flex;
     flex-direction: column;
     gap: 0px;
+    position: relative; /* absolute 자식 요소를 위한 컨테이너 */
 }
 
 .afternoon-half {
@@ -153,42 +154,39 @@
     display: flex;
     flex-direction: column;
     gap: 0px;
+    position: relative; /* absolute 자식 요소를 위한 컨테이너 */
 }
 
 
 .half-vacation-bar {
     display: flex;
     align-items: center;
-    padding: 2px 0;
+    padding: 2px 4px; /* 좌우 패딩 추가 */
     border-radius: 4px !important; /* 둥글이 줄이기 8px -> 4px */
     font-size: 10px;
     cursor: pointer;
     transition: all 0.2s ease;
     color: white;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    min-height: 16px;
+    height: 18px; /* height: 100% 대신 고정 높이 */
     font-weight: 500;
     box-sizing: border-box;
     position: absolute; /* 절대 위치로 변경 */
     top: 0;
-    height: 100%;
+    width: 100%; /* 부모 컨테이너(morning-half 또는 afternoon-half) 기준 100% */
 }
 
 .morning-half .half-vacation-bar {
     justify-content: flex-start;
     text-align: left;
     left: 0; /* 왼쪽 끝에서 시작 */
-    width: 50%; /* 정확히 절반 너비 */
-    padding-left: 4px; /* 왼쪽 여백 추가 */
 }
 
 .afternoon-half .half-vacation-bar {
     justify-content: flex-end;
     text-align: right;
-    left: 50%; /* 가운데에서 시작 */
+    left: 0; /* afternoon-half 내부에서 시작 */
     right: auto; /* right 자동 설정 제거 */
-    width: 50%; /* 정확히 절반 너비 */
-    padding-right: 4px; /* 오른쪽 여백 추가 */
 }
 
 .half-vacation-bar:hover {
