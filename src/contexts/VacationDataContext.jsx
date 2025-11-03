@@ -50,10 +50,10 @@ function vacationDataReducer(state, action) {
       };
 
     case VACATION_ACTIONS.DELETE_VACATION_DAY:
-      const { vacationId, date } = action.payload;
-      console.log(`🗑️ [Reducer] DELETE_VACATION_DAY: ID=${vacationId}, date=${date}`);
+      const { vacationId } = action.payload;
+      console.log(`🗑️ [Reducer] DELETE_VACATION_DAY: ID=${vacationId}`);
       console.log(`📊 [Reducer] 삭제 전 휴가 개수: ${state.vacations.length}`);
-      const filteredVacations = state.vacations.filter(v => !(v.id === vacationId && v.date === date));
+      const filteredVacations = state.vacations.filter(v => v.id !== vacationId);
       console.log(`📊 [Reducer] 삭제 후 휴가 개수: ${filteredVacations.length}`);
       return {
         ...state,

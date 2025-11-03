@@ -70,9 +70,12 @@ class FirebaseService {
       const snapshot = await get(ref(realtimeDb, path));
       if (snapshot.exists()) {
         const data = snapshot.val();
-        // Firebase 객체를 배열로 변환
+        // Firebase 객체를 배열로 변환하고, Firebase 키를 id로 사용
         if (typeof data === 'object' && data !== null) {
-          const vacationsArray = Object.values(data);
+          const vacationsArray = Object.keys(data).map(key => ({
+            ...data[key],
+            id: key
+          }));
           console.log(`✅ [${departmentCode}] Firebase에서 휴가 ${vacationsArray.length}개 로드됨`);
           return vacationsArray;
         }
