@@ -1,11 +1,13 @@
 {
   "files": {
-    "main.css": "/vacation-manager-react/static/css/main.87d4b62e.css",
-    "main.js": "/vacation-manager-react/static/js/main.b679ac45.js",
-    "index.html": "/vacation-manager-react/index.html"
+    "main.css": "/vacation-manager-react/static/css/main.6bbbcd9f.css",
+    "main.js": "/vacation-manager-react/static/js/main.4fe25d1a.js",
+    "index.html": "/vacation-manager-react/index.html",
+    "main.6bbbcd9f.css.map": "/vacation-manager-react/static/css/main.6bbbcd9f.css.map",
+    "main.4fe25d1a.js.map": "/vacation-manager-react/static/js/main.4fe25d1a.js.map"
   },
   "entrypoints": [
-    "static/css/main.87d4b62e.css",
-    "static/js/main.b679ac45.js"
+    "static/css/main.6bbbcd9f.css",
+    "static/js/main.4fe25d1a.js"
   ]
 }
