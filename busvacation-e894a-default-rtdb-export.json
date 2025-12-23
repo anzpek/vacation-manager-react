@@ -1,0 +1,2020 @@
+{
+  "departments": {
+    "0": {
+      "id": "support",
+      "name": "보상지원부",
+      "teams": [
+        {
+          "id": "customer",
+          "leader": "이용진",
+          "members": [
+            "이용진",
+            "정예원",
+            "정욱군"
+          ],
+          "name": "고객만족팀"
+        },
+        {
+          "id": "compensation",
+          "leader": "강태호",
+          "members": [
+            "강태호",
+            "백순열",
+            "장순아"
+          ],
+          "name": "보상관리팀"
+        },
+        {
+          "id": "보상지도팀",
+          "name": "보상지도팀"
+        }
+      ]
+    },
+    "JUVBJUIyJUJEJUVBJUI4JUIwJUVCJUIzJUI0JUVDJTgzJTgxMyVFRCU4QyU4MA__": {
+      "employees": [
+        {
+          "color": "#3B82F6",
+          "id": 1,
+          "name": "김개발",
+          "position": "member",
+          "team": "개발팀"
+        },
+        {
+          "color": "#10B981",
+          "id": 2,
+          "name": "이마케팅",
+          "position": "leader",
+          "team": "마케팅팀"
+        },
+        {
+          "color": "#F59E0B",
+          "id": 3,
+          "name": "박영업",
+          "position": "member",
+          "team": "영업팀"
+        }
+      ],
+      "vacations": [
+        {
+          "date": "2025-07-18",
+          "employeeId": 1,
+          "id": 0,
+          "type": "오후"
+        },
+        {
+          "createdAt": 1753273099841,
+          "date": "2025-07-21",
+          "description": "일하기 싫어요",
+          "employeeId": 3,
+          "id": 1,
+          "type": "업무",
+          "updatedAt": 1753273099841
+        },
+        {
+          "createdAt": 1753273118099,
+          "date": "2025-07-26",
+          "description": "",
+          "employeeId": 3,
+          "id": 2,
+          "type": "특별",
+          "updatedAt": 1753273118099
+        },
+        {
+          "createdAt": 1753337014503,
+          "date": "2025-07-23",
+          "description": "",
+          "employeeId": 3,
+          "id": 3,
+          "type": "연차",
+          "updatedAt": 1753337014503
+        },
+        {
+          "createdAt": 1753337017333,
+          "date": "2025-07-24",
+          "description": "",
+          "employeeId": 3,
+          "id": 4,
+          "type": "연차",
+          "updatedAt": 1753337017333
+        },
+        {
+          "createdAt": 1753340549371,
+          "date": "2025-07-07",
+          "description": "",
+          "employeeId": 1,
+          "id": 5,
+          "type": "연차",
+          "updatedAt": 1753340549371
+        },
+        {
+          "createdAt": 1753340573146,
+          "date": "2025-07-08",
+          "description": "",
+          "employeeId": 1,
+          "id": 6,
+          "type": "연차",
+          "updatedAt": 1753340573146
+        },
+        {
+          "createdAt": 1753340578746,
+          "date": "2025-07-08",
+          "description": "",
+          "employeeId": 2,
+          "id": 7,
+          "type": "오후",
+          "updatedAt": 1753340578746
+        },
+        {
+          "createdAt": 1753340581727,
+          "date": "2025-07-09",
+          "description": "",
+          "employeeId": 2,
+          "id": 8,
+          "type": "연차",
+          "updatedAt": 1753340581727
+        }
+      ]
+    },
+    "JUVCJUIzJUI0JUVDJTgzJTgxJUVDJUE3JTgwJUVDJTlCJTkwJUVCJUI2JTgw": {
+      "employees": [
+        {
+          "color": "#3B82F6",
+          "id": 1753246153045,
+          "name": "강태호",
+          "position": "leader",
+          "team": "보상관리팀"
+        },
+        {
+          "color": "#10B981",
+          "id": 1753246154744,
+          "name": "박인",
+          "position": "member",
+          "team": "보상지도팀"
+        },
+        {
+          "color": "#F59E0B",
+          "id": 1753246155401,
+          "name": "백승철",
+          "position": "member",
+          "team": "보상관리팀"
+        },
+        {
+          "color": "#EF4444",
+          "id": 1753246155696,
+          "name": "이용진",
+          "position": "member",
+          "team": "고객만족팀"
+        },
+        {
+          "color": "#8B5CF6",
+          "id": 1753246156898,
+          "name": "임국단",
+          "position": "member",
+          "team": "보상지도팀"
+        },
+        {
+          "color": "#06B6D4",
+          "id": 1753246156947,
+          "name": "장순아",
+          "position": "member",
+          "team": "보상관리팀"
+        },
+        {
+          "color": "#84CC16",
+          "id": 1753246157606,
+          "name": "정예원",
+          "position": "member",
+          "team": "고객만족팀"
+        },
+        {
+          "color": "#F97316",
+          "id": 1753246159039,
+          "name": "정옥균",
+          "position": "leader",
+          "team": "고객만족팀"
+        },
+        {
+          "color": "#EC4899",
+          "id": 1753246160572,
+          "name": "배영제",
+          "position": "member",
+          "team": "보상지도팀"
+        },
+        {
+          "color": "#6366F1",
+          "id": 1753246161454,
+          "name": "강능훈",
+          "position": "leader",
+          "team": "보상지도팀"
+        },
+        {
+          "color": "#14B8A6",
+          "id": 1753246163434,
+          "name": "배기덕",
+          "position": "manager",
+          "team": "보상지원부"
+        }
+      ],
+      "vacations": {
+        "0": {
+          "createdAt": 1753246152943,
+          "date": "2025-07-14",
+          "employeeId": 1753246153045,
+          "id": 0,
+          "type": "연차",
+          "updatedAt": 1753246152943
+        },
+        "1": {
+          "createdAt": 1753246153311,
+          "date": "2025-09-08",
+          "employeeId": 1753246153045,
+          "id": 1,
+          "type": "연차",
+          "updatedAt": 1753246153311
+        },
+        "2": {
+          "createdAt": 1753246153390,
+          "date": "2025-09-22",
+          "employeeId": 1753246153045,
+          "id": 2,
+          "type": "연차",
+          "updatedAt": 1753246153390
+        },
+        "3": {
+          "createdAt": 1753246153469,
+          "date": "2025-10-30",
+          "employeeId": 1753246153045,
+          "id": 3,
+          "type": "오후",
+          "updatedAt": 1753246153469
+        },
+        "4": {
+          "createdAt": 1753246153551,
+          "date": "2025-10-31",
+          "employeeId": 1753246153045,
+          "id": 4,
+          "type": "연차",
+          "updatedAt": 1753246153551
+        },
+        "5": {
+          "createdAt": 1753246153633,
+          "date": "2025-11-03",
+          "employeeId": 1753246153045,
+          "id": 5,
+          "type": "연차",
+          "updatedAt": 1753246153633
+        },
+        "6": {
+          "createdAt": 1753246153715,
+          "date": "2025-11-04",
+          "employeeId": 1753246153045,
+          "id": 6,
+          "type": "연차",
+          "updatedAt": 1753246153715
+        },
+        "7": {
+          "createdAt": 1753246153795,
+          "date": "2025-12-26",
+          "employeeId": 1753246153045,
+          "id": 7,
+          "type": "연차",
+          "updatedAt": 1753246153795
+        },
+        "8": {
+          "createdAt": 1753246153955,
+          "date": "2025-08-29",
+          "employeeId": 1753246154744,
+          "id": 9,
+          "type": "오후",
+          "updatedAt": 1753246153955
+        },
+        "9": {
+          "createdAt": 1753246154036,
+          "date": "2025-09-26",
+          "employeeId": 1753246154744,
+          "id": 10,
+          "type": "연차",
+          "updatedAt": 1753246154036
+        },
+        "10": {
+          "createdAt": 1753246154128,
+          "date": "2025-10-10",
+          "employeeId": 1753246154744,
+          "id": 11,
+          "type": "연차",
+          "updatedAt": 1753246154128
+        },
+        "11": {
+          "createdAt": 1753246154210,
+          "date": "2025-10-31",
+          "employeeId": 1753246154744,
+          "id": 12,
+          "type": "연차",
+          "updatedAt": 1753246154210
+        },
+        "12": {
+          "createdAt": 1753246154298,
+          "date": "2025-11-28",
+          "employeeId": 1753246154744,
+          "id": 13,
+          "type": "연차",
+          "updatedAt": 1753246154298
+        },
+        "13": {
+          "createdAt": 1753246154377,
+          "date": "2025-12-23",
+          "employeeId": 1753246154744,
+          "id": 14,
+          "type": "연차",
+          "updatedAt": 1753246154377
+        },
+        "14": {
+          "createdAt": 1753246154455,
+          "date": "2025-12-26",
+          "employeeId": 1753246154744,
+          "id": 15,
+          "type": "연차",
+          "updatedAt": 1753246154455
+        },
+        "15": {
+          "createdAt": 1753246154534,
+          "date": "2025-12-29",
+          "employeeId": 1753246154744,
+          "id": 16,
+          "type": "연차",
+          "updatedAt": 1753246154534
+        },
+        "16": {
+          "createdAt": 1753246154614,
+          "date": "2025-07-25",
+          "employeeId": 1753246155401,
+          "id": 17,
+          "type": "연차",
+          "updatedAt": 1753246154614
+        },
+        "17": {
+          "createdAt": 1753246154694,
+          "date": "2025-08-22",
+          "employeeId": 1753246155401,
+          "id": 18,
+          "type": "연차",
+          "updatedAt": 1753246154694
+        },
+        "18": {
+          "createdAt": 1753246154774,
+          "date": "2025-09-12",
+          "employeeId": 1753246155401,
+          "id": 19,
+          "type": "연차",
+          "updatedAt": 1753246154774
+        },
+        "19": {
+          "createdAt": 1753246154853,
+          "date": "2025-09-26",
+          "employeeId": 1753246155401,
+          "id": 20,
+          "type": "연차",
+          "updatedAt": 1753246154853
+        },
+        "20": {
+          "createdAt": 1753246154932,
+          "date": "2025-10-10",
+          "employeeId": 1753246155401,
+          "id": 21,
+          "type": "연차",
+          "updatedAt": 1753246154932
+        },
+        "21": {
+          "createdAt": 1753246155011,
+          "date": "2025-10-24",
+          "employeeId": 1753246155401,
+          "id": 22,
+          "type": "연차",
+          "updatedAt": 1753246155011
+        },
+        "22": {
+          "createdAt": 1753246155091,
+          "date": "2025-11-14",
+          "employeeId": 1753246155401,
+          "id": 23,
+          "type": "연차",
+          "updatedAt": 1753246155091
+        },
+        "23": {
+          "createdAt": 1753246155170,
+          "date": "2025-11-21",
+          "employeeId": 1753246155401,
+          "id": 24,
+          "type": "연차",
+          "updatedAt": 1753246155170
+        },
+        "24": {
+          "createdAt": 1753246155249,
+          "date": "2025-12-26",
+          "employeeId": 1753246155401,
+          "id": 25,
+          "type": "연차",
+          "updatedAt": 1753246155249
+        },
+        "25": {
+          "createdAt": 1753246155329,
+          "date": "2025-07-11",
+          "employeeId": 1753246155696,
+          "id": 26,
+          "type": "오후",
+          "updatedAt": 1753246155329
+        },
+        "26": {
+          "createdAt": 1753246155487,
+          "date": "2025-08-14",
+          "employeeId": 1753246155696,
+          "id": 27,
+          "type": "연차",
+          "updatedAt": 1753246155487
+        },
+        "27": {
+          "createdAt": 1753246155568,
+          "date": "2025-09-05",
+          "employeeId": 1753246155696,
+          "id": 28,
+          "type": "연차",
+          "updatedAt": 1753246155568
+        },
+        "28": {
+          "createdAt": 1753246155646,
+          "date": "2025-09-26",
+          "employeeId": 1753246155696,
+          "id": 29,
+          "type": "연차",
+          "updatedAt": 1753246155646
+        },
+        "29": {
+          "createdAt": 1753246155725,
+          "date": "2025-10-10",
+          "employeeId": 1753246155696,
+          "id": 30,
+          "type": "연차",
+          "updatedAt": 1753246155725
+        },
+        "30": {
+          "createdAt": 1753246155804,
+          "date": "2025-10-17",
+          "employeeId": 1753246155696,
+          "id": 31,
+          "type": "연차",
+          "updatedAt": 1753246155804
+        },
+        "31": {
+          "createdAt": 1753246155882,
+          "date": "2025-11-14",
+          "employeeId": 1753246155696,
+          "id": 32,
+          "type": "연차",
+          "updatedAt": 1753246155882
+        },
+        "32": {
+          "createdAt": 1753246155961,
+          "date": "2025-12-12",
+          "employeeId": 1753246155696,
+          "id": 33,
+          "type": "연차",
+          "updatedAt": 1753246155961
+        },
+        "33": {
+          "createdAt": 1753246156042,
+          "date": "2025-09-29",
+          "employeeId": 1753246156898,
+          "id": 34,
+          "type": "연차",
+          "updatedAt": 1753246156042
+        },
+        "34": {
+          "createdAt": 1753246156312,
+          "date": "2025-11-26",
+          "employeeId": 1753246156898,
+          "id": 35,
+          "type": "연차",
+          "updatedAt": 1753246156312
+        },
+        "37": {
+          "createdAt": 1753246156561,
+          "date": "2025-12-17",
+          "employeeId": 1753246156898,
+          "id": 38,
+          "type": "연차",
+          "updatedAt": 1753246156561
+        },
+        "38": {
+          "createdAt": 1753246156723,
+          "date": "2025-07-30",
+          "employeeId": 1753246156947,
+          "id": 39,
+          "type": "연차",
+          "updatedAt": 1753246156723
+        },
+        "39": {
+          "createdAt": 1753246156804,
+          "date": "2025-07-31",
+          "employeeId": 1753246156947,
+          "id": 40,
+          "type": "연차",
+          "updatedAt": 1753246156804
+        },
+        "40": {
+          "createdAt": 1753246156888,
+          "date": "2025-08-01",
+          "employeeId": 1753246156947,
+          "id": 41,
+          "type": "연차",
+          "updatedAt": 1753246156888
+        },
+        "41": {
+          "createdAt": 1753246156977,
+          "date": "2025-08-14",
+          "employeeId": 1753246156947,
+          "id": 42,
+          "type": "오후",
+          "updatedAt": 1753246156977
+        },
+        "42": {
+          "createdAt": 1753246157084,
+          "date": "2025-10-10",
+          "employeeId": 1753246156947,
+          "id": 43,
+          "type": "연차",
+          "updatedAt": 1753246157084
+        },
+        "43": {
+          "createdAt": 1753246157231,
+          "date": "2025-07-02",
+          "employeeId": 1753246157606,
+          "id": 44,
+          "type": "오후",
+          "updatedAt": 1753246157231
+        },
+        "44": {
+          "createdAt": 1753246157331,
+          "date": "2025-08-06",
+          "employeeId": 1753246157606,
+          "id": 45,
+          "type": "오후",
+          "updatedAt": 1753246157331
+        },
+        "45": {
+          "createdAt": 1753246157415,
+          "date": "2025-08-20",
+          "employeeId": 1753246157606,
+          "id": 46,
+          "type": "오후",
+          "updatedAt": 1753246157415
+        },
+        "46": {
+          "createdAt": 1753246157508,
+          "date": "2025-09-03",
+          "employeeId": 1753246157606,
+          "id": 47,
+          "type": "오후",
+          "updatedAt": 1753246157508
+        },
+        "47": {
+          "createdAt": 1753246157626,
+          "date": "2025-10-23",
+          "employeeId": 1753246157606,
+          "id": 48,
+          "type": "오후",
+          "updatedAt": 1753246157626
+        },
+        "48": {
+          "createdAt": 1753246157720,
+          "date": "2025-11-05",
+          "employeeId": 1753246157606,
+          "id": 49,
+          "type": "오후",
+          "updatedAt": 1753246157720
+        },
+        "49": {
+          "createdAt": 1753246157799,
+          "date": "2025-12-26",
+          "employeeId": 1753246157606,
+          "id": 50,
+          "type": "연차",
+          "updatedAt": 1753246157799
+        },
+        "50": {
+          "createdAt": 1753246157918,
+          "date": "2025-12-29",
+          "employeeId": 1753246157606,
+          "id": 51,
+          "type": "연차",
+          "updatedAt": 1753246157918
+        },
+        "51": {
+          "createdAt": 1753246158012,
+          "date": "2025-12-30",
+          "employeeId": 1753246157606,
+          "id": 52,
+          "type": "연차",
+          "updatedAt": 1753246158012
+        },
+        "52": {
+          "createdAt": 1753246158119,
+          "date": "2025-12-31",
+          "employeeId": 1753246157606,
+          "id": 53,
+          "type": "연차",
+          "updatedAt": 1753246158119
+        },
+        "53": {
+          "createdAt": 1753246158232,
+          "date": "2025-07-31",
+          "employeeId": 1753246159039,
+          "id": 54,
+          "type": "연차",
+          "updatedAt": 1753246158232
+        },
+        "54": {
+          "createdAt": 1753246158440,
+          "date": "2025-08-22",
+          "employeeId": 1753246159039,
+          "id": 55,
+          "type": "연차",
+          "updatedAt": 1753246158440
+        },
+        "55": {
+          "createdAt": 1753246158679,
+          "date": "2025-08-29",
+          "employeeId": 1753246159039,
+          "id": 56,
+          "type": "연차",
+          "updatedAt": 1753246158679
+        },
+        "56": {
+          "createdAt": 1753246158862,
+          "date": "2025-09-12",
+          "employeeId": 1753246159039,
+          "id": 57,
+          "type": "연차",
+          "updatedAt": 1753246158862
+        },
+        "57": {
+          "createdAt": 1753246159005,
+          "date": "2025-09-19",
+          "employeeId": 1753246159039,
+          "id": 58,
+          "type": "연차",
+          "updatedAt": 1753246159005
+        },
+        "58": {
+          "createdAt": 1753246159160,
+          "date": "2025-09-26",
+          "employeeId": 1753246159039,
+          "id": 59,
+          "type": "연차",
+          "updatedAt": 1753246159160
+        },
+        "59": {
+          "createdAt": 1753246159265,
+          "date": "2025-10-31",
+          "employeeId": 1753246159039,
+          "id": 60,
+          "type": "연차",
+          "updatedAt": 1753246159265
+        },
+        "60": {
+          "createdAt": 1753246159403,
+          "date": "2025-11-07",
+          "employeeId": 1753246159039,
+          "id": 61,
+          "type": "연차",
+          "updatedAt": 1753246159403
+        },
+        "61": {
+          "createdAt": 1753246159521,
+          "date": "2025-11-14",
+          "employeeId": 1753246159039,
+          "id": 62,
+          "type": "연차",
+          "updatedAt": 1753246159521
+        },
+        "62": {
+          "createdAt": 1753246159622,
+          "date": "2025-11-21",
+          "employeeId": 1753246159039,
+          "id": 63,
+          "type": "연차",
+          "updatedAt": 1753246159622
+        },
+        "63": {
+          "createdAt": 1753246159712,
+          "date": "2025-11-28",
+          "employeeId": 1753246159039,
+          "id": 64,
+          "type": "연차",
+          "updatedAt": 1753246159712
+        },
+        "64": {
+          "createdAt": 1753246159815,
+          "date": "2025-12-12",
+          "employeeId": 1753246159039,
+          "id": 65,
+          "type": "연차",
+          "updatedAt": 1753246159815
+        },
+        "65": {
+          "createdAt": 1753246159910,
+          "date": "2025-12-19",
+          "employeeId": 1753246159039,
+          "id": 66,
+          "type": "연차",
+          "updatedAt": 1753246159910
+        },
+        "66": {
+          "createdAt": 1753246160011,
+          "date": "2025-07-04",
+          "employeeId": 1753246160572,
+          "id": 67,
+          "type": "연차",
+          "updatedAt": 1753246160011
+        },
+        "67": {
+          "createdAt": 1753246160211,
+          "date": "2025-07-14",
+          "employeeId": 1753246160572,
+          "id": 68,
+          "type": "연차",
+          "updatedAt": 1753246160211
+        },
+        "68": {
+          "createdAt": 1753246160363,
+          "date": "2025-08-14",
+          "employeeId": 1753246160572,
+          "id": 69,
+          "type": "연차",
+          "updatedAt": 1753246160363
+        },
+        "69": {
+          "createdAt": 1753246160477,
+          "date": "2025-09-22",
+          "employeeId": 1753246160572,
+          "id": 70,
+          "type": "연차",
+          "updatedAt": 1753246160477
+        },
+        "70": {
+          "createdAt": 1753246160622,
+          "date": "2025-10-20",
+          "employeeId": 1753246160572,
+          "id": 71,
+          "type": "연차",
+          "updatedAt": 1753246160622
+        },
+        "71": {
+          "createdAt": 1753246160711,
+          "date": "2025-11-03",
+          "employeeId": 1753246160572,
+          "id": 72,
+          "type": "연차",
+          "updatedAt": 1753246160711
+        },
+        "72": {
+          "createdAt": 1753246160802,
+          "date": "2025-11-21",
+          "employeeId": 1753246160572,
+          "id": 73,
+          "type": "연차",
+          "updatedAt": 1753246160802
+        },
+        "73": {
+          "createdAt": 1753246160902,
+          "date": "2025-12-12",
+          "employeeId": 1753246160572,
+          "id": 74,
+          "type": "연차",
+          "updatedAt": 1753246160902
+        },
+        "74": {
+          "createdAt": 1753246161056,
+          "date": "2025-12-23",
+          "employeeId": 1753246160572,
+          "id": 75,
+          "type": "연차",
+          "updatedAt": 1753246161056
+        },
+        "75": {
+          "createdAt": 1753246161213,
+          "date": "2025-12-26",
+          "employeeId": 1753246160572,
+          "id": 76,
+          "type": "연차",
+          "updatedAt": 1753246161213
+        },
+        "76": {
+          "createdAt": 1753246161414,
+          "date": "2025-09-05",
+          "employeeId": 1753246161454,
+          "id": 78,
+          "type": "오후",
+          "updatedAt": 1753246161414
+        },
+        "77": {
+          "createdAt": 1753246161563,
+          "date": "2025-09-22",
+          "employeeId": 1753246161454,
+          "id": 79,
+          "type": "연차",
+          "updatedAt": 1753246161563
+        },
+        "78": {
+          "createdAt": 1753246161746,
+          "date": "2025-10-10",
+          "employeeId": 1753246161454,
+          "id": 80,
+          "type": "연차",
+          "updatedAt": 1753246161746
+        },
+        "79": {
+          "createdAt": 1753246161905,
+          "date": "2025-10-20",
+          "employeeId": 1753246161454,
+          "id": 81,
+          "type": "연차",
+          "updatedAt": 1753246161905
+        },
+        "80": {
+          "createdAt": 1753246162075,
+          "date": "2025-11-10",
+          "employeeId": 1753246161454,
+          "id": 82,
+          "type": "연차",
+          "updatedAt": 1753246162075
+        },
+        "81": {
+          "createdAt": 1753246162156,
+          "date": "2025-11-21",
+          "employeeId": 1753246161454,
+          "id": 83,
+          "type": "연차",
+          "updatedAt": 1753246162156
+        },
+        "82": {
+          "createdAt": 1753246162241,
+          "date": "2025-11-24",
+          "employeeId": 1753246161454,
+          "id": 84,
+          "type": "연차",
+          "updatedAt": 1753246162241
+        },
+        "83": {
+          "createdAt": 1753246162330,
+          "date": "2025-12-26",
+          "employeeId": 1753246161454,
+          "id": 85,
+          "type": "연차",
+          "updatedAt": 1753246162330
+        },
+        "84": {
+          "createdAt": 1753246162492,
+          "date": "2025-12-29",
+          "employeeId": 1753246161454,
+          "id": 86,
+          "type": "연차",
+          "updatedAt": 1753246162492
+        },
+        "85": {
+          "createdAt": 1753246162608,
+          "date": "2025-12-30",
+          "employeeId": 1753246161454,
+          "id": 87,
+          "type": "연차",
+          "updatedAt": 1753246162608
+        },
+        "86": {
+          "createdAt": 1753246162768,
+          "date": "2025-07-18",
+          "employeeId": 1753246163434,
+          "id": 88,
+          "type": "연차",
+          "updatedAt": 1753246162768
+        },
+        "87": {
+          "createdAt": 1753246162862,
+          "date": "2025-08-01",
+          "employeeId": 1753246163434,
+          "id": 89,
+          "type": "연차",
+          "updatedAt": 1753246162862
+        },
+        "88": {
+          "createdAt": 1753246163015,
+          "date": "2025-08-14",
+          "employeeId": 1753246163434,
+          "id": 90,
+          "type": "연차",
+          "updatedAt": 1753246163015
+        },
+        "89": {
+          "createdAt": 1753246163095,
+          "date": "2025-08-29",
+          "employeeId": 1753246163434,
+          "id": 91,
+          "type": "연차",
+          "updatedAt": 1753246163095
+        },
+        "90": {
+          "createdAt": 1753246163190,
+          "date": "2025-09-12",
+          "employeeId": 1753246163434,
+          "id": 92,
+          "type": "연차",
+          "updatedAt": 1753246163190
+        },
+        "91": {
+          "createdAt": 1753246163294,
+          "date": "2025-09-26",
+          "employeeId": 1753246163434,
+          "id": 93,
+          "type": "연차",
+          "updatedAt": 1753246163294
+        },
+        "92": {
+          "createdAt": 1753246163390,
+          "date": "2025-10-31",
+          "employeeId": 1753246163434,
+          "id": 94,
+          "type": "연차",
+          "updatedAt": 1753246163390
+        },
+        "93": {
+          "createdAt": 1753246163490,
+          "date": "2025-11-14",
+          "employeeId": 1753246163434,
+          "id": 95,
+          "type": "연차",
+          "updatedAt": 1753246163490
+        },
+        "94": {
+          "createdAt": 1753246163621,
+          "date": "2025-11-28",
+          "employeeId": 1753246163434,
+          "id": 96,
+          "type": "연차",
+          "updatedAt": 1753246163621
+        },
+        "95": {
+          "createdAt": 1753246163732,
+          "date": "2025-12-12",
+          "employeeId": 1753246163434,
+          "id": 97,
+          "type": "연차",
+          "updatedAt": 1753246163732
+        },
+        "96": {
+          "createdAt": 1753246163811,
+          "date": "2025-12-23",
+          "employeeId": 1753246163434,
+          "id": 98,
+          "type": "연차",
+          "updatedAt": 1753246163811
+        },
+        "97": {
+          "createdAt": 1753247882607,
+          "date": "2025-07-29",
+          "description": "",
+          "employeeId": 1753246156947,
+          "id": 99,
+          "type": "연차",
+          "updatedAt": 1753247882607
+        },
+        "98": {
+          "createdAt": 1753337040856,
+          "date": "2025-08-04",
+          "description": "",
+          "employeeId": 1753246153045,
+          "id": 100,
+          "type": "연차",
+          "updatedAt": 1753337040856
+        },
+        "99": {
+          "createdAt": 1753337043339,
+          "date": "2025-08-05",
+          "description": "",
+          "employeeId": 1753246153045,
+          "id": 101,
+          "type": "연차",
+          "updatedAt": 1753337043339
+        },
+        "100": {
+          "createdAt": 1753337045827,
+          "date": "2025-08-06",
+          "description": "",
+          "employeeId": 1753246153045,
+          "id": 102,
+          "type": "연차",
+          "updatedAt": 1753337045827
+        },
+        "101": {
+          "createdAt": 1753337152830,
+          "date": "2025-08-08",
+          "description": "",
+          "employeeId": 1753246155696,
+          "id": 103,
+          "type": "연차",
+          "updatedAt": 1753337152830
+        },
+        "102": {
+          "createdAt": 1755651982964,
+          "date": "2025-09-03",
+          "description": "",
+          "employeeId": 1753246156898,
+          "id": 104,
+          "type": "연차",
+          "updatedAt": 1755651982964
+        },
+        "103": {
+          "createdAt": 1755651985907,
+          "date": "2025-09-10",
+          "description": "",
+          "employeeId": 1753246156898,
+          "id": 105,
+          "type": "연차",
+          "updatedAt": 1755651985907
+        },
+        "104": {
+          "date": "2025-08-18",
+          "description": "",
+          "employeeId": 1753246160572,
+          "id": 8,
+          "type": "연차"
+        },
+        "-OZ2ci8FU5k8SpydTq9Y": {
+          "createdAt": 1756702630701,
+          "date": "2025-09-04",
+          "description": "",
+          "employeeId": 1753246163434,
+          "id": "-OZ2ci8FU5k8SpydTq9Y",
+          "type": "연차",
+          "updatedAt": 1756702630701
+        },
+        "-OZaiukU_Ce52ffeogYk": {
+          "date": "2025-09-18",
+          "description": "진흥원 보험사기 실무자 회의",
+          "employeeId": 1753246156898,
+          "id": "-OZaiukU_Ce52ffeogYk",
+          "type": "업무",
+          "updatedAt": 1757322342196
+        },
+        "-OZcR3GXgFJ3DuznBdRJ": {
+          "createdAt": 1757320070430,
+          "date": "2025-09-17",
+          "description": "",
+          "employeeId": 1753246156898,
+          "id": "-OZcR3GXgFJ3DuznBdRJ",
+          "type": "연차",
+          "updatedAt": 1757320070430
+        },
+        "-OZcR3y2JxZAmgUA-RTS": {
+          "date": "2025-09-24",
+          "description": "",
+          "employeeId": 1753246156898,
+          "id": "-OZcR3y2JxZAmgUA-RTS",
+          "type": "연차",
+          "updatedAt": 1757320910660
+        },
+        "-OZcZT86K1F4tu6oV8Po": {
+          "createdAt": 1757322272875,
+          "date": "2025-09-09",
+          "description": "정책토론회",
+          "employeeId": 1753246156898,
+          "id": "-OZcZT86K1F4tu6oV8Po",
+          "type": "업무",
+          "updatedAt": 1757322272875
+        },
+        "-OZcZac621ogLSbx_BIt": {
+          "createdAt": 1757322307627,
+          "date": "2025-09-11",
+          "description": "보험사기 진흥원 교육",
+          "employeeId": 1753246156898,
+          "id": "-OZcZac621ogLSbx_BIt",
+          "type": "업무",
+          "updatedAt": 1757322307627
+        },
+        "-OZcemLZgPkBi6BsUtJf": {
+          "date": "2025-12-10",
+          "description": "",
+          "employeeId": 1753246156898,
+          "id": "-OZcemLZgPkBi6BsUtJf",
+          "type": "연차",
+          "updatedAt": 1757323973815
+        }
+      }
+    },
+    "JUVEJTg1JThDJUVDJThBJUE0JUVEJThBJUI4JUVCJUI2JTgwJUVDJTg0JTlD": {
+      "employees": [
+        {
+          "color": "#3B82F6",
+          "id": 1753276148186,
+          "name": "연두",
+          "position": "leader",
+          "team": "강아지팀"
+        },
+        {
+          "color": "#10B981",
+          "id": 1753276197447,
+          "name": "태구",
+          "position": "member",
+          "team": "강아지팀"
+        },
+        {
+          "color": "#F59E0B",
+          "id": 1753276230264,
+          "name": "철수",
+          "position": "member",
+          "team": "사람팀"
+        },
+        {
+          "color": "#EF4444",
+          "id": 1753276800738,
+          "name": "박영희",
+          "position": "member",
+          "team": "사람팀"
+        },
+        {
+          "color": "#8B5CF6",
+          "id": 1753276801004,
+          "name": "자루",
+          "position": "manager",
+          "team": "강아지팀"
+        }
+      ],
+      "vacations": [
+        {
+          "createdAt": 1753276206134,
+          "date": "2025-07-23",
+          "description": "",
+          "employeeId": 1753276197447,
+          "id": "0",
+          "type": "연차",
+          "updatedAt": 1753276206134
+        },
+        {
+          "createdAt": 1753276230168,
+          "date": "2025-07-16",
+          "employeeId": 1753276230264,
+          "id": "1",
+          "type": "연차",
+          "updatedAt": 1753276230168
+        },
+        {
+          "createdAt": 1753276245913,
+          "date": "2025-07-22",
+          "description": "",
+          "employeeId": 1753276197447,
+          "id": "2",
+          "type": "연차",
+          "updatedAt": 1753276245913
+        },
+        {
+          "createdAt": 1753276685861,
+          "date": "2025-07-17",
+          "description": "",
+          "employeeId": 1753276230264,
+          "id": "3",
+          "type": "연차",
+          "updatedAt": 1753276685861
+        },
+        {
+          "date": "2025-07-29",
+          "description": "출장",
+          "employeeId": 1753276800738,
+          "id": "4",
+          "type": "오전"
+        },
+        {
+          "date": "2025-07-04",
+          "description": "",
+          "employeeId": 1753276800738,
+          "id": "5",
+          "type": "연차"
+        },
+        {
+          "createdAt": 1753276800444,
+          "date": "2025-07-02",
+          "employeeId": 1753276801004,
+          "id": "6",
+          "type": "연차",
+          "updatedAt": 1753276800444
+        },
+        {
+          "createdAt": 1753276800529,
+          "date": "2025-07-25",
+          "employeeId": 1753276801004,
+          "id": "7",
+          "type": "오전",
+          "updatedAt": 1753276800529
+        },
+        {
+          "createdAt": 1753276800614,
+          "date": "2025-07-29",
+          "employeeId": 1753276801004,
+          "id": "8",
+          "type": "오후",
+          "updatedAt": 1753276800614
+        },
+        {
+          "createdAt": 1753276859992,
+          "date": "2025-07-28",
+          "description": "",
+          "employeeId": 1753276148186,
+          "id": "9",
+          "type": "오후",
+          "updatedAt": 1753276859992
+        },
+        {
+          "createdAt": 1753278740713,
+          "date": "2025-07-30",
+          "description": "",
+          "employeeId": 1753276800738,
+          "id": "10",
+          "type": "오전",
+          "updatedAt": 1753278740713
+        },
+        {
+          "createdAt": 1753279933273,
+          "date": "2025-07-07",
+          "description": "",
+          "employeeId": 1753276801004,
+          "id": "11",
+          "type": "오후",
+          "updatedAt": 1753279933273
+        },
+        {
+          "createdAt": 1753336072310,
+          "date": "2025-07-07",
+          "description": "",
+          "employeeId": 1753276148186,
+          "id": "12",
+          "type": "연차",
+          "updatedAt": 1753336072310
+        },
+        {
+          "createdAt": 1753336074598,
+          "date": "2025-07-08",
+          "description": "",
+          "employeeId": 1753276148186,
+          "id": "13",
+          "type": "연차",
+          "updatedAt": 1753336074598
+        },
+        {
+          "createdAt": 1753336104040,
+          "date": "2025-07-08",
+          "description": "",
+          "employeeId": 1753276197447,
+          "id": "14",
+          "type": "오후",
+          "updatedAt": 1753336104040
+        },
+        {
+          "createdAt": 1753336108911,
+          "date": "2025-07-09",
+          "description": "",
+          "employeeId": 1753276197447,
+          "id": "15",
+          "type": "연차",
+          "updatedAt": 1753336108911
+        },
+        {
+          "createdAt": 1753336120084,
+          "date": "2025-07-15",
+          "description": "",
+          "employeeId": 1753276197447,
+          "id": "16",
+          "type": "연차",
+          "updatedAt": 1753336120084
+        },
+        {
+          "createdAt": 1753336123240,
+          "date": "2025-07-16",
+          "description": "",
+          "employeeId": 1753276197447,
+          "id": "17",
+          "type": "연차",
+          "updatedAt": 1753336123240
+        },
+        {
+          "createdAt": 1753424512188,
+          "date": "2025-07-10",
+          "description": "",
+          "employeeId": 1753276197447,
+          "id": "18",
+          "type": "연차",
+          "updatedAt": 1753424512188
+        },
+        {
+          "createdAt": 1755841742128,
+          "date": "2025-08-13",
+          "description": "",
+          "employeeId": 1753276801004,
+          "id": "-OYFJgRk4pUe6t1UMHfF",
+          "type": "연차",
+          "updatedAt": 1755841742128
+        },
+        {
+          "createdAt": 1755841748349,
+          "date": "2025-08-14",
+          "description": "",
+          "employeeId": 1753276801004,
+          "id": "-OYFJhxxYCpK0lKu-RX_",
+          "type": "연차",
+          "updatedAt": 1755841748349
+        },
+        {
+          "createdAt": 1755841757082,
+          "date": "2025-08-12",
+          "description": "",
+          "employeeId": 1753276801004,
+          "id": "-OYFJk5QPPPAR3ASm_ex",
+          "type": "오후",
+          "updatedAt": 1755841757082
+        },
+        {
+          "createdAt": 1755841772542,
+          "date": "2025-08-13",
+          "description": "",
+          "employeeId": 1753276230264,
+          "id": "-OYFJnrzg8hR8qavOdfn",
+          "type": "연차",
+          "updatedAt": 1755841772542
+        },
+        {
+          "createdAt": 1755841779452,
+          "date": "2025-08-27",
+          "description": "",
+          "employeeId": 1753276148186,
+          "id": "-OYFJpYx6CR7wIrnXdWF",
+          "type": "특별",
+          "updatedAt": 1755841779452
+        },
+        {
+          "createdAt": 1755841786088,
+          "date": "2025-08-20",
+          "description": "",
+          "employeeId": 1753276800738,
+          "id": "-OYFJrAdyAJIpfZhRJp2",
+          "type": "업무",
+          "updatedAt": 1755841786088
+        },
+        {
+          "createdAt": 1755841799568,
+          "date": "2025-08-18",
+          "description": "",
+          "employeeId": 1753276230264,
+          "id": "-OYFJuTGrieG7r6I2Oab",
+          "type": "병가",
+          "updatedAt": 1755841799568
+        }
+      ]
+    }
+  },
+  "employees": {
+    "강능훈": {
+      "color": "#A8DADC",
+      "department": "support",
+      "hidden": false,
+      "role": "leader",
+      "team": "보상지도팀"
+    },
+    "강태호": {
+      "color": "#FF6B6B",
+      "department": "support",
+      "hidden": false,
+      "role": "leader",
+      "team": "compensation"
+    },
+    "박인": {
+      "color": "#FFD166",
+      "department": "support",
+      "hidden": false,
+      "role": "member",
+      "team": "보상지도팀"
+    },
+    "배기덕": {
+      "color": "#457B9D",
+      "department": "support",
+      "hidden": false,
+      "role": "manager",
+      "team": "unknown"
+    },
+    "배영제": {
+      "color": "#F7B801",
+      "department": "support",
+      "hidden": false,
+      "role": "member",
+      "team": "보상지도팀"
+    },
+    "백승철": {
+      "color": "#06D6A0",
+      "department": "support",
+      "hidden": false,
+      "role": "member",
+      "team": "compensation"
+    },
+    "이용진": {
+      "color": "#118AB2",
+      "department": "support",
+      "hidden": false,
+      "role": "member",
+      "team": "customer"
+    },
+    "임국단": {
+      "color": "#073B4C",
+      "department": "support",
+      "hidden": false,
+      "role": "member",
+      "team": "보상지도팀"
+    },
+    "장순아": {
+      "color": "#FF9F1C",
+      "department": "support",
+      "hidden": false,
+      "role": "member",
+      "team": "compensation"
+    },
+    "정예원": {
+      "color": "#2EC4B6",
+      "department": "support",
+      "hidden": false,
+      "role": "member",
+      "team": "customer"
+    },
+    "정옥균": {
+      "color": "#E71D36",
+      "department": "support",
+      "hidden": false,
+      "role": "leader",
+      "team": "customer"
+    }
+  },
+  "lastUpdated": 1753224172923,
+  "system": {
+    "adminPassword": "rhksflwk12!@",
+    "departments": [
+      {
+        "code": "보상지원부",
+        "color": "#4285f4",
+        "id": 1,
+        "name": "보상지원부",
+        "password": "1343"
+      },
+      {
+        "code": "테스트부서",
+        "color": "#009688",
+        "id": 1753274739151,
+        "name": "테스트부서",
+        "password": "1234"
+      }
+    ]
+  },
+  "vacations": {
+    "2025-07-02": [
+      {
+        "employee": "정예원",
+        "type": "오후"
+      }
+    ],
+    "2025-07-04": [
+      {
+        "employee": "배영제",
+        "type": "연차"
+      }
+    ],
+    "2025-07-11": [
+      {
+        "employee": "이용진",
+        "type": "오후"
+      }
+    ],
+    "2025-07-14": [
+      {
+        "employee": "강태호",
+        "type": "연차"
+      },
+      {
+        "employee": "배영제",
+        "type": "연차"
+      }
+    ],
+    "2025-07-17": [
+      {
+        "employee": "배영제",
+        "type": "오후"
+      }
+    ],
+    "2025-07-18": [
+      {
+        "employee": "배기덕",
+        "type": "연차"
+      }
+    ],
+    "2025-07-23": [
+      {
+        "employee": "임국단",
+        "type": "연차"
+      }
+    ],
+    "2025-07-25": [
+      {
+        "employee": "백승철",
+        "type": "연차"
+      }
+    ],
+    "2025-07-29": [
+      {
+        "employee": "장순아",
+        "type": "연차"
+      }
+    ],
+    "2025-07-30": [
+      {
+        "employee": "장순아",
+        "type": "연차"
+      }
+    ],
+    "2025-07-31": [
+      {
+        "employee": "장순아",
+        "type": "연차"
+      },
+      {
+        "employee": "정옥균",
+        "type": "연차"
+      }
+    ],
+    "2025-08-01": [
+      {
+        "employee": "장순아",
+        "type": "연차"
+      },
+      {
+        "employee": "배기덕",
+        "type": "연차"
+      }
+    ],
+    "2025-08-04": [
+      {
+        "employee": "강태호",
+        "type": "연차"
+      }
+    ],
+    "2025-08-05": [
+      {
+        "employee": "강태호",
+        "type": "연차"
+      }
+    ],
+    "2025-08-06": [
+      {
+        "employee": "강태호",
+        "type": "연차"
+      },
+      {
+        "employee": "정예원",
+        "type": "오후"
+      }
+    ],
+    "2025-08-08": [
+      {
+        "employee": "이용진",
+        "type": "연차"
+      }
+    ],
+    "2025-08-14": [
+      {
+        "employee": "이용진",
+        "type": "연차"
+      },
+      {
+        "employee": "장순아",
+        "type": "오후"
+      },
+      {
+        "employee": "배영제",
+        "type": "연차"
+      },
+      {
+        "employee": "배기덕",
+        "type": "연차"
+      }
+    ],
+    "2025-08-18": [
+      {
+        "employee": "박인",
+        "type": "연차"
+      },
+      {
+        "employee": "강능훈",
+        "type": "연차"
+      }
+    ],
+    "2025-08-20": [
+      {
+        "employee": "정예원",
+        "type": "오후"
+      }
+    ],
+    "2025-08-22": [
+      {
+        "employee": "백승철",
+        "type": "연차"
+      },
+      {
+        "employee": "정옥균",
+        "type": "연차"
+      }
+    ],
+    "2025-08-29": [
+      {
+        "employee": "박인",
+        "type": "오후"
+      },
+      {
+        "employee": "임국단",
+        "type": "연차"
+      },
+      {
+        "employee": "정옥균",
+        "type": "연차"
+      },
+      {
+        "employee": "배기덕",
+        "type": "연차"
+      }
+    ],
+    "2025-09-01": [
+      {
+        "employee": "임국단",
+        "type": "연차"
+      }
+    ],
+    "2025-09-03": [
+      {
+        "employee": "정예원",
+        "type": "오후"
+      }
+    ],
+    "2025-09-05": [
+      {
+        "employee": "이용진",
+        "type": "연차"
+      },
+      {
+        "employee": "강능훈",
+        "type": "오후"
+      }
+    ],
+    "2025-09-08": [
+      {
+        "employee": "강태호",
+        "type": "연차"
+      }
+    ],
+    "2025-09-12": [
+      {
+        "employee": "백승철",
+        "type": "연차"
+      },
+      {
+        "employee": "정옥균",
+        "type": "연차"
+      },
+      {
+        "employee": "배기덕",
+        "type": "연차"
+      }
+    ],
+    "2025-09-19": [
+      {
+        "employee": "정옥균",
+        "type": "연차"
+      }
+    ],
+    "2025-09-22": [
+      {
+        "employee": "강태호",
+        "type": "연차"
+      },
+      {
+        "employee": "배영제",
+        "type": "연차"
+      },
+      {
+        "employee": "강능훈",
+        "type": "연차"
+      }
+    ],
+    "2025-09-26": [
+      {
+        "employee": "박인",
+        "type": "연차"
+      },
+      {
+        "employee": "백승철",
+        "type": "연차"
+      },
+      {
+        "employee": "이용진",
+        "type": "연차"
+      },
+      {
+        "employee": "정옥균",
+        "type": "연차"
+      },
+      {
+        "employee": "배기덕",
+        "type": "연차"
+      }
+    ],
+    "2025-09-29": [
+      {
+        "employee": "임국단",
+        "type": "연차"
+      }
+    ],
+    "2025-10-10": [
+      {
+        "employee": "박인",
+        "type": "연차"
+      },
+      {
+        "employee": "백승철",
+        "type": "연차"
+      },
+      {
+        "employee": "이용진",
+        "type": "연차"
+      },
+      {
+        "employee": "장순아",
+        "type": "연차"
+      },
+      {
+        "employee": "강능훈",
+        "type": "연차"
+      }
+    ],
+    "2025-10-17": [
+      {
+        "employee": "이용진",
+        "type": "연차"
+      }
+    ],
+    "2025-10-20": [
+      {
+        "employee": "배영제",
+        "type": "연차"
+      },
+      {
+        "employee": "강능훈",
+        "type": "연차"
+      }
+    ],
+    "2025-10-22": [
+      {
+        "employee": "임국단",
+        "type": "연차"
+      }
+    ],
+    "2025-10-23": [
+      {
+        "employee": "정예원",
+        "type": "오후"
+      }
+    ],
+    "2025-10-24": [
+      {
+        "employee": "백승철",
+        "type": "연차"
+      }
+    ],
+    "2025-10-30": [
+      {
+        "employee": "강태호",
+        "type": "오후"
+      }
+    ],
+    "2025-10-31": [
+      {
+        "employee": "강태호",
+        "type": "연차"
+      },
+      {
+        "employee": "박인",
+        "type": "연차"
+      },
+      {
+        "employee": "정옥균",
+        "type": "연차"
+      },
+      {
+        "employee": "배기덕",
+        "type": "연차"
+      }
+    ],
+    "2025-11-03": [
+      {
+        "employee": "강태호",
+        "type": "연차"
+      },
+      {
+        "employee": "배영제",
+        "type": "연차"
+      }
+    ],
+    "2025-11-04": [
+      {
+        "employee": "강태호",
+        "type": "연차"
+      }
+    ],
+    "2025-11-05": [
+      {
+        "employee": "정예원",
+        "type": "오후"
+      }
+    ],
+    "2025-11-07": [
+      {
+        "employee": "정옥균",
+        "type": "연차"
+      }
+    ],
+    "2025-11-10": [
+      {
+        "employee": "강능훈",
+        "type": "연차"
+      }
+    ],
+    "2025-11-14": [
+      {
+        "employee": "백승철",
+        "type": "연차"
+      },
+      {
+        "employee": "이용진",
+        "type": "연차"
+      },
+      {
+        "employee": "정옥균",
+        "type": "연차"
+      },
+      {
+        "employee": "배기덕",
+        "type": "연차"
+      }
+    ],
+    "2025-11-19": [
+      {
+        "employee": "임국단",
+        "type": "연차"
+      }
+    ],
+    "2025-11-21": [
+      {
+        "employee": "백승철",
+        "type": "연차"
+      },
+      {
+        "employee": "정옥균",
+        "type": "연차"
+      },
+      {
+        "employee": "배영제",
+        "type": "연차"
+      },
+      {
+        "employee": "강능훈",
+        "type": "연차"
+      }
+    ],
+    "2025-11-24": [
+      {
+        "employee": "강능훈",
+        "type": "연차"
+      }
+    ],
+    "2025-11-28": [
+      {
+        "employee": "박인",
+        "type": "연차"
+      },
+      {
+        "employee": "정옥균",
+        "type": "연차"
+      },
+      {
+        "employee": "배기덕",
+        "type": "연차"
+      }
+    ],
+    "2025-12-12": [
+      {
+        "employee": "이용진",
+        "type": "연차"
+      },
+      {
+        "employee": "정옥균",
+        "type": "연차"
+      },
+      {
+        "employee": "배영제",
+        "type": "연차"
+      },
+      {
+        "employee": "배기덕",
+        "type": "연차"
+      }
+    ],
+    "2025-12-17": [
+      {
+        "employee": "임국단",
+        "type": "연차"
+      }
+    ],
+    "2025-12-19": [
+      {
+        "employee": "정옥균",
+        "type": "연차"
+      }
+    ],
+    "2025-12-23": [
+      {
+        "employee": "박인",
+        "type": "연차"
+      },
+      {
+        "employee": "배영제",
+        "type": "연차"
+      },
+      {
+        "employee": "배기덕",
+        "type": "연차"
+      }
+    ],
+    "2025-12-26": [
+      {
+        "employee": "강태호",
+        "type": "연차"
+      },
+      {
+        "employee": "박인",
+        "type": "연차"
+      },
+      {
+        "employee": "백승철",
+        "type": "연차"
+      },
+      {
+        "employee": "정예원",
+        "type": "연차"
+      },
+      {
+        "employee": "배영제",
+        "type": "연차"
+      },
+      {
+        "employee": "강능훈",
+        "type": "연차"
+      }
+    ],
+    "2025-12-29": [
+      {
+        "employee": "박인",
+        "type": "연차"
+      },
+      {
+        "employee": "정예원",
+        "type": "연차"
+      },
+      {
+        "employee": "강능훈",
+        "type": "연차"
+      }
+    ],
+    "2025-12-30": [
+      {
+        "employee": "정예원",
+        "type": "연차"
+      },
+      {
+        "employee": "강능훈",
+        "type": "연차"
+      }
+    ],
+    "2025-12-31": [
+      {
+        "employee": "정예원",
+        "type": "연차"
+      }
+    ]
+  }
+}

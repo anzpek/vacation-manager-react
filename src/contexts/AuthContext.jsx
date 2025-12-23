@@ -9,7 +9,7 @@ export default AuthContext;
 export function AuthProvider({ children }) {
   // 🚧 개발 모드: 임시 인증 우회
   const DEV_MODE = process.env.NODE_ENV === 'development';
-  
+
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [currentDepartment, setCurrentDepartment] = useState(null);
@@ -33,29 +33,29 @@ export function AuthProvider({ children }) {
   // 부서별 로그인
   const loginWithDepartment = async (deptCode, password) => {
     const department = departments.find(d => d.code === deptCode);
-    
+
     if (!department) {
       throw new Error('존재하지 않는 부서입니다.');
     }
-    
+
     if (department.password !== password) {
       throw new Error('비밀번호가 틀렸습니다.');
     }
-    
+
     // 로그인 성공
-    const mockUser = { 
-      email: `${deptCode}@company.com`, 
+    const mockUser = {
+      email: `${deptCode}@company.com`,
       uid: `user-${deptCode}`,
-      department: department 
+      department: department
     };
-    
+
     setCurrentUser(mockUser);
     setCurrentDepartment(department);
-    
+
     // 로컬스토리지에 사용자 정보와 부서 정보 저장
     localStorage.setItem('currentUser', JSON.stringify(mockUser));
     localStorage.setItem('currentDepartment', JSON.stringify(department));
-    
+
     return Promise.resolve(mockUser);
   };
 
@@ -84,13 +84,13 @@ export function AuthProvider({ children }) {
       const updatedDepartments = [...departments, newDepartment];
       setDepartments(updatedDepartments);
       localStorage.setItem('departments', JSON.stringify(updatedDepartments));
-      
+
       // Firebase에도 저장
       if (database) {
         const departmentsRef = ref(database, 'system/departments');
         await set(departmentsRef, updatedDepartments);
       }
-      
+
       console.log(`🏢 새 부서 추가: ${newDepartment.name} (${newDepartment.code})`);
       return newDepartment;
     } catch (error) {
@@ -102,21 +102,21 @@ export function AuthProvider({ children }) {
   // 부서 수정 (관리자 기능)
   const updateDepartment = async (deptCode, departmentData) => {
     try {
-      const updatedDepartments = departments.map(dept => 
-        dept.code === deptCode 
+      const updatedDepartments = departments.map(dept =>
+        dept.code === deptCode
           ? { ...dept, ...departmentData }
           : dept
       );
-      
+
       setDepartments(updatedDepartments);
       localStorage.setItem('departments', JSON.stringify(updatedDepartments));
-      
+
       // Firebase에도 저장
       if (database) {
         const departmentsRef = ref(database, 'system/departments');
         await set(departmentsRef, updatedDepartments);
       }
-      
+
       console.log(`🔧 부서 수정: ${departmentData.name || deptCode}`);
     } catch (error) {
       console.error('부서 수정 실패:', error);
@@ -135,13 +135,13 @@ export function AuthProvider({ children }) {
       const updatedDepartments = departments.filter(dept => dept.code !== deptCode);
       setDepartments(updatedDepartments);
       localStorage.setItem('departments', JSON.stringify(updatedDepartments));
-      
+
       // Firebase에도 저장
       if (database) {
         const departmentsRef = ref(database, 'system/departments');
         await set(departmentsRef, updatedDepartments);
       }
-      
+
       console.log(`🗑️ 부서 삭제: ${department.name} (${deptCode})`);
     } catch (error) {
       console.error('부서 삭제 실패:', error);
@@ -160,7 +160,7 @@ export function AuthProvider({ children }) {
     setCurrentDepartment(null);
     localStorage.removeItem('currentUser');
     localStorage.removeItem('currentDepartment');
-    
+
     if (!DEV_MODE) {
       return signOut(auth);
     }
@@ -176,7 +176,7 @@ export function AuthProvider({ children }) {
           // 부서 목록 불러오기
           const departmentsRef = ref(database, 'system/departments');
           const departmentsSnapshot = await get(departmentsRef);
-          
+
           if (departmentsSnapshot.exists()) {
             const firebaseDepartments = departmentsSnapshot.val();
             setDepartments(firebaseDepartments);
@@ -195,11 +195,11 @@ export function AuthProvider({ children }) {
               }
             }
           }
-          
+
           // 관리자 비밀번호 불러오기
           const adminPasswordRef = ref(database, 'system/adminPassword');
           const adminPasswordSnapshot = await get(adminPasswordRef);
-          
+
           if (adminPasswordSnapshot.exists()) {
             const firebaseAdminPassword = adminPasswordSnapshot.val();
             localStorage.setItem('adminPassword', firebaseAdminPassword);
@@ -225,7 +225,7 @@ export function AuthProvider({ children }) {
             console.error('부서 목록 복원 실패:', error);
           }
         }
-        
+
         // Firebase 실패 시에도 기본 관리자 비밀번호 설정
         if (!localStorage.getItem('adminPassword')) {
           localStorage.setItem('adminPassword', 'admin2025!');
@@ -233,18 +233,18 @@ export function AuthProvider({ children }) {
         }
       }
     };
-    
+
     loadFromFirebase();
 
     // localStorage에서 사용자 세션 복원 (개발모드와 프로덕션 모두)
     const savedUser = localStorage.getItem('currentUser');
     const savedDepartment = localStorage.getItem('currentDepartment');
-    
+
     if (savedUser && savedDepartment) {
       try {
         const user = JSON.parse(savedUser);
         const department = JSON.parse(savedDepartment);
-        
+
         setCurrentUser(user);
         setCurrentDepartment(department);
         console.log(`🏢 사용자 세션 복원: ${department.name} (${user.email})`);
@@ -255,16 +255,35 @@ export function AuthProvider({ children }) {
       }
     }
 
-    if (DEV_MODE) {
-      console.log('🚧 개발 모드: Firebase 인증 우회됨');
-      setLoading(false);
-      return;
-    }
+    // 🚧 개발 모드여도 Firebase Auth 감지 허용
+    // if (DEV_MODE) { ... } 코드를 제거하여 실제 구글 로그인 감지
 
     const unsubscribe = onAuthStateChanged(auth, user => {
       setCurrentUser(user);
       if (user) {
-        // Firebase 사용자에서 부서 정보 추출
+        // 🔥 관리자 계정 자동 접속 처리 (lkd0115lkd@gmail.com)
+        if (user.email === 'lkd0115lkd@gmail.com') {
+          // 부서 목록에서 찾거나, 없으면 강제로 생성
+          let targetDept = departments.find(d => d.code === '보상지원부');
+
+          if (!targetDept) {
+            targetDept = {
+              code: '보상지원부',
+              name: '보상지원부',
+              color: '#4285f4',
+              password: '1343',
+              id: 1
+            };
+          }
+
+          setCurrentDepartment(targetDept);
+          localStorage.setItem('currentDepartment', JSON.stringify(targetDept));
+          console.log('⚡ 관리자 계정 자동 접속 완료: 보상지원부');
+          setLoading(false);
+          return;
+        }
+
+        // 일반적인 경우: 저장된 부서 정보 복원
         const savedDept = localStorage.getItem('currentDepartment');
         if (savedDept) {
           setCurrentDepartment(JSON.parse(savedDept));
@@ -274,7 +293,7 @@ export function AuthProvider({ children }) {
     });
 
     return unsubscribe;
-  }, [DEV_MODE]);
+  }, [departments]);
 
   const value = {
     currentUser,

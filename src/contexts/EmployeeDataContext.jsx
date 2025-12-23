@@ -67,7 +67,7 @@ const COLOR_PALETTE = [
 // EmployeeData Provider
 export function EmployeeDataProvider({ children }) {
   const [state, dispatch] = useReducer(employeeDataReducer, initialState);
-  const { currentDepartment } = useAuth();
+  const { currentDepartment, currentUser } = useAuth();
   const { showSuccess, showError } = useNotification();
 
   // Storage 관련 함수들
@@ -91,10 +91,10 @@ export function EmployeeDataProvider({ children }) {
     const storageKey = getStorageKey('employees');
     const currentEmployees = JSON.parse(localStorage.getItem(storageKey) || '[]');
     const usedColors = currentEmployees.map(emp => emp.color).filter(Boolean);
-    
+
     // 사용되지 않은 색상 찾기
     const availableColors = COLOR_PALETTE.filter(color => !usedColors.includes(color));
-    
+
     // 색상 할당
     let assignedColor;
     if (employee.color && employee.color !== null) {
@@ -104,63 +104,83 @@ export function EmployeeDataProvider({ children }) {
     } else {
       assignedColor = COLOR_PALETTE[currentEmployees.length % COLOR_PALETTE.length];
     }
-    
-    const newEmployee = { 
-      ...employee, 
+
+    const newEmployee = {
+      ...employee,
       id: Date.now() + Math.floor(Math.random() * 1000),
       color: assignedColor
     };
-    
+
     dispatch({ type: EMPLOYEE_ACTIONS.ADD_EMPLOYEE, payload: newEmployee });
-    
+
     const updatedEmployees = [...currentEmployees, newEmployee];
     saveData('employees', updatedEmployees);
-    
+
+    // Firebase에 저장 (Real User일 때만)
+    const isMockUser = currentUser?.email?.includes('@company.com') || currentUser?.uid?.startsWith('user-');
+    if (currentDepartment?.code && !isMockUser) {
+      firebaseService.saveEmployees(currentDepartment.code, updatedEmployees);
+    }
+
     // 사용자 데이터 생성 플래그 설정 (데이터 보존용)
     localStorage.setItem(getStorageKey('employees_ever_created'), 'true');
     localStorage.setItem('user_data_exists', 'true');
     sessionStorage.setItem('user_data_exists', 'true');
-    
+
     // 알림 표시
     showSuccess(
       '직원 추가 완료',
       `${newEmployee.name}님이 ${newEmployee.team} 팀에 추가되었습니다.`,
       { employee: newEmployee }
     );
-    
+
     return newEmployee;
-  }, [dispatch, getStorageKey, saveData, showSuccess]);
+  }, [dispatch, getStorageKey, saveData, showSuccess, currentDepartment, currentUser]);
 
   const updateEmployee = useCallback((employee) => {
     dispatch({ type: EMPLOYEE_ACTIONS.UPDATE_EMPLOYEE, payload: employee });
-    
+
     const updatedEmployees = state.employees.map(e =>
       e.id === employee.id ? employee : e
     );
     saveData('employees', updatedEmployees);
+
+    // Firebase에 저장 (Real User일 때만)
+    const isMockUser = currentUser?.email?.includes('@company.com') || currentUser?.uid?.startsWith('user-');
+    if (currentDepartment?.code && !isMockUser) {
+      firebaseService.saveEmployees(currentDepartment.code, updatedEmployees);
+    }
+
     showSuccess('직원 정보가 수정되었습니다.');
-  }, [state.employees, saveData, showSuccess]);
+  }, [state.employees, saveData, showSuccess, currentDepartment, currentUser]);
 
   const deleteEmployee = useCallback((employeeId) => {
     dispatch({ type: EMPLOYEE_ACTIONS.DELETE_EMPLOYEE, payload: employeeId });
-    
+
     // localStorage에서도 제거
     const empStorageKey = getStorageKey('employees');
     const vacStorageKey = getStorageKey('vacations');
     const currentEmployees = JSON.parse(localStorage.getItem(empStorageKey) || '[]');
     const currentVacations = JSON.parse(localStorage.getItem(vacStorageKey) || '[]');
-    
+
     const updatedEmployees = currentEmployees.filter(e => e.id !== employeeId);
     const updatedVacations = currentVacations.filter(v => v.employeeId !== employeeId);
-    
+
     saveData('employees', updatedEmployees);
     saveData('vacations', updatedVacations);
-    
+
+    // Firebase에 저장 (Real User일 때만)
+    const isMockUser = currentUser?.email?.includes('@company.com') || currentUser?.uid?.startsWith('user-');
+    if (currentDepartment?.code && !isMockUser) {
+      firebaseService.saveEmployees(currentDepartment.code, updatedEmployees);
+      firebaseService.saveVacations(currentDepartment.code, updatedVacations);
+    }
+
     showSuccess('직원 및 관련 휴가가 삭제되었습니다.');
-    
+
     // 관련 휴가 삭제 알림을 위해 삭제된 휴가 수 반환
     return { deletedVacationsCount: currentVacations.length - updatedVacations.length };
-  }, [getStorageKey, saveData, showSuccess]);
+  }, [getStorageKey, saveData, showSuccess, currentDepartment, currentUser]);
 
   // 계산된 값들
   const getEmployeeById = useCallback((employeeId) => {
@@ -190,16 +210,38 @@ export function EmployeeDataProvider({ children }) {
     const loadEmployeesFromFirebase = async () => {
       if (!currentDepartment?.code) return;
 
+      // 🛑 Mock User(비밀번호 로그인)인 경우 Firebase 동기화 하지 않음 (로컬 전용)
+      // Mock User는 uid가 'user-'로 시작하거나 email이 '@company.com'으로 끝남
+      const isMockUser = currentDepartment.uid?.startsWith('user-') ||
+        (currentUser?.email?.includes('@company.com'));
+
+      if (isMockUser) {
+        console.log(`🔒 [${currentDepartment.code}] Mock User 모드: 로컬 직원 데이터만 사용`);
+        const localEmployees = JSON.parse(localStorage.getItem(getStorageKey('employees')) || '[]');
+        if (localEmployees.length > 0) {
+          dispatch({ type: EMPLOYEE_ACTIONS.SET_EMPLOYEES, payload: localEmployees });
+        }
+        return;
+      }
+
       try {
         console.log(`🔄 [${currentDepartment.code}] Firebase에서 직원 데이터 로딩 중...`);
         const firebaseEmployees = await firebaseService.getEmployees(currentDepartment.code);
-        
+
         if (firebaseEmployees && firebaseEmployees.length > 0) {
           console.log(`✅ [${currentDepartment.code}] Firebase에서 직원 ${firebaseEmployees.length}명 로드됨`);
           dispatch({ type: EMPLOYEE_ACTIONS.SET_EMPLOYEES, payload: firebaseEmployees });
           saveData('employees', firebaseEmployees);
         } else {
-          console.log(`📭 [${currentDepartment.code}] Firebase에 직원 데이터 없음`);
+          console.log(`📭 [${currentDepartment.code}] Firebase에 직원 데이터 없음, 로컬 데이터 확인`);
+          // Firebase에 데이터가 없으면 로컬 데이터 확인 및 복구
+          const localEmployees = JSON.parse(localStorage.getItem(getStorageKey('employees')) || '[]');
+          if (localEmployees.length > 0) {
+            console.log(`💾 로컬에서 직원 ${localEmployees.length}명 발견, 복원 및 Firebase 업로드`);
+            dispatch({ type: EMPLOYEE_ACTIONS.SET_EMPLOYEES, payload: localEmployees });
+            // Firebase에 업로드 (복구)
+            firebaseService.saveEmployees(currentDepartment.code, localEmployees);
+          }
         }
       } catch (error) {
         console.error('Firebase 직원 데이터 로드 실패:', error);
@@ -218,20 +260,20 @@ export function EmployeeDataProvider({ children }) {
   const value = {
     // State
     employees: state.employees,
-    
+
     // Actions
     setEmployees,
     addEmployee,
     updateEmployee,
     deleteEmployee,
-    
+
     // Computed values
     getEmployeeById,
     getEmployeesByTeam,
     getTeams,
     getUsedColors,
     getAvailableColors,
-    
+
     // Constants
     COLOR_PALETTE
   };
