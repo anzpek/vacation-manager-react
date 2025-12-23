@@ -116,9 +116,8 @@ export function EmployeeDataProvider({ children }) {
     const updatedEmployees = [...currentEmployees, newEmployee];
     saveData('employees', updatedEmployees);
 
-    // Firebase에 저장 (Real User일 때만)
-    const isMockUser = currentUser?.email?.includes('@company.com') || currentUser?.uid?.startsWith('user-');
-    if (currentDepartment?.code && !isMockUser) {
+    // Firebase에 저장
+    if (currentDepartment?.code) {
       firebaseService.saveEmployees(currentDepartment.code, updatedEmployees);
     }
 
@@ -145,9 +144,8 @@ export function EmployeeDataProvider({ children }) {
     );
     saveData('employees', updatedEmployees);
 
-    // Firebase에 저장 (Real User일 때만)
-    const isMockUser = currentUser?.email?.includes('@company.com') || currentUser?.uid?.startsWith('user-');
-    if (currentDepartment?.code && !isMockUser) {
+    // Firebase에 저장
+    if (currentDepartment?.code) {
       firebaseService.saveEmployees(currentDepartment.code, updatedEmployees);
     }
 
@@ -169,9 +167,8 @@ export function EmployeeDataProvider({ children }) {
     saveData('employees', updatedEmployees);
     saveData('vacations', updatedVacations);
 
-    // Firebase에 저장 (Real User일 때만)
-    const isMockUser = currentUser?.email?.includes('@company.com') || currentUser?.uid?.startsWith('user-');
-    if (currentDepartment?.code && !isMockUser) {
+    // Firebase에 저장
+    if (currentDepartment?.code) {
       firebaseService.saveEmployees(currentDepartment.code, updatedEmployees);
       firebaseService.saveVacations(currentDepartment.code, updatedVacations);
     }
@@ -210,19 +207,9 @@ export function EmployeeDataProvider({ children }) {
     const loadEmployeesFromFirebase = async () => {
       if (!currentDepartment?.code) return;
 
-      // 🛑 Mock User(비밀번호 로그인)인 경우 Firebase 동기화 하지 않음 (로컬 전용)
-      // Mock User는 uid가 'user-'로 시작하거나 email이 '@company.com'으로 끝남
-      const isMockUser = currentDepartment.uid?.startsWith('user-') ||
-        (currentUser?.email?.includes('@company.com'));
+      // 🛑 Mock User 제한 제거: 모든 부서 로그인이 Firebase와 동기화되도록 수정됨
+      // 기존: Mock User(비밀번호 로그인)인 경우 Firebase 동기화 하지 않음 (로컬 전용)
 
-      if (isMockUser) {
-        console.log(`🔒 [${currentDepartment.code}] Mock User 모드: 로컬 직원 데이터만 사용`);
-        const localEmployees = JSON.parse(localStorage.getItem(getStorageKey('employees')) || '[]');
-        if (localEmployees.length > 0) {
-          dispatch({ type: EMPLOYEE_ACTIONS.SET_EMPLOYEES, payload: localEmployees });
-        }
-        return;
-      }
 
       try {
         console.log(`🔄 [${currentDepartment.code}] Firebase에서 직원 데이터 로딩 중...`);
