@@ -167,7 +167,7 @@ export function AuthProvider({ children }) {
     return Promise.resolve();
   };
 
-  // 앱 시작 시 Firebase와 로컬스토리지에서 데이터 복원
+  // 앱 시작 시 Firebase와 로컬스토리지에서 데이터 복원 (한 번만 실행)
   useEffect(() => {
     // Firebase에서 부서 목록과 관리자 비밀번호 불러오기
     const loadFromFirebase = async () => {
@@ -254,13 +254,15 @@ export function AuthProvider({ children }) {
         localStorage.removeItem('currentDepartment');
       }
     }
+  }, []); // 의존성 배열 비움 (한 번만 실행)
 
-    // 🚧 개발 모드여도 Firebase Auth 감지 허용
-    // if (DEV_MODE) { ... } 코드를 제거하여 실제 구글 로그인 감지
-
+  // Firebase Auth 상태 감지 (departments 변경 시 갱신)
+  useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => {
-      setCurrentUser(user);
       if (user) {
+        // Firebase 로그인 감지됨
+        setCurrentUser(user);
+
         // 🔥 관리자 계정 자동 접속 처리 (lkd0115lkd@gmail.com)
         if (user.email === 'lkd0115lkd@gmail.com') {
           // 부서 목록에서 찾거나, 없으면 강제로 생성
@@ -288,11 +290,32 @@ export function AuthProvider({ children }) {
         if (savedDept) {
           setCurrentDepartment(JSON.parse(savedDept));
         }
+      } else {
+        // Firebase 로그아웃 상태
+        // ⚠️ 여기서 무조건 setCurrentUser(null)을 하면 Mock User(로컬 로그인)도 로그아웃 됨
+        // 따라서 로컬 스토리지에 Mock User 정보가 있는지 확인
+        const savedUserStr = localStorage.getItem('currentUser');
+        if (savedUserStr) {
+          try {
+            const savedUser = JSON.parse(savedUserStr);
+            if (savedUser.uid && savedUser.uid.startsWith('user-')) {
+              console.log('🛡️ Firebase Auth null, 하지만 Mock User 세션 유지 중');
+              // Mock User는 유지, loading만 false 처리
+              setLoading(false);
+              return;
+            }
+          } catch (e) {
+            console.error('세션 확인 중 오류:', e);
+          }
+        }
+
+        // Mock User가 아니라면 로그아웃 처리
+        setCurrentUser(null);
       }
       setLoading(false);
     });
 
-    return unsubscribe;
+    return () => unsubscribe();
   }, [departments]);
 
   const value = {
