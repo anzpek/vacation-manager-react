@@ -129,11 +129,11 @@ export function VacationDataProvider({ children }) {
       // Firebase에서 수정 시도
       if (currentDepartment?.code) {
         const result = await firebaseService.updateVacation(
-          currentDepartment.code, 
-          vacation.id, 
+          currentDepartment.code,
+          vacation.id,
           vacation
         );
-        
+
         if (result.success) {
           dispatch({ type: VACATION_ACTIONS.UPDATE_VACATION, payload: vacation });
           showSuccess('휴가가 수정되었습니다.');
@@ -175,16 +175,16 @@ export function VacationDataProvider({ children }) {
   const deleteVacationDay = useCallback(async (vacationId, date) => {
     console.log(`🗑️ [VacationDataContext] deleteVacationDay 시작: ID=${vacationId}, date=${date}`);
     console.log(`📊 [VacationDataContext] 삭제 전 휴가 개수: ${state.vacations.length}`);
-    
+
     try {
       // Firebase에서 삭제 시도
       if (currentDepartment?.code) {
         const result = await firebaseService.deleteVacation(currentDepartment.code, vacationId);
         if (result.success) {
           console.log(`✅ [VacationDataContext] Firebase 삭제 성공, dispatch 호출 중...`);
-          dispatch({ 
-            type: VACATION_ACTIONS.DELETE_VACATION_DAY, 
-            payload: { vacationId, date } 
+          dispatch({
+            type: VACATION_ACTIONS.DELETE_VACATION_DAY,
+            payload: { vacationId, date }
           });
           console.log(`📊 [VacationDataContext] dispatch 호출 완료`);
           showSuccess('해당 날짜의 휴가가 삭제되었습니다.');
@@ -201,13 +201,54 @@ export function VacationDataProvider({ children }) {
     }
   }, [showSuccess, currentDepartment, state.vacations]);
 
-  const deleteConsecutiveVacations = useCallback((startDate, endDate, employeeId) => {
-    dispatch({ 
-      type: VACATION_ACTIONS.DELETE_CONSECUTIVE_VACATIONS, 
-      payload: { startDate, endDate, employeeId } 
-    });
-    showSuccess('연속 휴가가 삭제되었습니다.');
-  }, [showSuccess]);
+  const deleteConsecutiveVacations = useCallback(async (startDate, endDate, employeeId) => {
+    try {
+      console.log(`🗑️ [VacationDataContext] 연휴 일괄 삭제 시작: ${startDate} ~ ${endDate}, 직원ID: ${employeeId}`);
+
+      if (currentDepartment?.code) {
+        // 삭제 대상 휴가 찾기
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+
+        // 날짜 비교를 위해 시간 제거
+        start.setHours(0, 0, 0, 0);
+        end.setHours(0, 0, 0, 0);
+
+        const targetVacations = state.vacations.filter(v => {
+          if (v.employeeId !== employeeId) return false;
+          const vacDate = new Date(v.date);
+          vacDate.setHours(0, 0, 0, 0);
+          return vacDate >= start && vacDate <= end;
+        });
+
+        console.log(`📊 [VacationDataContext] 삭제 대상 휴가: ${targetVacations.length}개`);
+
+        // Firebase에서 하나씩 삭제
+        // Promise.all로 병렬 처리하여 속도 향상
+        const deletePromises = targetVacations.map(v =>
+          firebaseService.deleteVacation(currentDepartment.code, v.id)
+            .then(result => {
+              if (!result.success) throw new Error(`휴가 삭제 실패: ${v.id}`);
+              return result;
+            })
+        );
+
+        await Promise.all(deletePromises);
+        console.log(`✅ [VacationDataContext] Firebase에서 모든 연휴 데이터 삭제 완료`);
+      }
+
+      // 로컬 상태 업데이트
+      dispatch({
+        type: VACATION_ACTIONS.DELETE_CONSECUTIVE_VACATIONS,
+        payload: { startDate, endDate, employeeId }
+      });
+      showSuccess('연속 휴가가 삭제되었습니다.');
+
+    } catch (error) {
+      console.error('연속 휴가 삭제 실패:', error);
+      // 에러 발생 시 사용자에게 알림 (여기서는 console만 찍음, 필요시 UI 에러 처리 추가)
+    }
+  }, [showSuccess, currentDepartment, state.vacations]);
 
   // 계산된 값들
   const getVacationsByDate = useCallback((dateStr) => {
@@ -222,7 +263,7 @@ export function VacationDataProvider({ children }) {
     return state.vacations.filter(v => {
       const vacDate = new Date(v.date);
       return vacDate.getFullYear() === year &&
-             vacDate.getMonth() === month;
+        vacDate.getMonth() === month;
     });
   }, [state.vacations]);
 
@@ -234,7 +275,7 @@ export function VacationDataProvider({ children }) {
       try {
         console.log(`🔄 [${currentDepartment.code}] Firebase에서 휴가 데이터 로딩 중...`);
         const firebaseVacations = await firebaseService.getVacations(currentDepartment.code);
-        
+
         console.log(`✅ [${currentDepartment.code}] Firebase에서 휴가 ${firebaseVacations?.length || 0}개 로드됨`);
         const finalVacations = firebaseVacations || [];
         dispatch({ type: VACATION_ACTIONS.SET_VACATIONS, payload: finalVacations });
@@ -251,7 +292,7 @@ export function VacationDataProvider({ children }) {
   const value = {
     // State
     vacations: state.vacations,
-    
+
     // Actions
     setVacations,
     addVacation,
@@ -259,7 +300,7 @@ export function VacationDataProvider({ children }) {
     deleteVacation,
     deleteVacationDay,
     deleteConsecutiveVacations,
-    
+
     // Computed values
     getVacationsByDate,
     getVacationsByEmployee,
